@@ -192,11 +192,15 @@ export default class AdsInsights extends AbstractCrudObject {
       quality_score_enfbr: 'quality_score_enfbr',
       quality_score_organic: 'quality_score_organic',
       reach: 'reach',
+<<<<<<< HEAD
       recurring_subscription_payment_actions: 'recurring_subscription_payment_actions',
       region: 'region',
       rule_asset: 'rule_asset',
       schedule_actions: 'schedule_actions',
       schedule_value: 'schedule_value',
+=======
+      relevance_score: 'relevance_score',
+>>>>>>> Removed social_impressions from ads-insights.js, as it is deprecated from facebook api.
       social_spend: 'social_spend',
       spend: 'spend',
       start_trial_actions: 'start_trial_actions',

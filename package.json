@@ -1,14 +1,20 @@
 {
+<<<<<<< HEAD
   "name": "facebook-nodejs-business-sdk",
   "version": "5.0.2",
   "description": "SDK for the Facebook Ads API in Javascript and Node.js",
+=======
+  "name": "@denimlabs/facebook-nodejs-business-sdk",
+  "version": "3.1.1",
+  "description": "Denimlabs Fork of SDK for the Facebook Ads API in Javascript and Node.js",
+>>>>>>> Removed social_impressions from ads-insights.js, as it is deprecated from facebook api.
   "author": "Facebook",
   "maintainers": [
-    "Ellen Tao <ellentao@fb.com>, Yonghong Shi <yongshi@fb.com>, Moyang He <hemoyang@fb.com>, Zain Aziz <zaziz@fb.com>, Neil Chen <xiaotchen@fb.com>, Supasate Choochaisri <supasate@fb.com>, lucascosta <lucas@lucascosta.com>"
+    "Michael W. Clark <michaelwclark@gmail.com>"
   ],
-  "homepage": "https://github.com/facebook/facebook-nodejs-business-sdk",
+  "homepage": "https://github.com/denimlabs/facebook-nodejs-business-sdk",
   "bugs": {
-    "url": "https://github.com/facebook/facebook-nodejs-business-sdk/issues"
+    "url": "https://github.com/denimlabs/facebook-nodejs-business-sdk/issues"
   },
   "keywords": [
     "facebook",
@@ -27,7 +33,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/facebook/facebook-nodejs-business-sdk.git"
+    "url": "git://github.com/denimlabs/facebook-nodejs-business-sdk.git"
   },
   "dependencies": {
     "mixwith": "~0.1.1",
