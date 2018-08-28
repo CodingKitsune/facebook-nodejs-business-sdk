@@ -5,7 +5,7 @@
   "description": "SDK for the Facebook Ads API in Javascript and Node.js",
 =======
   "name": "@denimlabs/facebook-nodejs-business-sdk",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Denimlabs Fork of SDK for the Facebook Ads API in Javascript and Node.js",
 >>>>>>> Removed social_impressions from ads-insights.js, as it is deprecated from facebook api.
   "author": "Facebook",
