@@ -7,44 +7,50 @@
  * @flow
  * @format
  */
-import Http from './http';
-import {FacebookRequestError} from './exceptions';
-import CrashReporter from './crash-reporter';
+import Http from './http'
+import { FacebookRequestError } from './exceptions'
+import CrashReporter from './crash-reporter'
 
 /**
  * Facebook Ads API
  */
 export default class FacebookAdsApi {
-  _debug: boolean;
-  _showHeader: boolean;
-  accessToken: string;
-  locale: string;
-  static _defaultApi: FacebookAdsApi;
-  static get VERSION() {
-    return 'v5.0';
+  _debug: boolean
+  _showHeader: boolean
+  accessToken: string
+  appsecret_proof: string
+  locale: string
+  static _defaultApi: FacebookAdsApi
+  static get VERSION () {
+    return 'v5.0'
   }
-  static get GRAPH() {
-    return 'https://graph.facebook.com';
+  static get GRAPH () {
+    return 'https://graph.facebook.com'
   }
 
   static get GRAPH_VIDEO () {
-    return 'https://graph-video.facebook.com';
+    return 'https://graph-video.facebook.com'
   }
 
   /**
    * @param {String} accessToken
    * @param {String} [locale]
    */
-  constructor(accessToken: string, locale: string = 'en_US', crash_log: bool = true) {
+  constructor (
+    accessToken: string,
+    appsecret_proof: string = null,
+    locale: string = 'en_US'
+  ) {
     if (!accessToken) {
-      throw new Error('Access token required');
+      throw new Error('Access token required')
     }
-    this.accessToken = accessToken;
-    this.locale = locale;
-    this._debug = false;
-    this._showHeader = false;
+    this.accessToken = accessToken
+    this.appsecret_proof = appsecret_proof
+    this.locale = locale
+    this._debug = false
+    this._showHeader = false
     if (crash_log) {
-      CrashReporter.enable();
+      CrashReporter.enable()
     }
   }
 
@@ -54,39 +60,47 @@ export default class FacebookAdsApi {
    * @param  {String} [locale]
    * @return {FacebookAdsApi}
    */
-  static init(accessToken: string, locale: string = 'en_US', crash_log: bool = true) {
-    const api = new this(accessToken, locale, crash_log);
-    this.setDefaultApi(api);
-    return api;
+  static init (
+    accessToken: string,
+    locale: string = 'en_US',
+    crash_log: boolean = true
+  ) {
+    const api = new this(accessToken, locale, crash_log)
+    this.setDefaultApi(api)
+    return api
   }
 
-  static setDefaultApi(api: FacebookAdsApi) {
-    this._defaultApi = api;
+  static setDefaultApi (api: FacebookAdsApi) {
+    this._defaultApi = api
   }
 
-  static getDefaultApi() {
-    return this._defaultApi;
+  static getDefaultApi () {
+    return this._defaultApi
   }
 
-  getAppID() : Promise<*> {
-    let url = [FacebookAdsApi.GRAPH, FacebookAdsApi.VERSION, 'debug_token'].join('/');
-    let params = {};
-    params['access_token'] = this.accessToken;
-    params['input_token'] = this.accessToken;
-    params['fields'] = 'app_id';
-    url += `?${FacebookAdsApi._encodeParams(params)}`;
+  getAppID (): Promise<*> {
+    let url = [
+      FacebookAdsApi.GRAPH,
+      FacebookAdsApi.VERSION,
+      'debug_token'
+    ].join('/')
+    let params = {}
+    params['access_token'] = this.accessToken
+    params['input_token'] = this.accessToken
+    params['fields'] = 'app_id'
+    url += `?${FacebookAdsApi._encodeParams(params)}`
 
-    return Http.request('GET', url, {}, {}, false);
+    return Http.request('GET', url, {}, {}, false)
   }
 
-  setDebug(flag: boolean) {
-    this._debug = flag;
-    return this;
+  setDebug (flag: boolean) {
+    this._debug = flag
+    return this
   }
 
-  setShowHeader(flag: boolean) {
-    this._showHeader = flag;
-    return this;
+  setShowHeader (flag: boolean) {
+    this._showHeader = flag
+    return this
   }
 
   /**
@@ -97,64 +111,82 @@ export default class FacebookAdsApi {
    * @param  {Object} [files]
    * @return {Promise}
    */
-  call(
+  call (
     method: string,
     path: string | Array<string> | String,
     params: Object = {},
     files: Object = {},
     useMultipartFormData: boolean = false,
-    urlOverride: string = '',
+    urlOverride: string = ''
   ): Promise<*> {
-    let url: any;
-    let data: Object = {};
+    let url: any
+    let data: Object = {}
     if (method === 'POST' || method === 'PUT') {
-      data = params;
-      params = {};
+      data = params
+      params = {}
     }
-    const domain = urlOverride || FacebookAdsApi.GRAPH;
+    const domain = urlOverride || FacebookAdsApi.GRAPH
     if (typeof path !== 'string' && !(path instanceof String)) {
-      url = [domain, FacebookAdsApi.VERSION, ...path].join('/');
-      params['access_token'] = this.accessToken;
-      url += `?${FacebookAdsApi._encodeParams(params)}`;
+      url = [domain, FacebookAdsApi.VERSION, ...path].join('/')
+      params['access_token'] = this.accessToken
+      params['appsecret_proof'] = this.appsecret_proof
+      url += `?${FacebookAdsApi._encodeParams(params)}`
     } else {
-      url = path;
+      url = path
     }
-    const strUrl: string = (url: any);
-    return Http.request(method, strUrl, data, files, useMultipartFormData, this._showHeader)
+
+    if (this.appsecret_proof) {
+      let connector: string = '?'
+      if (url.indexOf('?') > -1) {
+        connector = '&'
+      }
+      url += connector + 'appsecret_proof=' + this.appsecret_proof
+    }
+    const strUrl: string = (url: any)
+    return Http.request(
+      method,
+      strUrl,
+      data,
+      files,
+      useMultipartFormData,
+      this._showHeader
+    )
       .then(response => {
         if (this._showHeader) {
-          response.body['headers'] = response.headers;
-          response = response.body;
+          response.body['headers'] = response.headers
+          response = response.body
         }
 
         if (this._debug) {
-          console.log(`200 ${method} ${url} ${Object.keys(data).length > 0 ? JSON.stringify(data) : ""}`);
           console.log(
-            `Response: ${response ? JSON.stringify(response) : ""}`
-          );
+            `200 ${method} ${url} ${
+              Object.keys(data).length > 0 ? JSON.stringify(data) : ''
+            }`
+          )
+          console.log(`Response: ${response ? JSON.stringify(response) : ''}`)
         }
-        return Promise.resolve(response);
+        return Promise.resolve(response)
       })
       .catch(response => {
         if (this._debug) {
           console.log(
             `${response.statusCode} ${method} ${url}
-            ${Object.keys(data).length > 0 ? JSON.stringify(data) : ''}`,
-          );
+            ${Object.keys(data).length > 0 ? JSON.stringify(data) : ''}`
+          )
         }
-        throw new FacebookRequestError(response, method, url, data);
-      });
+        throw new FacebookRequestError(response, method, url, data)
+      })
   }
 
-  static _encodeParams(params: Object) {
+  static _encodeParams (params: Object) {
     return Object.keys(params)
       .map(key => {
-        var param = params[key];
+        var param = params[key]
         if (typeof param === 'object') {
-          param = param ? JSON.stringify(param) : '';
+          param = param ? JSON.stringify(param) : ''
         }
-        return `${encodeURIComponent(key)}=${encodeURIComponent(param)}`;
+        return `${encodeURIComponent(key)}=${encodeURIComponent(param)}`
       })
-      .join('&');
-    }
+      .join('&')
+  }
 }
