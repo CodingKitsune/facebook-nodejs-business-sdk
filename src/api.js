@@ -128,8 +128,16 @@ export default class FacebookAdsApi {
     const domain = urlOverride || FacebookAdsApi.GRAPH
     if (typeof path !== 'string' && !(path instanceof String)) {
       url = [domain, FacebookAdsApi.VERSION, ...path].join('/')
-      params['access_token'] = this.accessToken
-      params['appsecret_proof'] = this.appsecret_proof
+      if (!params.access_token) {
+        params['access_token'] = this.accessToken
+      } else {
+        this.accessToken = params['accessToken']
+      }
+      if (!params.appsecret_proof) {
+        params['appsecret_proof'] = this.appsecret_proof
+      } else {
+        this.appsecret_proof = params['appsecret_proof']
+      }
       url += `?${FacebookAdsApi._encodeParams(params)}`
     } else {
       url = path
