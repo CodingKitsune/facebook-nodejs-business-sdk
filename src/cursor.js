@@ -117,5 +117,3 @@ export default class Cursor extends Array<Object> {
     };
   }
 }
-
-export default Cursor
