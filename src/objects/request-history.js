@@ -22,16 +22,15 @@ export default class RequestHistory extends AbstractCrudObject {
       graph_path: 'graph_path',
       http_method: 'http_method',
       post_params: 'post_params',
-      query_params: 'query_params',
-      id: 'id'
+      query_params: 'query_params'
     });
   }
 
   static get HttpMethod (): Object {
     return Object.freeze({
+      delete: 'DELETE',
       get: 'GET',
-      post: 'POST',
-      delete: 'DELETE'
+      post: 'POST'
     });
   }
 }

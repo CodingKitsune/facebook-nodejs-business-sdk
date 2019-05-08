@@ -9,7 +9,6 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Comment from './comment';
-import Profile from './profile';
 import Post from './post';
 
 /**
@@ -30,30 +29,9 @@ export default class Link extends AbstractCrudObject {
       message: 'message',
       multi_share_optimized: 'multi_share_optimized',
       name: 'name',
-      picture: 'picture',
       privacy: 'privacy',
       via: 'via'
     });
-  }
-
-  static get UnpublishedContentType (): Object {
-    return Object.freeze({
-      scheduled: 'SCHEDULED',
-      draft: 'DRAFT',
-      ads_post: 'ADS_POST',
-      inline_created: 'INLINE_CREATED',
-      published: 'PUBLISHED'
-    });
-  }
-
-  getComments (fields, params, fetchFirstPage = true): Comment {
-    return this.getEdge(
-      Comment,
-      fields,
-      params,
-      fetchFirstPage,
-      '/comments'
-    );
   }
 
   createComment (fields, params): Comment {
@@ -62,42 +40,6 @@ export default class Link extends AbstractCrudObject {
       fields,
       params,
       Comment
-    );
-  }
-
-  deleteLikes (params): AbstractObject {
-    return super.deleteEdge(
-      '/likes',
-      params
-    );
-  }
-
-  getLikes (fields, params, fetchFirstPage = true): Profile {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/likes'
-    );
-  }
-
-  createLike (fields, params): Link {
-    return this.createEdge(
-      '/likes',
-      fields,
-      params,
-      Link
-    );
-  }
-
-  getReactions (fields, params, fetchFirstPage = true): Profile {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/reactions'
     );
   }
 

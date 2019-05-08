@@ -12,7 +12,6 @@ import AdAccount from './ad-account';
 import Business from './business';
 import CustomAudience from './custom-audience';
 import CustomConversion from './custom-conversion';
-import DACheck from './da-check';
 
 /**
  * OfflineConversionDataSet
@@ -25,7 +24,6 @@ export default class OfflineConversionDataSet extends AbstractCrudObject {
       business: 'business',
       config: 'config',
       creation_time: 'creation_time',
-      data_origin: 'data_origin',
       description: 'description',
       duplicate_entries: 'duplicate_entries',
       enable_auto_assign_to_accounts: 'enable_auto_assign_to_accounts',
@@ -45,52 +43,20 @@ export default class OfflineConversionDataSet extends AbstractCrudObject {
     });
   }
 
-  static get DataOrigin (): Object {
-    return Object.freeze({
-      directly_from_people: 'DIRECTLY_FROM_PEOPLE',
-      people_and_partners: 'PEOPLE_AND_PARTNERS',
-      directly_from_partners: 'DIRECTLY_FROM_PARTNERS',
-      none: 'NONE'
-    });
-  }
   static get PermittedRoles (): Object {
     return Object.freeze({
       admin: 'ADMIN',
-      uploader: 'UPLOADER',
-      advertiser: 'ADVERTISER'
+      advertiser: 'ADVERTISER',
+      uploader: 'UPLOADER'
     });
   }
   static get RelationshipType (): Object {
     return Object.freeze({
       ad_manager: 'AD_MANAGER',
-      audience_manager: 'AUDIENCE_MANAGER',
       agency: 'AGENCY',
+      audience_manager: 'AUDIENCE_MANAGER',
       other: 'OTHER'
     });
-  }
-  static get Role (): Object {
-    return Object.freeze({
-      admin: 'ADMIN',
-      uploader: 'UPLOADER',
-      advertiser: 'ADVERTISER'
-    });
-  }
-
-  getActivities (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/activities'
-    );
-  }
-
-  deleteAdAccounts (params): AbstractObject {
-    return super.deleteEdge(
-      '/adaccounts',
-      params
-    );
   }
 
   getAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
@@ -158,16 +124,6 @@ export default class OfflineConversionDataSet extends AbstractCrudObject {
     );
   }
 
-  getDaChecks (fields, params, fetchFirstPage = true): DACheck {
-    return this.getEdge(
-      DACheck,
-      fields,
-      params,
-      fetchFirstPage,
-      '/da_checks'
-    );
-  }
-
   createEvent (fields, params): AbstractObject {
     return this.createEdge(
       '/events',
@@ -203,39 +159,6 @@ export default class OfflineConversionDataSet extends AbstractCrudObject {
       fields,
       params
 
-    );
-  }
-
-  deleteUserPermissions (params): AbstractObject {
-    return super.deleteEdge(
-      '/userpermissions',
-      params
-    );
-  }
-
-  getUserPermissions (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/userpermissions'
-    );
-  }
-
-  createUserPermission (fields, params): OfflineConversionDataSet {
-    return this.createEdge(
-      '/userpermissions',
-      fields,
-      params,
-      OfflineConversionDataSet
-    );
-  }
-
-  deleteUsers (params): AbstractObject {
-    return super.deleteEdge(
-      '/users',
-      params
     );
   }
 

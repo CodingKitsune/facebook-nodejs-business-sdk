@@ -22,23 +22,22 @@ export default class AdRecommendation extends AbstractCrudObject {
       importance: 'importance',
       message: 'message',
       recommendation_data: 'recommendation_data',
-      title: 'title',
-      id: 'id'
+      title: 'title'
     });
   }
 
   static get Confidence (): Object {
     return Object.freeze({
       high: 'HIGH',
-      medium: 'MEDIUM',
-      low: 'LOW'
+      low: 'LOW',
+      medium: 'MEDIUM'
     });
   }
   static get Importance (): Object {
     return Object.freeze({
       high: 'HIGH',
-      medium: 'MEDIUM',
-      low: 'LOW'
+      low: 'LOW',
+      medium: 'MEDIUM'
     });
   }
 }

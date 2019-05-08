@@ -34,7 +34,6 @@ export default class AdsInsights extends AbstractCrudObject {
       auction_bid: 'auction_bid',
       auction_competitiveness: 'auction_competitiveness',
       auction_max_competitor_bid: 'auction_max_competitor_bid',
-      bid_type: 'bid_type',
       body_asset: 'body_asset',
       buying_type: 'buying_type',
       call_to_action_asset: 'call_to_action_asset',
@@ -107,11 +106,9 @@ export default class AdsInsights extends AbstractCrudObject {
       place_page_name: 'place_page_name',
       placement: 'placement',
       platform_position: 'platform_position',
-      product_format: 'product_format',
       product_id: 'product_id',
       publisher_platform: 'publisher_platform',
       purchase_roas: 'purchase_roas',
-      purchasing_interface: 'purchasing_interface',
       reach: 'reach',
       region: 'region',
       relevance_score: 'relevance_score',
@@ -145,6 +142,7 @@ export default class AdsInsights extends AbstractCrudObject {
       video_p75_watched_actions: 'video_p75_watched_actions',
       video_p95_watched_actions: 'video_p95_watched_actions',
       video_play_actions: 'video_play_actions',
+      video_play_curve_actions: 'video_play_curve_actions',
       video_play_retention_0_to_15s_actions: 'video_play_retention_0_to_15s_actions',
       video_play_retention_20_to_60s_actions: 'video_play_retention_20_to_60s_actions',
       video_play_retention_graph_actions: 'video_play_retention_graph_actions',
@@ -152,19 +150,18 @@ export default class AdsInsights extends AbstractCrudObject {
       video_time_watched_actions: 'video_time_watched_actions',
       website_ctr: 'website_ctr',
       website_purchase_roas: 'website_purchase_roas',
-      wish_bid: 'wish_bid',
-      id: 'id'
+      wish_bid: 'wish_bid'
     });
   }
 
   static get ActionAttributionWindows (): Object {
     return Object.freeze({
-      value_1d_view: '1d_view',
-      value_7d_view: '7d_view',
-      value_28d_view: '28d_view',
       value_1d_click: '1d_click',
-      value_7d_click: '7d_click',
+      value_1d_view: '1d_view',
       value_28d_click: '28d_click',
+      value_28d_view: '28d_view',
+      value_7d_click: '7d_click',
+      value_7d_view: '7d_view',
       default: 'default'
     });
   }
@@ -175,7 +172,6 @@ export default class AdsInsights extends AbstractCrudObject {
       action_carousel_card_name: 'action_carousel_card_name',
       action_destination: 'action_destination',
       action_device: 'action_device',
-      action_link_click_destination: 'action_link_click_destination',
       action_reaction: 'action_reaction',
       action_target_id: 'action_target_id',
       action_type: 'action_type',
@@ -185,65 +181,65 @@ export default class AdsInsights extends AbstractCrudObject {
   }
   static get ActionReportTime (): Object {
     return Object.freeze({
-      impression: 'impression',
-      conversion: 'conversion'
+      conversion: 'conversion',
+      impression: 'impression'
     });
   }
   static get Breakdowns (): Object {
     return Object.freeze({
-      age: 'age',
-      country: 'country',
-      dma: 'dma',
-      gender: 'gender',
-      frequency_value: 'frequency_value',
-      hourly_stats_aggregated_by_advertiser_time_zone: 'hourly_stats_aggregated_by_advertiser_time_zone',
-      hourly_stats_aggregated_by_audience_time_zone: 'hourly_stats_aggregated_by_audience_time_zone',
-      impression_device: 'impression_device',
-      place_page_id: 'place_page_id',
-      publisher_platform: 'publisher_platform',
-      platform_position: 'platform_position',
-      device_platform: 'device_platform',
-      product_id: 'product_id',
-      region: 'region',
       ad_format_asset: 'ad_format_asset',
+      age: 'age',
       body_asset: 'body_asset',
       call_to_action_asset: 'call_to_action_asset',
+      country: 'country',
       description_asset: 'description_asset',
+      device_platform: 'device_platform',
+      dma: 'dma',
+      frequency_value: 'frequency_value',
+      gender: 'gender',
+      hourly_stats_aggregated_by_advertiser_time_zone: 'hourly_stats_aggregated_by_advertiser_time_zone',
+      hourly_stats_aggregated_by_audience_time_zone: 'hourly_stats_aggregated_by_audience_time_zone',
       image_asset: 'image_asset',
+      impression_device: 'impression_device',
       link_url_asset: 'link_url_asset',
+      place_page_id: 'place_page_id',
+      platform_position: 'platform_position',
+      product_id: 'product_id',
+      publisher_platform: 'publisher_platform',
+      region: 'region',
       title_asset: 'title_asset',
       video_asset: 'video_asset'
     });
   }
   static get DatePreset (): Object {
     return Object.freeze({
-      today: 'today',
-      yesterday: 'yesterday',
-      this_month: 'this_month',
-      last_month: 'last_month',
-      this_quarter: 'this_quarter',
-      lifetime: 'lifetime',
-      last_3d: 'last_3d',
-      last_7d: 'last_7d',
       last_14d: 'last_14d',
       last_28d: 'last_28d',
       last_30d: 'last_30d',
+      last_3d: 'last_3d',
+      last_7d: 'last_7d',
       last_90d: 'last_90d',
+      last_month: 'last_month',
+      last_quarter: 'last_quarter',
       last_week_mon_sun: 'last_week_mon_sun',
       last_week_sun_sat: 'last_week_sun_sat',
-      last_quarter: 'last_quarter',
       last_year: 'last_year',
+      lifetime: 'lifetime',
+      this_month: 'this_month',
+      this_quarter: 'this_quarter',
       this_week_mon_today: 'this_week_mon_today',
       this_week_sun_today: 'this_week_sun_today',
-      this_year: 'this_year'
+      this_year: 'this_year',
+      today: 'today',
+      yesterday: 'yesterday'
     });
   }
   static get Level (): Object {
     return Object.freeze({
+      account: 'account',
       ad: 'ad',
       adset: 'adset',
-      campaign: 'campaign',
-      account: 'account'
+      campaign: 'campaign'
     });
   }
   static get SummaryActionBreakdowns (): Object {
@@ -253,7 +249,6 @@ export default class AdsInsights extends AbstractCrudObject {
       action_carousel_card_name: 'action_carousel_card_name',
       action_destination: 'action_destination',
       action_device: 'action_device',
-      action_link_click_destination: 'action_link_click_destination',
       action_reaction: 'action_reaction',
       action_target_id: 'action_target_id',
       action_type: 'action_type',

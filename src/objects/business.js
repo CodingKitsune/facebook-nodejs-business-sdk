@@ -16,36 +16,30 @@ import AdNetworkAnalyticsAsyncQueryResult from './ad-network-analytics-async-que
 import AdsPixel from './ads-pixel';
 import BusinessAdvertisableApplicationsResult from './business-advertisable-applications-result';
 import Page from './page';
+import AdPlacement from './ad-placement';
 import OracleTransaction from './oracle-transaction';
 import BusinessUser from './business-user';
 import BusinessProject from './business-project';
-import BusinessSettingLogsData from './business-setting-logs-data';
-import BusinessProductCatalogTOS from './business-product-catalog-tos';
 import CustomConversion from './custom-conversion';
 import Application from './application';
 import ProductCatalog from './product-catalog';
-import CreativeDemocracyRun from './creative-democracy-run';
 import DirectDeal from './direct-deal';
 import EventSourceGroup from './event-source-group';
 import ExtendedCredit from './extended-credit';
-import ReachFrequencyPrediction from './reach-frequency-prediction';
-import BusinessAssetSharingAgreement from './business-asset-sharing-agreement';
 import BusinessAgreement from './business-agreement';
 import InstagramUser from './instagram-user';
-import BusinessMatchedSearchApplicationsEdgeData from './business-matched-search-applications-edge-data';
 import MeasurementReport from './measurement-report';
 import OfflineConversionDataSet from './offline-conversion-data-set';
 import OfflineTermsOfService from './offline-terms-of-service';
-import OwnedDomain from './owned-domain';
-import PartnerIntegrationLinked from './partner-integration-linked';
 import BusinessAdAccountRequest from './business-ad-account-request';
 import BusinessApplicationRequest from './business-application-request';
 import BusinessPageRequest from './business-page-request';
-import LegacyBusinessAdAccountRequest from './legacy-business-ad-account-request';
 import BusinessRoleRequest from './business-role-request';
 import ProfilePictureSource from './profile-picture-source';
 import AudiencePermission from './audience-permission';
+import BusinessOwnedObjectOnBehalfOfRequest from './business-owned-object-on-behalf-of-request';
 import SystemUser from './system-user';
+import ThirdPartyMeasurementReportDataset from './third-party-measurement-report-dataset';
 import MeasurementUploadEvent from './measurement-upload-event';
 
 /**
@@ -80,9 +74,9 @@ export default class Business extends AbstractCrudObject {
 
   static get TwoFactorType (): Object {
     return Object.freeze({
-      none: 'none',
       admin_required: 'admin_required',
-      all_required: 'all_required'
+      all_required: 'all_required',
+      none: 'none'
     });
   }
   static get Vertical (): Object {
@@ -97,142 +91,63 @@ export default class Business extends AbstractCrudObject {
       financial_services: 'FINANCIAL_SERVICES',
       gaming: 'GAMING',
       government_and_politics: 'GOVERNMENT_AND_POLITICS',
+      health: 'HEALTH',
+      luxury: 'LUXURY',
       marketing: 'MARKETING',
+      non_profit: 'NON_PROFIT',
       organizations_and_associations: 'ORGANIZATIONS_AND_ASSOCIATIONS',
+      other: 'OTHER',
       professional_services: 'PROFESSIONAL_SERVICES',
+      restaurant: 'RESTAURANT',
       retail: 'RETAIL',
       technology: 'TECHNOLOGY',
       telecom: 'TELECOM',
-      travel: 'TRAVEL',
-      non_profit: 'NON_PROFIT',
-      restaurant: 'RESTAURANT',
-      health: 'HEALTH',
-      luxury: 'LUXURY',
-      other: 'OTHER'
-    });
-  }
-  static get AggregationPeriod (): Object {
-    return Object.freeze({
-      hour: 'HOUR',
-      day: 'DAY',
-      total: 'TOTAL'
-    });
-  }
-  static get Breakdowns (): Object {
-    return Object.freeze({
-      age: 'AGE',
-      app: 'APP',
-      country: 'COUNTRY',
-      delivery_method: 'DELIVERY_METHOD',
-      display_format: 'DISPLAY_FORMAT',
-      deal: 'DEAL',
-      deal_ad: 'DEAL_AD',
-      deal_page: 'DEAL_PAGE',
-      gender: 'GENDER',
-      placement: 'PLACEMENT',
-      platform: 'PLATFORM',
-      property: 'PROPERTY',
-      clicked_view_tag: 'CLICKED_VIEW_TAG',
-      fail_reason: 'FAIL_REASON'
-    });
-  }
-  static get Metrics (): Object {
-    return Object.freeze({
-      fb_ad_network_bidding_request: 'FB_AD_NETWORK_BIDDING_REQUEST',
-      fb_ad_network_bidding_response: 'FB_AD_NETWORK_BIDDING_RESPONSE',
-      fb_ad_network_bidding_bid_rate: 'FB_AD_NETWORK_BIDDING_BID_RATE',
-      fb_ad_network_bidding_win_rate: 'FB_AD_NETWORK_BIDDING_WIN_RATE',
-      fb_ad_network_request: 'FB_AD_NETWORK_REQUEST',
-      fb_ad_network_filled_request: 'FB_AD_NETWORK_FILLED_REQUEST',
-      fb_ad_network_fill_rate: 'FB_AD_NETWORK_FILL_RATE',
-      fb_ad_network_imp: 'FB_AD_NETWORK_IMP',
-      fb_ad_network_show_rate: 'FB_AD_NETWORK_SHOW_RATE',
-      fb_ad_network_click: 'FB_AD_NETWORK_CLICK',
-      fb_ad_network_ctr: 'FB_AD_NETWORK_CTR',
-      fb_ad_network_bidding_revenue: 'FB_AD_NETWORK_BIDDING_REVENUE',
-      fb_ad_network_revenue: 'FB_AD_NETWORK_REVENUE',
-      fb_ad_network_cpm: 'FB_AD_NETWORK_CPM',
-      fb_ad_network_video_guarantee_revenue: 'FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE',
-      fb_ad_network_video_view: 'FB_AD_NETWORK_VIDEO_VIEW',
-      fb_ad_network_video_view_rate: 'FB_AD_NETWORK_VIDEO_VIEW_RATE',
-      fb_ad_network_video_mrc: 'FB_AD_NETWORK_VIDEO_MRC',
-      fb_ad_network_video_mrc_rate: 'FB_AD_NETWORK_VIDEO_MRC_RATE',
-      fb_ad_network_win_rate: 'FB_AD_NETWORK_WIN_RATE',
-      fb_ad_network_direct_total_revenue: 'FB_AD_NETWORK_DIRECT_TOTAL_REVENUE',
-      fb_ad_network_direct_publisher_bill: 'FB_AD_NETWORK_DIRECT_PUBLISHER_BILL',
-      fb_ad_network_fast_click_rate: 'FB_AD_NETWORK_FAST_CLICK_RATE',
-      fb_ad_network_fast_return_rate: 'FB_AD_NETWORK_FAST_RETURN_RATE',
-      fb_ad_network_click_value_score: 'FB_AD_NETWORK_CLICK_VALUE_SCORE',
-      fb_ad_network_fast_click_numerator: 'FB_AD_NETWORK_FAST_CLICK_NUMERATOR',
-      fb_ad_network_fast_click_denominator: 'FB_AD_NETWORK_FAST_CLICK_DENOMINATOR',
-      fb_ad_network_fast_return_numerator: 'FB_AD_NETWORK_FAST_RETURN_NUMERATOR',
-      fb_ad_network_fast_return_denominator: 'FB_AD_NETWORK_FAST_RETURN_DENOMINATOR',
-      fb_ad_network_click_value_score_numerator: 'FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR',
-      fb_ad_network_click_value_score_denominator: 'FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR',
-      fb_ad_network_no_fill: 'FB_AD_NETWORK_NO_FILL',
-      fb_ad_network_no_bid: 'FB_AD_NETWORK_NO_BID'
-    });
-  }
-  static get OrderingColumn (): Object {
-    return Object.freeze({
-      time: 'TIME',
-      value: 'VALUE',
-      metric: 'METRIC'
-    });
-  }
-  static get OrderingType (): Object {
-    return Object.freeze({
-      ascending: 'ASCENDING',
-      descending: 'DESCENDING'
+      travel: 'TRAVEL'
     });
   }
   static get AccessType (): Object {
     return Object.freeze({
-      owner: 'OWNER',
-      agency: 'AGENCY'
+      agency: 'AGENCY',
+      owner: 'OWNER'
     });
   }
   static get PermittedTasks (): Object {
     return Object.freeze({
-      manage: 'MANAGE',
       advertise: 'ADVERTISE',
-      analyze: 'ANALYZE'
+      analyze: 'ANALYZE',
+      manage: 'MANAGE'
     });
   }
   static get SurveyBusinessType (): Object {
     return Object.freeze({
-      agency: 'AGENCY',
       advertiser: 'ADVERTISER',
+      agency: 'AGENCY',
       app_developer: 'APP_DEVELOPER',
       publisher: 'PUBLISHER'
     });
   }
-  static get PagePermittedRoles (): Object {
+  static get PagePermittedTasks (): Object {
     return Object.freeze({
-      manager: 'MANAGER',
-      content_creator: 'CONTENT_CREATOR',
-      moderator: 'MODERATOR',
-      advertiser: 'ADVERTISER',
-      insights_analyst: 'INSIGHTS_ANALYST'
-    });
-  }
-  static get PermittedRoles (): Object {
-    return Object.freeze({
-      manager: 'MANAGER',
-      content_creator: 'CONTENT_CREATOR',
-      moderator: 'MODERATOR',
-      advertiser: 'ADVERTISER',
-      insights_analyst: 'INSIGHTS_ANALYST'
+      advertise: 'ADVERTISE',
+      analyze: 'ANALYZE',
+      create_content: 'CREATE_CONTENT',
+      manage: 'MANAGE',
+      manage_jobs: 'MANAGE_JOBS',
+      moderate: 'MODERATE',
+      moderate_community: 'MODERATE_COMMUNITY',
+      pages_messaging: 'PAGES_MESSAGING',
+      pages_messaging_subscriptions: 'PAGES_MESSAGING_SUBSCRIPTIONS',
+      read_page_mailboxes: 'READ_PAGE_MAILBOXES',
+      view_monetization_insights: 'VIEW_MONETIZATION_INSIGHTS'
     });
   }
   static get Role (): Object {
     return Object.freeze({
-      finance_editor: 'FINANCE_EDITOR',
-      finance_analyst: 'FINANCE_ANALYST',
-      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       admin: 'ADMIN',
+      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       employee: 'EMPLOYEE',
-      fb_employee_sales_rep: 'FB_EMPLOYEE_SALES_REP'
+      finance_analyst: 'FINANCE_ANALYST',
+      finance_editor: 'FINANCE_EDITOR'
     });
   }
 
@@ -270,16 +185,6 @@ export default class Business extends AbstractCrudObject {
       fields,
       params,
       AdAccount
-    );
-  }
-
-  getAdAccountCreationRequests (fields, params, fetchFirstPage = true): AdAccountCreationRequest {
-    return this.getEdge(
-      AdAccountCreationRequest,
-      fields,
-      params,
-      fetchFirstPage,
-      '/adaccountcreationrequests'
     );
   }
 
@@ -364,6 +269,16 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
+  getAgencies (fields, params, fetchFirstPage = true): Business {
+    return this.getEdge(
+      Business,
+      fields,
+      params,
+      fetchFirstPage,
+      '/agencies'
+    );
+  }
+
   getAgencyPages (fields, params, fetchFirstPage = true): Page {
     return this.getEdge(
       Page,
@@ -371,6 +286,16 @@ export default class Business extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/agency_pages'
+    );
+  }
+
+  getAnPlacements (fields, params, fetchFirstPage = true): AdPlacement {
+    return this.getEdge(
+      AdPlacement,
+      fields,
+      params,
+      fetchFirstPage,
+      '/an_placements'
     );
   }
 
@@ -444,26 +369,6 @@ export default class Business extends AbstractCrudObject {
       fields,
       params,
       BusinessProject
-    );
-  }
-
-  getBusinessSettingLogs (fields, params, fetchFirstPage = true): BusinessSettingLogsData {
-    return this.getEdge(
-      BusinessSettingLogsData,
-      fields,
-      params,
-      fetchFirstPage,
-      '/businesssettinglogs'
-    );
-  }
-
-  getCatalogSegmentProducerTos (fields, params, fetchFirstPage = true): BusinessProductCatalogTOS {
-    return this.getEdge(
-      BusinessProductCatalogTOS,
-      fields,
-      params,
-      fetchFirstPage,
-      '/catalog_segment_producer_tos'
     );
   }
 
@@ -569,22 +474,13 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getCreativeCompassStudy (fields, params, fetchFirstPage = true): CreativeDemocracyRun {
+  getClients (fields, params, fetchFirstPage = true): Business {
     return this.getEdge(
-      CreativeDemocracyRun,
+      Business,
       fields,
       params,
       fetchFirstPage,
-      '/creative_compass_study'
-    );
-  }
-
-  createCreativeCompassStudy (fields, params): CreativeDemocracyRun {
-    return this.createEdge(
-      '/creative_compass_study',
-      fields,
-      params,
-      CreativeDemocracyRun
+      '/clients'
     );
   }
 
@@ -656,19 +552,9 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getGrpPlans (fields, params, fetchFirstPage = true): ReachFrequencyPrediction {
+  getInitiatedAudienceSharingRequests (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
-      ReachFrequencyPrediction,
-      fields,
-      params,
-      fetchFirstPage,
-      '/grp_plans'
-    );
-  }
-
-  getInitiatedAudienceSharingRequests (fields, params, fetchFirstPage = true): BusinessAssetSharingAgreement {
-    return this.getEdge(
-      BusinessAssetSharingAgreement,
+      AbstractObject,
       fields,
       params,
       fetchFirstPage,
@@ -712,16 +598,6 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getMatchedSearchApplications (fields, params, fetchFirstPage = true): BusinessMatchedSearchApplicationsEdgeData {
-    return this.getEdge(
-      BusinessMatchedSearchApplicationsEdgeData,
-      fields,
-      params,
-      fetchFirstPage,
-      '/matched_search_applications'
-    );
-  }
-
   getMeasurementReports (fields, params, fetchFirstPage = true): MeasurementReport {
     return this.getEdge(
       MeasurementReport,
@@ -729,15 +605,6 @@ export default class Business extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/measurement_reports'
-    );
-  }
-
-  createMeasurementReport (fields, params): MeasurementReport {
-    return this.createEdge(
-      '/measurement_reports',
-      fields,
-      params,
-      MeasurementReport
     );
   }
 
@@ -760,7 +627,7 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getOfFLineTermsOfService (fields, params, fetchFirstPage = true): OfflineTermsOfService {
+  getOfflineTermsOfService (fields, params, fetchFirstPage = true): OfflineTermsOfService {
     return this.getEdge(
       OfflineTermsOfService,
       fields,
@@ -834,19 +701,9 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getOwnedCustomConversions (fields, params, fetchFirstPage = true): CustomConversion {
+  getOwnedDomains (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
-      CustomConversion,
-      fields,
-      params,
-      fetchFirstPage,
-      '/owned_custom_conversions'
-    );
-  }
-
-  getOwnedDomains (fields, params, fetchFirstPage = true): OwnedDomain {
-    return this.getEdge(
-      OwnedDomain,
+      AbstractObject,
       fields,
       params,
       fetchFirstPage,
@@ -854,12 +711,12 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  createOwnedDomain (fields, params): OwnedDomain {
+  createOwnedDomain (fields, params): AbstractObject {
     return this.createEdge(
       '/owned_domains',
       fields,
-      params,
-      OwnedDomain
+      params
+
     );
   }
 
@@ -928,43 +785,6 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  createPage (fields, params): Business {
-    return this.createEdge(
-      '/pages',
-      fields,
-      params,
-      Business
-    );
-  }
-
-  getPartnerIntegrations (fields, params, fetchFirstPage = true): PartnerIntegrationLinked {
-    return this.getEdge(
-      PartnerIntegrationLinked,
-      fields,
-      params,
-      fetchFirstPage,
-      '/partner_integrations'
-    );
-  }
-
-  createPartnerIntegration (fields, params): PartnerIntegrationLinked {
-    return this.createEdge(
-      '/partner_integrations',
-      fields,
-      params,
-      PartnerIntegrationLinked
-    );
-  }
-
-  createPartnerAdAccount (fields, params): AbstractObject {
-    return this.createEdge(
-      '/partneradaccount',
-      fields,
-      params
-
-    );
-  }
-
   getPartners (fields, params, fetchFirstPage = true): Business {
     return this.getEdge(
       Business,
@@ -1015,9 +835,9 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getPendingOwnedAdAccounts (fields, params, fetchFirstPage = true): LegacyBusinessAdAccountRequest {
+  getPendingOwnedAdAccounts (fields, params, fetchFirstPage = true): BusinessAdAccountRequest {
     return this.getEdge(
-      LegacyBusinessAdAccountRequest,
+      BusinessAdAccountRequest,
       fields,
       params,
       fetchFirstPage,
@@ -1065,15 +885,6 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  createProductCatalog (fields, params): ProductCatalog {
-    return this.createEdge(
-      '/product_catalogs',
-      fields,
-      params,
-      ProductCatalog
-    );
-  }
-
   getReceivedAudiencePermissions (fields, params, fetchFirstPage = true): AudiencePermission {
     return this.getEdge(
       AudiencePermission,
@@ -1084,13 +895,23 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getReceivedAudienceSharingRequests (fields, params, fetchFirstPage = true): BusinessAssetSharingAgreement {
+  getReceivedAudienceSharingRequests (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
-      BusinessAssetSharingAgreement,
+      AbstractObject,
       fields,
       params,
       fetchFirstPage,
       '/received_audience_sharing_requests'
+    );
+  }
+
+  getReceivedInprogressOnBehalfRequests (fields, params, fetchFirstPage = true): BusinessOwnedObjectOnBehalfOfRequest {
+    return this.getEdge(
+      BusinessOwnedObjectOnBehalfOfRequest,
+      fields,
+      params,
+      fetchFirstPage,
+      '/received_inprogress_onbehalf_requests'
     );
   }
 
@@ -1104,6 +925,25 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
+  getSentInprogressOnBehalfRequests (fields, params, fetchFirstPage = true): BusinessOwnedObjectOnBehalfOfRequest {
+    return this.getEdge(
+      BusinessOwnedObjectOnBehalfOfRequest,
+      fields,
+      params,
+      fetchFirstPage,
+      '/sent_inprogress_onbehalf_requests'
+    );
+  }
+
+  createSentInprogressOnBehalfRequest (fields, params): BusinessOwnedObjectOnBehalfOfRequest {
+    return this.createEdge(
+      '/sent_inprogress_onbehalf_requests',
+      fields,
+      params,
+      BusinessOwnedObjectOnBehalfOfRequest
+    );
+  }
+
   getSharedAudiencePermissions (fields, params, fetchFirstPage = true): AudiencePermission {
     return this.getEdge(
       AudiencePermission,
@@ -1111,15 +951,6 @@ export default class Business extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/shared_audience_permissions'
-    );
-  }
-
-  createSpacoDataSetCollection (fields, params): AbstractObject {
-    return this.createEdge(
-      '/spaco_dataset_collections',
-      fields,
-      params
-
     );
   }
 
@@ -1142,13 +973,22 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getUploadEvent (fields, params, fetchFirstPage = true): MeasurementUploadEvent {
+  getThirdPartyMeasurementReportDataset (fields, params, fetchFirstPage = true): ThirdPartyMeasurementReportDataset {
     return this.getEdge(
-      MeasurementUploadEvent,
+      ThirdPartyMeasurementReportDataset,
       fields,
       params,
       fetchFirstPage,
-      '/upload_event'
+      '/third_party_measurement_report_dataset'
+    );
+  }
+
+  createThirdPartyMeasurementReportDataset (fields, params): ThirdPartyMeasurementReportDataset {
+    return this.createEdge(
+      '/third_party_measurement_report_dataset',
+      fields,
+      params,
+      ThirdPartyMeasurementReportDataset
     );
   }
 
@@ -1168,16 +1008,6 @@ export default class Business extends AbstractCrudObject {
     );
   }
 
-  getUserInvitations (fields, params, fetchFirstPage = true): BusinessRoleRequest {
-    return this.getEdge(
-      BusinessRoleRequest,
-      fields,
-      params,
-      fetchFirstPage,
-      '/user_invitations'
-    );
-  }
-
   deleteUserPermissions (params): AbstractObject {
     return super.deleteEdge(
       '/userpermissions',
@@ -1191,15 +1021,6 @@ export default class Business extends AbstractCrudObject {
       fields,
       params,
       Business
-    );
-  }
-
-  createVietnamAdAccountCreationRequest (fields, params): AdAccountCreationRequest {
-    return this.createEdge(
-      '/vietnamadaccountcreationrequests',
-      fields,
-      params,
-      AdAccountCreationRequest
     );
   }
 

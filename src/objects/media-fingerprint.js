@@ -7,7 +7,6 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
 
 /**
  * MediaFingerprint
@@ -31,25 +30,12 @@ export default class MediaFingerprint extends AbstractCrudObject {
 
   static get FingerprintContentType (): Object {
     return Object.freeze({
-      songtrack: 'SONGTRACK',
+      am_songtrack: 'AM_SONGTRACK',
       episode: 'EPISODE',
-      other: 'OTHER',
       movie: 'MOVIE',
-      am_songtrack: 'AM_SONGTRACK'
+      other: 'OTHER',
+      songtrack: 'SONGTRACK'
     });
-  }
-  static get FingerprintValidity (): Object {
-    return Object.freeze({
-      valid: 'VALID',
-      expiring: 'EXPIRING',
-      expired: 'EXPIRED'
-    });
-  }
-
-  delete (fields, params): AbstractObject {
-    return super.delete(
-      params
-    );
   }
 
   get (fields, params): MediaFingerprint {

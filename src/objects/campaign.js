@@ -8,7 +8,6 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
-import AdStudy from './ad-study';
 import AdRule from './ad-rule';
 import Ad from './ad';
 import AdSet from './ad-set';
@@ -38,9 +37,9 @@ export default class Campaign extends AbstractCrudObject {
       daily_budget: 'daily_budget',
       effective_status: 'effective_status',
       id: 'id',
+      issues_info: 'issues_info',
       last_budget_toggling_time: 'last_budget_toggling_time',
       lifetime_budget: 'lifetime_budget',
-      metrics_metadata: 'metrics_metadata',
       name: 'name',
       objective: 'objective',
       pacing_type: 'pacing_type',
@@ -67,61 +66,61 @@ export default class Campaign extends AbstractCrudObject {
   static get ConfiguredStatus (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
+      archived: 'ARCHIVED',
       deleted: 'DELETED',
-      archived: 'ARCHIVED'
+      paused: 'PAUSED'
     });
   }
   static get EffectiveStatus (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
-      deleted: 'DELETED',
-      pending_review: 'PENDING_REVIEW',
-      disapproved: 'DISAPPROVED',
-      preapproved: 'PREAPPROVED',
-      pending_billing_info: 'PENDING_BILLING_INFO',
-      campaign_paused: 'CAMPAIGN_PAUSED',
-      archived: 'ARCHIVED',
       adset_paused: 'ADSET_PAUSED',
+      archived: 'ARCHIVED',
+      campaign_paused: 'CAMPAIGN_PAUSED',
+      deleted: 'DELETED',
+      disapproved: 'DISAPPROVED',
+      paused: 'PAUSED',
+      pending_billing_info: 'PENDING_BILLING_INFO',
+      pending_review: 'PENDING_REVIEW',
+      preapproved: 'PREAPPROVED',
       with_issues: 'WITH_ISSUES'
     });
   }
   static get Status (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
+      archived: 'ARCHIVED',
       deleted: 'DELETED',
-      archived: 'ARCHIVED'
+      paused: 'PAUSED'
     });
   }
   static get DatePreset (): Object {
     return Object.freeze({
-      today: 'today',
-      yesterday: 'yesterday',
-      this_month: 'this_month',
-      last_month: 'last_month',
-      this_quarter: 'this_quarter',
-      lifetime: 'lifetime',
-      last_3d: 'last_3d',
-      last_7d: 'last_7d',
       last_14d: 'last_14d',
       last_28d: 'last_28d',
       last_30d: 'last_30d',
+      last_3d: 'last_3d',
+      last_7d: 'last_7d',
       last_90d: 'last_90d',
+      last_month: 'last_month',
+      last_quarter: 'last_quarter',
       last_week_mon_sun: 'last_week_mon_sun',
       last_week_sun_sat: 'last_week_sun_sat',
-      last_quarter: 'last_quarter',
       last_year: 'last_year',
+      lifetime: 'lifetime',
+      this_month: 'this_month',
+      this_quarter: 'this_quarter',
       this_week_mon_today: 'this_week_mon_today',
       this_week_sun_today: 'this_week_sun_today',
-      this_year: 'this_year'
+      this_year: 'this_year',
+      today: 'today',
+      yesterday: 'yesterday'
     });
   }
   static get ExecutionOptions (): Object {
     return Object.freeze({
-      validate_only: 'validate_only',
-      include_recommendations: 'include_recommendations'
+      include_recommendations: 'include_recommendations',
+      validate_only: 'validate_only'
     });
   }
   static get Objective (): Object {
@@ -151,19 +150,9 @@ export default class Campaign extends AbstractCrudObject {
   static get StatusOption (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      paused: 'PAUSED',
-      inherited_from_source: 'INHERITED_FROM_SOURCE'
+      inherited_from_source: 'INHERITED_FROM_SOURCE',
+      paused: 'PAUSED'
     });
-  }
-
-  getAdStudies (fields, params, fetchFirstPage = true): AdStudy {
-    return this.getEdge(
-      AdStudy,
-      fields,
-      params,
-      fetchFirstPage,
-      '/ad_studies'
-    );
   }
 
   deleteAdLabels (params): AbstractObject {

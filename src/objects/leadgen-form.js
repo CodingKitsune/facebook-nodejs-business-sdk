@@ -20,7 +20,6 @@ export default class LeadgenForm extends AbstractCrudObject {
     return Object.freeze({
       allow_organic_lead: 'allow_organic_lead',
       block_display_for_non_targeted_viewer: 'block_display_for_non_targeted_viewer',
-      context_card: 'context_card',
       created_time: 'created_time',
       creator: 'creator',
       creator_id: 'creator_id',
@@ -33,7 +32,6 @@ export default class LeadgenForm extends AbstractCrudObject {
       is_optimized_for_quality: 'is_optimized_for_quality',
       leadgen_export_csv_url: 'leadgen_export_csv_url',
       leads_count: 'leads_count',
-      legal_content: 'legal_content',
       locale: 'locale',
       messenger_welcome_message: 'messenger_welcome_message',
       name: 'name',
@@ -46,7 +44,6 @@ export default class LeadgenForm extends AbstractCrudObject {
       questions: 'questions',
       status: 'status',
       tcpa_compliance: 'tcpa_compliance',
-      thank_you_page: 'thank_you_page',
       tracking_parameters: 'tracking_parameters'
     });
   }
@@ -61,37 +58,37 @@ export default class LeadgenForm extends AbstractCrudObject {
   }
   static get Locale (): Object {
     return Object.freeze({
-      en_us: 'EN_US',
-      it_it: 'IT_IT',
-      fr_fr: 'FR_FR',
-      es_es: 'ES_ES',
-      es_la: 'ES_LA',
-      de_de: 'DE_DE',
-      en_gb: 'EN_GB',
-      pt_br: 'PT_BR',
-      zh_tw: 'ZH_TW',
-      zh_hk: 'ZH_HK',
-      tr_tr: 'TR_TR',
       ar_ar: 'AR_AR',
       cs_cz: 'CS_CZ',
       da_dk: 'DA_DK',
+      de_de: 'DE_DE',
+      en_gb: 'EN_GB',
+      en_us: 'EN_US',
+      es_es: 'ES_ES',
+      es_la: 'ES_LA',
       fi_fi: 'FI_FI',
+      fr_fr: 'FR_FR',
       he_il: 'HE_IL',
       hi_in: 'HI_IN',
       hu_hu: 'HU_HU',
       id_id: 'ID_ID',
+      it_it: 'IT_IT',
       ja_jp: 'JA_JP',
       ko_kr: 'KO_KR',
       nb_no: 'NB_NO',
       nl_nl: 'NL_NL',
       pl_pl: 'PL_PL',
+      pt_br: 'PT_BR',
       pt_pt: 'PT_PT',
       ro_ro: 'RO_RO',
       ru_ru: 'RU_RU',
       sv_se: 'SV_SE',
       th_th: 'TH_TH',
+      tr_tr: 'TR_TR',
       vi_vn: 'VI_VN',
-      zh_cn: 'ZH_CN'
+      zh_cn: 'ZH_CN',
+      zh_hk: 'ZH_HK',
+      zh_tw: 'ZH_TW'
     });
   }
 
@@ -102,15 +99,6 @@ export default class LeadgenForm extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/leads'
-    );
-  }
-
-  createLead (fields, params): Lead {
-    return this.createEdge(
-      '/leads',
-      fields,
-      params,
-      Lead
     );
   }
 

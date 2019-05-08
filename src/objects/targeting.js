@@ -23,7 +23,7 @@ export default class Targeting extends AbstractCrudObject {
       app_install_state: 'app_install_state',
       audience_network_positions: 'audience_network_positions',
       behaviors: 'behaviors',
-      brand_safety_content_severity_levels: 'brand_safety_content_severity_levels',
+      brand_safety_content_filter_levels: 'brand_safety_content_filter_levels',
       catalog_based_targeting: 'catalog_based_targeting',
       cities: 'cities',
       college_years: 'college_years',
@@ -104,23 +104,22 @@ export default class Targeting extends AbstractCrudObject {
       wireless_carrier: 'wireless_carrier',
       work_employers: 'work_employers',
       work_positions: 'work_positions',
-      zips: 'zips',
-      id: 'id'
+      zips: 'zips'
     });
   }
 
   static get DevicePlatforms (): Object {
     return Object.freeze({
-      mobile: 'mobile',
+      connected_tv: 'connected_tv',
       desktop: 'desktop',
-      connected_tv: 'connected_tv'
+      mobile: 'mobile'
     });
   }
   static get EffectiveDevicePlatforms (): Object {
     return Object.freeze({
-      mobile: 'mobile',
+      connected_tv: 'connected_tv',
       desktop: 'desktop',
-      connected_tv: 'connected_tv'
+      mobile: 'mobile'
     });
   }
 }

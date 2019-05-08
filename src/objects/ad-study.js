@@ -11,7 +11,6 @@ import AbstractObject from './../abstract-object';
 import AdStudyCell from './ad-study-cell';
 import AdsTALHealthCheckError from './ads-tal-health-check-error';
 import AdStudyObjective from './ad-study-objective';
-import AdStudyAdsAssetUserPermissions from './ad-study-ads-asset-user-permissions';
 import User from './user';
 
 /**
@@ -46,14 +45,9 @@ export default class AdStudy extends AbstractCrudObject {
       not_most_responsive: 'NOT_MOST_RESPONSIVE'
     });
   }
-  static get Role (): Object {
-    return Object.freeze({
-      admin: 'ADMIN',
-      analyst: 'ANALYST'
-    });
-  }
   static get Type (): Object {
     return Object.freeze({
+      continuous_lift_config: 'CONTINUOUS_LIFT_CONFIG',
       lift: 'LIFT',
       split_test: 'SPLIT_TEST'
     });
@@ -104,32 +98,6 @@ export default class AdStudy extends AbstractCrudObject {
       fields,
       params,
       AdStudyObjective
-    );
-  }
-
-  deleteUserPermissions (params): AbstractObject {
-    return super.deleteEdge(
-      '/userpermissions',
-      params
-    );
-  }
-
-  getUserPermissions (fields, params, fetchFirstPage = true): AdStudyAdsAssetUserPermissions {
-    return this.getEdge(
-      AdStudyAdsAssetUserPermissions,
-      fields,
-      params,
-      fetchFirstPage,
-      '/userpermissions'
-    );
-  }
-
-  createUserPermission (fields, params): AdStudy {
-    return this.createEdge(
-      '/userpermissions',
-      fields,
-      params,
-      AdStudy
     );
   }
 

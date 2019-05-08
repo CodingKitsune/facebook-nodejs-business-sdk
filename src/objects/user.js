@@ -11,39 +11,26 @@ import AbstractObject from './../abstract-object';
 import Page from './page';
 import AdStudy from './ad-study';
 import AdAccount from './ad-account';
-import AdContract from './ad-contract';
 import Album from './album';
 import AppRequestFormerRecipient from './app-request-former-recipient';
 import AppRequest from './app-request';
-import WithAsset3D from './with-asset3-d';
-import AdMonetizationProperty from './ad-monetization-property';
 import ProductCatalog from './product-catalog';
-import BusinessActivityLogEvent from './business-activity-log-event';
 import BusinessUser from './business-user';
 import Business from './business';
 import UnifiedThread from './unified-thread';
-import PageUserMessageThreadLabel from './page-user-message-thread-label';
-import Domain from './domain';
 import Event from './event';
-import FavoriteRequest from './favorite-request';
 import FriendList from './friend-list';
 import Group from './group';
 import UserIDForApp from './user-id-for-app';
 import UserIDForPage from './user-id-for-page';
-import UserInvitableFriend from './user-invitable-friend';
-import Link from './link';
 import LiveEncoder from './live-encoder';
 import LiveVideo from './live-video';
-import OpenGraphObject from './open-graph-object';
 import Permission from './permission';
 import Photo from './photo';
 import ProfilePictureSource from './profile-picture-source';
+import Domain from './domain';
 import RequestHistory from './request-history';
-import Canvas from './canvas';
-import PlatformSessionKey from './platform-session-key';
-import StreamFilter from './stream-filter';
 import UserTaggableFriend from './user-taggable-friend';
-import PlaceTag from './place-tag';
 import AdVideo from './ad-video';
 
 /**
@@ -60,7 +47,6 @@ export default class User extends AbstractCrudObject {
       age_range: 'age_range',
       birthday: 'birthday',
       can_review_measurement_request: 'can_review_measurement_request',
-      context: 'context',
       cover: 'cover',
       currency: 'currency',
       devices: 'devices',
@@ -119,24 +105,29 @@ export default class User extends AbstractCrudObject {
 
   static get Tasks (): Object {
     return Object.freeze({
-      manage: 'MANAGE',
+      advertise: 'ADVERTISE',
+      analyze: 'ANALYZE',
       create_content: 'CREATE_CONTENT',
+      manage: 'MANAGE',
+      manage_jobs: 'MANAGE_JOBS',
       moderate: 'MODERATE',
       moderate_community: 'MODERATE_COMMUNITY',
-      advertise: 'ADVERTISE',
-      analyze: 'ANALYZE'
+      pages_messaging: 'PAGES_MESSAGING',
+      pages_messaging_subscriptions: 'PAGES_MESSAGING_SUBSCRIPTIONS',
+      read_page_mailboxes: 'READ_PAGE_MAILBOXES',
+      view_monetization_insights: 'VIEW_MONETIZATION_INSIGHTS'
     });
   }
   static get LocalNewsMegaphoneDismissStatus (): Object {
     return Object.freeze({
-      yes: 'YES',
-      no: 'NO'
+      no: 'NO',
+      yes: 'YES'
     });
   }
   static get LocalNewsSubscriptionStatus (): Object {
     return Object.freeze({
-      status_on: 'STATUS_ON',
-      status_off: 'STATUS_OFF'
+      status_off: 'STATUS_OFF',
+      status_on: 'STATUS_ON'
     });
   }
   static get ResumeType (): Object {
@@ -147,76 +138,67 @@ export default class User extends AbstractCrudObject {
   }
   static get Filtering (): Object {
     return Object.freeze({
+      ema: 'ema',
       groups: 'groups',
-      groups_social: 'groups_social',
-      ema: 'ema'
+      groups_social: 'groups_social'
     });
   }
   static get Type (): Object {
     return Object.freeze({
-      generic: 'generic',
-      content_update: 'content_update'
+      content_update: 'content_update',
+      generic: 'generic'
     });
   }
   static get ServiceType (): Object {
     return Object.freeze({
       aim: 'AIM',
-      gadu: 'GADU',
-      icq: 'ICQ',
-      gtalk: 'GTALK',
-      msn: 'MSN',
-      skype: 'SKYPE',
-      yahoo: 'YAHOO',
-      yahoo_jp: 'YAHOO_JP',
-      qq: 'QQ',
-      nateon: 'NATEON',
-      twitter: 'TWITTER',
-      hyves: 'HYVES',
-      orkut: 'ORKUT',
-      myspace: 'MYSPACE',
-      groupwise: 'GROUPWISE',
-      cyworld: 'CYWORLD',
-      mixi: 'MIXI',
-      qip: 'QIP',
-      rediff_bol: 'REDIFF_BOL',
-      vkontakte: 'VKONTAKTE',
-      ebuddy: 'EBUDDY',
-      mailru: 'MAILRU',
-      jabber: 'JABBER',
-      icloud: 'ICLOUD',
+      ask_fm: 'ASK_FM',
       bbm: 'BBM',
       bbm_ppid: 'BBM_PPID',
-      instagram: 'INSTAGRAM',
-      line: 'LINE',
-      wechat: 'WECHAT',
-      kakaotalk: 'KAKAOTALK',
-      others: 'OTHERS',
-      snapchat: 'SNAPCHAT',
-      tumblr: 'TUMBLR',
-      sound_cloud: 'SOUND_CLOUD',
-      linked_in: 'LINKED_IN',
-      pinterest: 'PINTEREST',
-      you_tube: 'YOU_TUBE',
-      medium: 'MEDIUM',
+      cyworld: 'CYWORLD',
+      ebuddy: 'EBUDDY',
       foursquare: 'FOURSQUARE',
-      spotify: 'SPOTIFY',
-      vimeo: 'VIMEO',
-      kik: 'KIK',
-      ask_fm: 'ASK_FM',
-      ok: 'OK',
+      gadu: 'GADU',
       github: 'GITHUB',
+      groupwise: 'GROUPWISE',
+      gtalk: 'GTALK',
+      hyves: 'HYVES',
+      icloud: 'ICLOUD',
+      icq: 'ICQ',
+      instagram: 'INSTAGRAM',
+      jabber: 'JABBER',
+      kakaotalk: 'KAKAOTALK',
+      kik: 'KIK',
+      line: 'LINE',
+      linked_in: 'LINKED_IN',
+      mailru: 'MAILRU',
+      medium: 'MEDIUM',
+      mixi: 'MIXI',
+      msn: 'MSN',
+      myspace: 'MYSPACE',
+      nateon: 'NATEON',
+      ok: 'OK',
+      orkut: 'ORKUT',
+      others: 'OTHERS',
+      pinterest: 'PINTEREST',
+      qip: 'QIP',
+      qq: 'QQ',
+      rediff_bol: 'REDIFF_BOL',
+      skype: 'SKYPE',
+      snapchat: 'SNAPCHAT',
+      sound_cloud: 'SOUND_CLOUD',
+      spotify: 'SPOTIFY',
+      tumblr: 'TUMBLR',
       twitch: 'TWITCH',
-      whatsapp: 'WHATSAPP'
+      twitter: 'TWITTER',
+      vimeo: 'VIMEO',
+      vkontakte: 'VKONTAKTE',
+      wechat: 'WECHAT',
+      whatsapp: 'WHATSAPP',
+      yahoo: 'YAHOO',
+      yahoo_jp: 'YAHOO_JP',
+      you_tube: 'YOU_TUBE'
     });
-  }
-
-  createPaymentCurrency (fields, params): User {
-    return this.createEdge(
-      '/PaymentCurrencies',
-      fields,
-      params,
-      User
-    );
   }
 
   createAccessToken (fields, params): User {
@@ -254,16 +236,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getAchievements (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/achievements'
-    );
-  }
-
   createAchievement (fields, params): AbstractObject {
     return this.createEdge(
       '/achievements',
@@ -283,15 +255,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  createAdStudy (fields, params): AdStudy {
-    return this.createEdge(
-      '/ad_studies',
-      fields,
-      params,
-      AdStudy
-    );
-  }
-
   getAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
     return this.getEdge(
       AdAccount,
@@ -302,16 +265,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getAdContracts (fields, params, fetchFirstPage = true): AdContract {
-    return this.getEdge(
-      AdContract,
-      fields,
-      params,
-      fetchFirstPage,
-      '/adcontracts'
-    );
-  }
-
   getAlbums (fields, params, fetchFirstPage = true): Album {
     return this.getEdge(
       Album,
@@ -319,15 +272,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/albums'
-    );
-  }
-
-  createAlbum (fields, params): Album {
-    return this.createEdge(
-      '/albums',
-      fields,
-      params,
-      Album
     );
   }
 
@@ -360,25 +304,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getAsset3Ds (fields, params, fetchFirstPage = true): WithAsset3D {
-    return this.getEdge(
-      WithAsset3D,
-      fields,
-      params,
-      fetchFirstPage,
-      '/asset3ds'
-    );
-  }
-
-  createAsset3D (fields, params): WithAsset3D {
-    return this.createEdge(
-      '/asset3ds',
-      fields,
-      params,
-      WithAsset3D
-    );
-  }
-
   getAssignedAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
     return this.getEdge(
       AdAccount,
@@ -386,16 +311,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/assigned_ad_accounts'
-    );
-  }
-
-  getAssignedMonetizationProperties (fields, params, fetchFirstPage = true): AdMonetizationProperty {
-    return this.getEdge(
-      AdMonetizationProperty,
-      fields,
-      params,
-      fetchFirstPage,
-      '/assigned_monetization_properties'
     );
   }
 
@@ -429,23 +344,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  deleteBulkContacts (params): AbstractObject {
-    return super.deleteEdge(
-      '/bulkcontacts',
-      params
-    );
-  }
-
-  getBusinessActivities (fields, params, fetchFirstPage = true): BusinessActivityLogEvent {
-    return this.getEdge(
-      BusinessActivityLogEvent,
-      fields,
-      params,
-      fetchFirstPage,
-      '/business_activities'
-    );
-  }
-
   getBusinessUsers (fields, params, fetchFirstPage = true): BusinessUser {
     return this.getEdge(
       BusinessUser,
@@ -473,15 +371,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  createCheckin (fields, params): AbstractObject {
-    return this.createEdge(
-      '/checkins',
-      fields,
-      params
-
-    );
-  }
-
   getConversations (fields, params, fetchFirstPage = true): UnifiedThread {
     return this.getEdge(
       UnifiedThread,
@@ -489,26 +378,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/conversations'
-    );
-  }
-
-  getCustomLabels (fields, params, fetchFirstPage = true): PageUserMessageThreadLabel {
-    return this.getEdge(
-      PageUserMessageThreadLabel,
-      fields,
-      params,
-      fetchFirstPage,
-      '/custom_labels'
-    );
-  }
-
-  getDomains (fields, params, fetchFirstPage = true): Domain {
-    return this.getEdge(
-      Domain,
-      fields,
-      params,
-      fetchFirstPage,
-      '/domains'
     );
   }
 
@@ -522,15 +391,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  createEvent (fields, params): Event {
-    return this.createEdge(
-      '/events',
-      fields,
-      params,
-      Event
-    );
-  }
-
   getFamily (fields, params, fetchFirstPage = true): User {
     return this.getEdge(
       User,
@@ -541,22 +401,13 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getFavoriteRequests (fields, params, fetchFirstPage = true): FavoriteRequest {
+  getFavoriteRequests (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
-      FavoriteRequest,
+      AbstractObject,
       fields,
       params,
       fetchFirstPage,
       '/favorite_requests'
-    );
-  }
-
-  createFavoriteRequest (fields, params): FavoriteRequest {
-    return this.createEdge(
-      '/favorite_requests',
-      fields,
-      params,
-      FavoriteRequest
     );
   }
 
@@ -576,15 +427,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/friendlists'
-    );
-  }
-
-  createFriendList (fields, params): FriendList {
-    return this.createEdge(
-      '/friendlists',
-      fields,
-      params,
-      FriendList
     );
   }
 
@@ -626,18 +468,18 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  createGamesStat (fields, params): AbstractObject {
+  createGamesAchieve (fields, params): AbstractObject {
     return this.createEdge(
-      '/games_stats',
+      '/games.achieves',
       fields,
       params
 
     );
   }
 
-  createGamesAchieve (fields, params): AbstractObject {
+  createGamesStat (fields, params): AbstractObject {
     return this.createEdge(
-      '/gamesachieves',
+      '/games_stats',
       fields,
       params
 
@@ -693,23 +535,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getInvitableFriends (fields, params, fetchFirstPage = true): UserInvitableFriend {
-    return this.getEdge(
-      UserInvitableFriend,
-      fields,
-      params,
-      fetchFirstPage,
-      '/invitable_friends'
-    );
-  }
-
-  deleteLikes (params): AbstractObject {
-    return super.deleteEdge(
-      '/likes',
-      params
-    );
-  }
-
   getLikes (fields, params, fetchFirstPage = true): Page {
     return this.getEdge(
       Page,
@@ -717,24 +542,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/likes'
-    );
-  }
-
-  createLike (fields, params): User {
-    return this.createEdge(
-      '/likes',
-      fields,
-      params,
-      User
-    );
-  }
-
-  createLink (fields, params): Link {
-    return this.createEdge(
-      '/links',
-      fields,
-      params,
-      Link
     );
   }
 
@@ -776,39 +583,12 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  createLoggedOutPushSetNonce (fields, params): User {
-    return this.createEdge(
-      '/loggedoutpushsetnonces',
-      fields,
-      params,
-      User
-    );
-  }
-
-  createLogInApprovalsKey (fields, params): AbstractObject {
-    return this.createEdge(
-      '/loginapprovalskeys',
-      fields,
-      params
-
-    );
-  }
-
   createMfsAccountPinReset (fields, params): User {
     return this.createEdge(
       '/mfs_account_pin_reset',
       fields,
       params,
       User
-    );
-  }
-
-  createMomentsLinkInvite (fields, params): AbstractObject {
-    return this.createEdge(
-      '/moments_link_invite',
-      fields,
-      params
-
     );
   }
 
@@ -850,15 +630,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  createNote (fields, params): AbstractObject {
-    return this.createEdge(
-      '/notes',
-      fields,
-      params
-
-    );
-  }
-
   createNotification (fields, params): User {
     return this.createEdge(
       '/notifications',
@@ -868,49 +639,12 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getObjects (fields, params, fetchFirstPage = true): OpenGraphObject {
-    return this.getEdge(
-      OpenGraphObject,
+  createPaymentCurrency (fields, params): User {
+    return this.createEdge(
+      '/payment_currencies',
       fields,
       params,
-      fetchFirstPage,
-      '/objects'
-    );
-  }
-
-  createObject (fields, params): OpenGraphObject {
-    return this.createEdge(
-      '/objects',
-      fields,
-      params,
-      OpenGraphObject
-    );
-  }
-
-  createOpenGraphActionFeed (fields, params): AbstractObject {
-    return this.createEdge(
-      '/opengraphactionfeed',
-      fields,
-      params
-
-    );
-  }
-
-  createPaymentAccountEmail (fields, params): AbstractObject {
-    return this.createEdge(
-      '/payment_account_emails',
-      fields,
-      params
-
-    );
-  }
-
-  createPaymentAccountPhone (fields, params): AbstractObject {
-    return this.createEdge(
-      '/payment_account_phones',
-      fields,
-      params
-
+      User
     );
   }
 
@@ -1009,23 +743,6 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getRichMediaDocuments (fields, params, fetchFirstPage = true): Canvas {
-    return this.getEdge(
-      Canvas,
-      fields,
-      params,
-      fetchFirstPage,
-      '/rich_media_documents'
-    );
-  }
-
-  deleteScreenNames (params): AbstractObject {
-    return super.deleteEdge(
-      '/screennames',
-      params
-    );
-  }
-
   createScreenName (fields, params): User {
     return this.createEdge(
       '/screennames',
@@ -1035,41 +752,12 @@ export default class User extends AbstractCrudObject {
     );
   }
 
-  getSessionKeys (fields, params, fetchFirstPage = true): PlatformSessionKey {
-    return this.getEdge(
-      PlatformSessionKey,
-      fields,
-      params,
-      fetchFirstPage,
-      '/session_keys'
-    );
-  }
-
   createStagingResource (fields, params): User {
     return this.createEdge(
-      '/stagingresources',
+      '/staging_resources',
       fields,
       params,
       User
-    );
-  }
-
-  getStreamFilters (fields, params, fetchFirstPage = true): StreamFilter {
-    return this.getEdge(
-      StreamFilter,
-      fields,
-      params,
-      fetchFirstPage,
-      '/stream_filters'
-    );
-  }
-
-  createSubscription (fields, params): AbstractObject {
-    return this.createEdge(
-      '/subscriptions',
-      fields,
-      params
-
     );
   }
 
@@ -1080,16 +768,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/taggable_friends'
-    );
-  }
-
-  getTaggedPlaces (fields, params, fetchFirstPage = true): PlaceTag {
-    return this.getEdge(
-      PlaceTag,
-      fields,
-      params,
-      fetchFirstPage,
-      '/tagged_places'
     );
   }
 
@@ -1110,16 +788,6 @@ export default class User extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/threads'
-    );
-  }
-
-  getVideoBroadcasts (fields, params, fetchFirstPage = true): LiveVideo {
-    return this.getEdge(
-      LiveVideo,
-      fields,
-      params,
-      fetchFirstPage,
-      '/video_broadcasts'
     );
   }
 

@@ -26,8 +26,7 @@ export default class ProductEventStat extends AbstractCrudObject {
       total_unmatched_content_ids: 'total_unmatched_content_ids',
       unique_content_ids_matched_other_catalogs: 'unique_content_ids_matched_other_catalogs',
       unique_matched_content_ids: 'unique_matched_content_ids',
-      unique_unmatched_content_ids: 'unique_unmatched_content_ids',
-      id: 'id'
+      unique_unmatched_content_ids: 'unique_unmatched_content_ids'
     });
   }
 
@@ -47,13 +46,14 @@ export default class ProductEventStat extends AbstractCrudObject {
   }
   static get Event (): Object {
     return Object.freeze({
-      viewcontent: 'ViewContent',
       addtocart: 'AddToCart',
-      purchase: 'Purchase',
+      addtowishlist: 'AddToWishlist',
       initiatecheckout: 'InitiateCheckout',
-      search: 'Search',
       lead: 'Lead',
-      addtowishlist: 'AddToWishlist'
+      purchase: 'Purchase',
+      search: 'Search',
+      subscribe: 'Subscribe',
+      viewcontent: 'ViewContent'
     });
   }
   static get Breakdowns (): Object {

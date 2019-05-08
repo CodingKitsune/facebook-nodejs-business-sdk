@@ -32,17 +32,12 @@ import AssignedUser from './assigned-user';
 import Campaign from './campaign';
 import AsyncRequest from './async-request';
 import AdAsyncRequestSet from './ad-async-request-set';
-import BrandAudience from './brand-audience';
 import BroadTargetingCategories from './broad-targeting-categories';
-import BusinessActivityLogEvent from './business-activity-log-event';
 import BusinessProject from './business-project';
-import BusinessSettingLogsData from './business-setting-logs-data';
-import AdAccountContextualTargeting from './ad-account-contextual-targeting';
 import CustomAudience from './custom-audience';
 import CustomAudiencesTOS from './custom-audiences-tos';
 import CustomConversion from './custom-conversion';
 import AdAccountDeliveryEstimate from './ad-account-delivery-estimate';
-import DirectDeal from './direct-deal';
 import AdPreview from './ad-preview';
 import AdsInsights from './ads-insights';
 import InstagramUser from './instagram-user';
@@ -51,20 +46,15 @@ import AdAccountMatchedSearchApplicationsEdgeData from './ad-account-matched-sea
 import AdAccountMaxBid from './ad-account-max-bid';
 import MinimumBudget from './minimum-budget';
 import OfflineConversionDataSet from './offline-conversion-data-set';
-import OffsitePixel from './offsite-pixel';
-import PartnerIntegrationLinked from './partner-integration-linked';
-import PartnerCategory from './partner-category';
-import AdsDataPartner from './ads-data-partner';
+import BusinessOwnedObjectOnBehalfOfRequest from './business-owned-object-on-behalf-of-request';
 import Page from './page';
 import PublisherBlockList from './publisher-block-list';
 import ReachEstimate from './reach-estimate';
 import ReachFrequencyPrediction from './reach-frequency-prediction';
-import Referral from './referral';
 import AdAccountRoas from './ad-account-roas';
 import SavedAudience from './saved-audience';
 import AdAccountTargetingUnified from './ad-account-targeting-unified';
 import TargetingSentenceLine from './targeting-sentence-line';
-import TimezoneOffset from './timezone-offset';
 import AdAccountTrackingData from './ad-account-tracking-data';
 import AdAccountUser from './ad-account-user';
 
@@ -97,12 +87,11 @@ export default class AdAccount extends AbstractCrudObject {
       capabilities: 'capabilities',
       created_time: 'created_time',
       currency: 'currency',
-      direct_deals_tos_accepted: 'direct_deals_tos_accepted',
       disable_reason: 'disable_reason',
       end_advertiser: 'end_advertiser',
       end_advertiser_name: 'end_advertiser_name',
-      extended_credit_invoice_group: 'extended_credit_invoice_group',
       failed_delivery_checks: 'failed_delivery_checks',
+      fb_entity: 'fb_entity',
       funding_source: 'funding_source',
       funding_source_details: 'funding_source_details',
       has_migrated_permissions: 'has_migrated_permissions',
@@ -194,28 +183,28 @@ export default class AdAccount extends AbstractCrudObject {
       twd: 'TWD',
       usd: 'USD',
       uyu: 'UYU',
-      vef: 'VEF',
       vnd: 'VND',
       zar: 'ZAR'
     });
   }
   static get PermittedTasks (): Object {
     return Object.freeze({
-      manage: 'MANAGE',
       advertise: 'ADVERTISE',
-      analyze: 'ANALYZE'
+      analyze: 'ANALYZE',
+      manage: 'MANAGE'
     });
   }
   static get Tasks (): Object {
     return Object.freeze({
-      manage: 'MANAGE',
       advertise: 'ADVERTISE',
-      analyze: 'ANALYZE'
+      analyze: 'ANALYZE',
+      manage: 'MANAGE'
     });
   }
   static get ClaimObjective (): Object {
     return Object.freeze({
       automotive_model: 'AUTOMOTIVE_MODEL',
+      collaborative_ads: 'COLLABORATIVE_ADS',
       home_listing: 'HOME_LISTING',
       media_title: 'MEDIA_TITLE',
       product: 'PRODUCT',
@@ -239,19 +228,21 @@ export default class AdAccount extends AbstractCrudObject {
   }
   static get Subtype (): Object {
     return Object.freeze({
-      custom: 'CUSTOM',
-      website: 'WEBSITE',
       app: 'APP',
-      offline_conversion: 'OFFLINE_CONVERSION',
-      claim: 'CLAIM',
-      partner: 'PARTNER',
-      managed: 'MANAGED',
-      video: 'VIDEO',
-      lookalike: 'LOOKALIKE',
-      engagement: 'ENGAGEMENT',
       bag_of_accounts: 'BAG_OF_ACCOUNTS',
+      claim: 'CLAIM',
+      custom: 'CUSTOM',
+      engagement: 'ENGAGEMENT',
+      fox: 'FOX',
+      lookalike: 'LOOKALIKE',
+      managed: 'MANAGED',
+      measurement: 'MEASUREMENT',
+      offline_conversion: 'OFFLINE_CONVERSION',
+      partner: 'PARTNER',
+      regulated_categories_audience: 'REGULATED_CATEGORIES_AUDIENCE',
       study_rule_audience: 'STUDY_RULE_AUDIENCE',
-      fox: 'FOX'
+      video: 'VIDEO',
+      website: 'WEBSITE'
     });
   }
 
@@ -294,15 +285,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  createAdAssetFeed (fields, params): AbstractObject {
-    return this.createEdge(
-      '/adasset_feeds',
-      fields,
-      params
-
-    );
-  }
-
   getAdContracts (fields, params, fetchFirstPage = true): AdContract {
     return this.getEdge(
       AdContract,
@@ -326,15 +308,6 @@ export default class AdAccount extends AbstractCrudObject {
   createAdCreative (fields, params): AdCreative {
     return this.createEdge(
       '/adcreatives',
-      fields,
-      params,
-      AdCreative
-    );
-  }
-
-  createAdCreativesFromMockup (fields, params): AdCreative {
-    return this.createEdge(
-      '/adcreatives_from_mockups',
       fields,
       params,
       AdCreative
@@ -393,15 +366,6 @@ export default class AdAccount extends AbstractCrudObject {
       fields,
       params,
       AdLabel
-    );
-  }
-
-  createAdLanguageAsset (fields, params): AbstractObject {
-    return this.createEdge(
-      '/adlanguage_assets',
-      fields,
-      params
-
     );
   }
 
@@ -638,16 +602,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  getAffectedAdSets (fields, params, fetchFirstPage = true): AdSet {
-    return this.getEdge(
-      AdSet,
-      fields,
-      params,
-      fetchFirstPage,
-      '/affectedadsets'
-    );
-  }
-
   deleteAgencies (params): AbstractObject {
     return super.deleteEdge(
       '/agencies',
@@ -784,22 +738,12 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  getBrandAudiences (fields, params, fetchFirstPage = true): BrandAudience {
-    return this.getEdge(
-      BrandAudience,
-      fields,
-      params,
-      fetchFirstPage,
-      '/brand_audiences'
-    );
-  }
-
-  createBrandAudience (fields, params): BrandAudience {
+  createBrandAudience (fields, params): AbstractObject {
     return this.createEdge(
       '/brand_audiences',
       fields,
-      params,
-      BrandAudience
+      params
+
     );
   }
 
@@ -813,16 +757,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  getBusinessActivities (fields, params, fetchFirstPage = true): BusinessActivityLogEvent {
-    return this.getEdge(
-      BusinessActivityLogEvent,
-      fields,
-      params,
-      fetchFirstPage,
-      '/business_activities'
-    );
-  }
-
   getBusinessProjects (fields, params, fetchFirstPage = true): BusinessProject {
     return this.getEdge(
       BusinessProject,
@@ -830,16 +764,6 @@ export default class AdAccount extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/businessprojects'
-    );
-  }
-
-  getBusinessSettingLogs (fields, params, fetchFirstPage = true): BusinessSettingLogsData {
-    return this.getEdge(
-      BusinessSettingLogsData,
-      fields,
-      params,
-      fetchFirstPage,
-      '/businesssettinglogs'
     );
   }
 
@@ -879,25 +803,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  getContextualTargetingBrowse (fields, params, fetchFirstPage = true): AdAccountContextualTargeting {
-    return this.getEdge(
-      AdAccountContextualTargeting,
-      fields,
-      params,
-      fetchFirstPage,
-      '/contextual_targeting_browse'
-    );
-  }
-
-  createCoupon (fields, params): AdAccount {
-    return this.createEdge(
-      '/coupons',
-      fields,
-      params,
-      AdAccount
-    );
-  }
-
   getCustomAudiences (fields, params, fetchFirstPage = true): CustomAudience {
     return this.getEdge(
       CustomAudience,
@@ -924,6 +829,15 @@ export default class AdAccount extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/customaudiencestos'
+    );
+  }
+
+  createCustomAudiencesTo (fields, params): AdAccount {
+    return this.createEdge(
+      '/customaudiencestos',
+      fields,
+      params,
+      AdAccount
     );
   }
 
@@ -972,34 +886,6 @@ export default class AdAccount extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/deprecatedtargetingadsets'
-    );
-  }
-
-  getDirectDeals (fields, params, fetchFirstPage = true): DirectDeal {
-    return this.getEdge(
-      DirectDeal,
-      fields,
-      params,
-      fetchFirstPage,
-      '/direct_deals'
-    );
-  }
-
-  createDirectDealsTo (fields, params): AdAccount {
-    return this.createEdge(
-      '/direct_deals_tos',
-      fields,
-      params,
-      AdAccount
-    );
-  }
-
-  createEmailImport (fields, params): AbstractObject {
-    return this.createEdge(
-      '/emailimport',
-      fields,
-      params
-
     );
   }
 
@@ -1062,15 +948,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  createLocationCluster (fields, params): AdAccount {
-    return this.createEdge(
-      '/locationclusters',
-      fields,
-      params,
-      AdAccount
-    );
-  }
-
   getMatchedSearchApplications (fields, params, fetchFirstPage = true): AdAccountMatchedSearchApplicationsEdgeData {
     return this.getEdge(
       AdAccountMatchedSearchApplicationsEdgeData,
@@ -1101,15 +978,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  createMockup (fields, params): AbstractObject {
-    return this.createEdge(
-      '/mockups',
-      fields,
-      params
-
-    );
-  }
-
   getOfflineConversionDataSets (fields, params, fetchFirstPage = true): OfflineConversionDataSet {
     return this.getEdge(
       OfflineConversionDataSet,
@@ -1120,51 +988,13 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  getOffsitePixels (fields, params, fetchFirstPage = true): OffsitePixel {
+  getOnBehalfRequests (fields, params, fetchFirstPage = true): BusinessOwnedObjectOnBehalfOfRequest {
     return this.getEdge(
-      OffsitePixel,
+      BusinessOwnedObjectOnBehalfOfRequest,
       fields,
       params,
       fetchFirstPage,
-      '/offsitepixels'
-    );
-  }
-
-  getPartnerIntegrations (fields, params, fetchFirstPage = true): PartnerIntegrationLinked {
-    return this.getEdge(
-      PartnerIntegrationLinked,
-      fields,
-      params,
-      fetchFirstPage,
-      '/partner_integrations'
-    );
-  }
-
-  createPartnerIntegration (fields, params): PartnerIntegrationLinked {
-    return this.createEdge(
-      '/partner_integrations',
-      fields,
-      params,
-      PartnerIntegrationLinked
-    );
-  }
-
-  getPartnerCategories (fields, params, fetchFirstPage = true): PartnerCategory {
-    return this.getEdge(
-      PartnerCategory,
-      fields,
-      params,
-      fetchFirstPage,
-      '/partnercategories'
-    );
-  }
-
-  createPartnerDatum (fields, params): AdAccount {
-    return this.createEdge(
-      '/partnerdata',
-      fields,
-      params,
-      AdAccount
+      '/onbehalf_requests'
     );
   }
 
@@ -1174,16 +1004,6 @@ export default class AdAccount extends AbstractCrudObject {
       fields,
       params
 
-    );
-  }
-
-  getPartners (fields, params, fetchFirstPage = true): AdsDataPartner {
-    return this.getEdge(
-      AdsDataPartner,
-      fields,
-      params,
-      fetchFirstPage,
-      '/partners'
     );
   }
 
@@ -1251,34 +1071,6 @@ export default class AdAccount extends AbstractCrudObject {
       fields,
       params,
       ReachFrequencyPrediction
-    );
-  }
-
-  getReferral (fields, params, fetchFirstPage = true): Referral {
-    return this.getEdge(
-      Referral,
-      fields,
-      params,
-      fetchFirstPage,
-      '/referral'
-    );
-  }
-
-  createReferral (fields, params): Referral {
-    return this.createEdge(
-      '/referral',
-      fields,
-      params,
-      Referral
-    );
-  }
-
-  createReportStat (fields, params): AbstractObject {
-    return this.createEdge(
-      '/reportstats',
-      fields,
-      params
-
     );
   }
 
@@ -1361,16 +1153,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  getTimezoneOffsets (fields, params, fetchFirstPage = true): TimezoneOffset {
-    return this.getEdge(
-      TimezoneOffset,
-      fields,
-      params,
-      fetchFirstPage,
-      '/timezoneoffsets'
-    );
-  }
-
   deleteTracking (params): AbstractObject {
     return super.deleteEdge(
       '/tracking',
@@ -1391,38 +1173,6 @@ export default class AdAccount extends AbstractCrudObject {
   createTracking (fields, params): AdAccount {
     return this.createEdge(
       '/tracking',
-      fields,
-      params,
-      AdAccount
-    );
-  }
-
-  deleteUserMatch (params): AbstractObject {
-    return super.deleteEdge(
-      '/usermatch',
-      params
-    );
-  }
-
-  createUserMatch (fields, params): AbstractObject {
-    return this.createEdge(
-      '/usermatch',
-      fields,
-      params
-
-    );
-  }
-
-  deleteUserPermissions (params): AbstractObject {
-    return super.deleteEdge(
-      '/userpermissions',
-      params
-    );
-  }
-
-  createUserPermission (fields, params): AdAccount {
-    return this.createEdge(
-      '/userpermissions',
       fields,
       params,
       AdAccount

@@ -9,12 +9,12 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Business from './business';
+import AssignedUser from './assigned-user';
 import AutomotiveModel from './automotive-model';
 import DynamicItemDisplayBundleFolder from './dynamic-item-display-bundle-folder';
 import DynamicItemDisplayBundle from './dynamic-item-display-bundle';
 import ProductCatalogCategory from './product-catalog-category';
 import CheckBatchRequestStatus from './check-batch-request-status';
-import ProductDaEventSamplesBatch from './product-da-event-samples-batch';
 import Destination from './destination';
 import ProductEventStat from './product-event-stat';
 import ExternalEventSource from './external-event-source';
@@ -28,9 +28,7 @@ import ProductGroup from './product-group';
 import ProductSet from './product-set';
 import ProductCatalogProductSetsBatch from './product-catalog-product-sets-batch';
 import ProductItem from './product-item';
-import ProductCatalogUserPermissions from './product-catalog-user-permissions';
 import Vehicle from './vehicle';
-import AdVideo from './ad-video';
 
 /**
  * ProductCatalog
@@ -41,11 +39,11 @@ export default class ProductCatalog extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       business: 'business',
+      cpas_parent_catalog_settings: 'cpas_parent_catalog_settings',
       da_display_settings: 'da_display_settings',
       default_image_url: 'default_image_url',
       fallback_image_url: 'fallback_image_url',
       feed_count: 'feed_count',
-      flight_catalog_settings: 'flight_catalog_settings',
       id: 'id',
       name: 'name',
       product_count: 'product_count',
@@ -72,42 +70,19 @@ export default class ProductCatalog extends AbstractCrudObject {
   }
   static get PermittedTasks (): Object {
     return Object.freeze({
-      admin: 'ADMIN',
-      advertiser: 'ADVERTISER'
+      advertise: 'ADVERTISE',
+      manage: 'MANAGE'
+    });
+  }
+  static get Tasks (): Object {
+    return Object.freeze({
+      advertise: 'ADVERTISE',
+      manage: 'MANAGE'
     });
   }
   static get Standard (): Object {
     return Object.freeze({
       google: 'google'
-    });
-  }
-  static get ItemType (): Object {
-    return Object.freeze({
-      auto: 'AUTO',
-      auto_market: 'AUTO_MARKET',
-      automotive_model: 'AUTOMOTIVE_MODEL',
-      destination: 'DESTINATION',
-      flight: 'FLIGHT',
-      geo_based_item: 'GEO_BASED_ITEM',
-      home_listing: 'HOME_LISTING',
-      home_service_provider: 'HOME_SERVICE_PROVIDER',
-      home_service_review: 'HOME_SERVICE_REVIEW',
-      hotel: 'HOTEL',
-      hotel_room: 'HOTEL_ROOM',
-      media_title: 'MEDIA_TITLE',
-      other_test_dynamic_item: 'OTHER_TEST_DYNAMIC_ITEM',
-      product_group: 'PRODUCT_GROUP',
-      product_item: 'PRODUCT_ITEM',
-      store_product_item: 'STORE_PRODUCT_ITEM',
-      test_dynamic_item: 'TEST_DYNAMIC_ITEM',
-      vehicle: 'VEHICLE',
-      vehicle_offer: 'VEHICLE_OFFER'
-    });
-  }
-  static get Role (): Object {
-    return Object.freeze({
-      admin: 'ADMIN',
-      advertiser: 'ADVERTISER'
     });
   }
 
@@ -137,6 +112,32 @@ export default class ProductCatalog extends AbstractCrudObject {
     );
   }
 
+  deleteAssignedUsers (params): AbstractObject {
+    return super.deleteEdge(
+      '/assigned_users',
+      params
+    );
+  }
+
+  getAssignedUsers (fields, params, fetchFirstPage = true): AssignedUser {
+    return this.getEdge(
+      AssignedUser,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_users'
+    );
+  }
+
+  createAssignedUser (fields, params): ProductCatalog {
+    return this.createEdge(
+      '/assigned_users',
+      fields,
+      params,
+      ProductCatalog
+    );
+  }
+
   getAutomotiveModels (fields, params, fetchFirstPage = true): AutomotiveModel {
     return this.getEdge(
       AutomotiveModel,
@@ -156,32 +157,12 @@ export default class ProductCatalog extends AbstractCrudObject {
     );
   }
 
-  getBundleFolders (fields, params, fetchFirstPage = true): DynamicItemDisplayBundleFolder {
-    return this.getEdge(
-      DynamicItemDisplayBundleFolder,
-      fields,
-      params,
-      fetchFirstPage,
-      '/bundle_folders'
-    );
-  }
-
   createBundleFolder (fields, params): DynamicItemDisplayBundleFolder {
     return this.createEdge(
       '/bundle_folders',
       fields,
       params,
       DynamicItemDisplayBundleFolder
-    );
-  }
-
-  getBundles (fields, params, fetchFirstPage = true): DynamicItemDisplayBundle {
-    return this.getEdge(
-      DynamicItemDisplayBundle,
-      fields,
-      params,
-      fetchFirstPage,
-      '/bundles'
     );
   }
 
@@ -223,16 +204,6 @@ export default class ProductCatalog extends AbstractCrudObject {
     );
   }
 
-  getDaEventSamples (fields, params, fetchFirstPage = true): ProductDaEventSamplesBatch {
-    return this.getEdge(
-      ProductDaEventSamplesBatch,
-      fields,
-      params,
-      fetchFirstPage,
-      '/da_event_samples'
-    );
-  }
-
   getDestinations (fields, params, fetchFirstPage = true): Destination {
     return this.getEdge(
       Destination,
@@ -240,15 +211,6 @@ export default class ProductCatalog extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/destinations'
-    );
-  }
-
-  createDestination (fields, params): Destination {
-    return this.createEdge(
-      '/destinations',
-      fields,
-      params,
-      Destination
     );
   }
 
@@ -295,15 +257,6 @@ export default class ProductCatalog extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/flights'
-    );
-  }
-
-  createFlight (fields, params): Flight {
-    return this.createEdge(
-      '/flights',
-      fields,
-      params,
-      Flight
     );
   }
 
@@ -487,32 +440,6 @@ export default class ProductCatalog extends AbstractCrudObject {
     );
   }
 
-  deleteUserPermissions (params): AbstractObject {
-    return super.deleteEdge(
-      '/userpermissions',
-      params
-    );
-  }
-
-  getUserPermissions (fields, params, fetchFirstPage = true): ProductCatalogUserPermissions {
-    return this.getEdge(
-      ProductCatalogUserPermissions,
-      fields,
-      params,
-      fetchFirstPage,
-      '/userpermissions'
-    );
-  }
-
-  createUserPermission (fields, params): ProductCatalog {
-    return this.createEdge(
-      '/userpermissions',
-      fields,
-      params,
-      ProductCatalog
-    );
-  }
-
   getVehicles (fields, params, fetchFirstPage = true): Vehicle {
     return this.getEdge(
       Vehicle,
@@ -523,12 +450,12 @@ export default class ProductCatalog extends AbstractCrudObject {
     );
   }
 
-  createVideo (fields, params): AdVideo {
+  createVehicle (fields, params): Vehicle {
     return this.createEdge(
-      '/videos',
+      '/vehicles',
       fields,
       params,
-      AdVideo
+      Vehicle
     );
   }
 

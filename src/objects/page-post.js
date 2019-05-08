@@ -14,7 +14,6 @@ import InsightsResult from './insights-result';
 import Profile from './profile';
 import User from './user';
 import Post from './post';
-import Page from './page';
 
 /**
  * PagePost
@@ -31,12 +30,10 @@ export default class PagePost extends AbstractCrudObject {
       backdated_time: 'backdated_time',
       call_to_action: 'call_to_action',
       can_reply_privately: 'can_reply_privately',
-      caption: 'caption',
       child_attachments: 'child_attachments',
       comments_mirroring_domain: 'comments_mirroring_domain',
       coordinates: 'coordinates',
       created_time: 'created_time',
-      description: 'description',
       event: 'event',
       expanded_height: 'expanded_height',
       expanded_width: 'expanded_width',
@@ -48,19 +45,17 @@ export default class PagePost extends AbstractCrudObject {
       id: 'id',
       instagram_eligibility: 'instagram_eligibility',
       is_app_share: 'is_app_share',
+      is_eligible_for_promotion: 'is_eligible_for_promotion',
       is_expired: 'is_expired',
       is_hidden: 'is_hidden',
       is_instagram_eligible: 'is_instagram_eligible',
       is_popular: 'is_popular',
       is_published: 'is_published',
       is_spherical: 'is_spherical',
-      link: 'link',
       message: 'message',
       message_tags: 'message_tags',
       multi_share_end_card: 'multi_share_end_card',
       multi_share_optimized: 'multi_share_optimized',
-      name: 'name',
-      object_id: 'object_id',
       parent_id: 'parent_id',
       permalink_url: 'permalink_url',
       picture: 'picture',
@@ -71,7 +66,6 @@ export default class PagePost extends AbstractCrudObject {
       properties: 'properties',
       scheduled_publish_time: 'scheduled_publish_time',
       shares: 'shares',
-      source: 'source',
       status_type: 'status_type',
       story: 'story',
       story_tags: 'story_tags',
@@ -79,7 +73,6 @@ export default class PagePost extends AbstractCrudObject {
       target: 'target',
       targeting: 'targeting',
       timeline_visibility: 'timeline_visibility',
-      type: 'type',
       updated_time: 'updated_time',
       via: 'via',
       video_buying_eligibility: 'video_buying_eligibility',
@@ -89,26 +82,26 @@ export default class PagePost extends AbstractCrudObject {
 
   static get BackdatedTimeGranularity (): Object {
     return Object.freeze({
-      year: 'year',
-      month: 'month',
       day: 'day',
       hour: 'hour',
       min: 'min',
-      none: 'none'
+      month: 'month',
+      none: 'none',
+      year: 'year'
     });
   }
   static get CheckinEntryPoint (): Object {
     return Object.freeze({
       branding_checkin: 'BRANDING_CHECKIN',
-      branding_status: 'BRANDING_STATUS',
+      branding_other: 'BRANDING_OTHER',
       branding_photo: 'BRANDING_PHOTO',
-      branding_other: 'BRANDING_OTHER'
+      branding_status: 'BRANDING_STATUS'
     });
   }
   static get Formatting (): Object {
     return Object.freeze({
-      plaintext: 'PLAINTEXT',
-      markdown: 'MARKDOWN'
+      markdown: 'MARKDOWN',
+      plaintext: 'PLAINTEXT'
     });
   }
   static get PlaceAttachmentSetting (): Object {
@@ -128,8 +121,8 @@ export default class PagePost extends AbstractCrudObject {
   }
   static get PostingToRedspace (): Object {
     return Object.freeze({
-      enabled: 'enabled',
-      disabled: 'disabled'
+      disabled: 'disabled',
+      enabled: 'enabled'
     });
   }
   static get TargetSurface (): Object {
@@ -140,11 +133,11 @@ export default class PagePost extends AbstractCrudObject {
   }
   static get UnpublishedContentType (): Object {
     return Object.freeze({
-      scheduled: 'SCHEDULED',
-      draft: 'DRAFT',
       ads_post: 'ADS_POST',
+      draft: 'DRAFT',
       inline_created: 'INLINE_CREATED',
-      published: 'PUBLISHED'
+      published: 'PUBLISHED',
+      scheduled: 'SCHEDULED'
     });
   }
   static get With (): Object {
@@ -160,9 +153,9 @@ export default class PagePost extends AbstractCrudObject {
   }
   static get TimelineVisibility (): Object {
     return Object.freeze({
+      forced_allow: 'forced_allow',
       hidden: 'hidden',
-      normal: 'normal',
-      forced_allow: 'forced_allow'
+      normal: 'normal'
     });
   }
 
@@ -205,16 +198,6 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getEditActions (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/edit_actions'
-    );
-  }
-
   getInsights (fields, params, fetchFirstPage = true): InsightsResult {
     return this.getEdge(
       InsightsResult,
@@ -251,15 +234,6 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  createPromotion (fields, params): AbstractObject {
-    return this.createEdge(
-      '/promotions',
-      fields,
-      params
-
-    );
-  }
-
   getReactions (fields, params, fetchFirstPage = true): Profile {
     return this.getEdge(
       Profile,
@@ -290,16 +264,6 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getSponsorTags (fields, params, fetchFirstPage = true): Page {
-    return this.getEdge(
-      Page,
-      fields,
-      params,
-      fetchFirstPage,
-      '/sponsor_tags'
-    );
-  }
-
   getTo (fields, params, fetchFirstPage = true): Profile {
     return this.getEdge(
       Profile,
@@ -307,16 +271,6 @@ export default class PagePost extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/to'
-    );
-  }
-
-  getWithTags (fields, params, fetchFirstPage = true): Profile {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/with_tags'
     );
   }
 

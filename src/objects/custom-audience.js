@@ -31,7 +31,6 @@ export default class CustomAudience extends AbstractCrudObject {
       delivery_status: 'delivery_status',
       description: 'description',
       excluded_custom_audiences: 'excluded_custom_audiences',
-      expiry_time: 'expiry_time',
       external_event_source: 'external_event_source',
       household_audience: 'household_audience',
       id: 'id',
@@ -39,7 +38,6 @@ export default class CustomAudience extends AbstractCrudObject {
       is_household: 'is_household',
       is_snapshot: 'is_snapshot',
       is_value_based: 'is_value_based',
-      list_of_accounts: 'list_of_accounts',
       lookalike_audience_ids: 'lookalike_audience_ids',
       lookalike_spec: 'lookalike_spec',
       name: 'name',
@@ -47,6 +45,7 @@ export default class CustomAudience extends AbstractCrudObject {
       opt_out_link: 'opt_out_link',
       permission_for_actions: 'permission_for_actions',
       pixel_id: 'pixel_id',
+      regulated_audience_spec: 'regulated_audience_spec',
       retention_days: 'retention_days',
       rev_share_policy_id: 'rev_share_policy_id',
       rule: 'rule',
@@ -54,7 +53,6 @@ export default class CustomAudience extends AbstractCrudObject {
       rule_v2: 'rule_v2',
       seed_audience: 'seed_audience',
       sharing_status: 'sharing_status',
-      study_spec: 'study_spec',
       subtype: 'subtype',
       time_content_updated: 'time_content_updated',
       time_created: 'time_created',
@@ -65,6 +63,7 @@ export default class CustomAudience extends AbstractCrudObject {
   static get ClaimObjective (): Object {
     return Object.freeze({
       automotive_model: 'AUTOMOTIVE_MODEL',
+      collaborative_ads: 'COLLABORATIVE_ADS',
       home_listing: 'HOME_LISTING',
       media_title: 'MEDIA_TITLE',
       product: 'PRODUCT',
@@ -88,26 +87,28 @@ export default class CustomAudience extends AbstractCrudObject {
   }
   static get CustomerFileSource (): Object {
     return Object.freeze({
-      user_provided_only: 'USER_PROVIDED_ONLY',
+      both_user_and_partner_provided: 'BOTH_USER_AND_PARTNER_PROVIDED',
       partner_provided_only: 'PARTNER_PROVIDED_ONLY',
-      both_user_and_partner_provided: 'BOTH_USER_AND_PARTNER_PROVIDED'
+      user_provided_only: 'USER_PROVIDED_ONLY'
     });
   }
   static get Subtype (): Object {
     return Object.freeze({
-      custom: 'CUSTOM',
-      website: 'WEBSITE',
       app: 'APP',
-      offline_conversion: 'OFFLINE_CONVERSION',
-      claim: 'CLAIM',
-      partner: 'PARTNER',
-      managed: 'MANAGED',
-      video: 'VIDEO',
-      lookalike: 'LOOKALIKE',
-      engagement: 'ENGAGEMENT',
       bag_of_accounts: 'BAG_OF_ACCOUNTS',
+      claim: 'CLAIM',
+      custom: 'CUSTOM',
+      engagement: 'ENGAGEMENT',
+      fox: 'FOX',
+      lookalike: 'LOOKALIKE',
+      managed: 'MANAGED',
+      measurement: 'MEASUREMENT',
+      offline_conversion: 'OFFLINE_CONVERSION',
+      partner: 'PARTNER',
+      regulated_categories_audience: 'REGULATED_CATEGORIES_AUDIENCE',
       study_rule_audience: 'STUDY_RULE_AUDIENCE',
-      fox: 'FOX'
+      video: 'VIDEO',
+      website: 'WEBSITE'
     });
   }
 
@@ -144,13 +145,6 @@ export default class CustomAudience extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/ads'
-    );
-  }
-
-  deleteCapabilities (params): AbstractObject {
-    return super.deleteEdge(
-      '/capabilities',
-      params
     );
   }
 

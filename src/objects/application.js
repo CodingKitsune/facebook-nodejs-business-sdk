@@ -8,19 +8,15 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
-import OpenGraphObject from './open-graph-object';
 import AdNetworkAnalyticsSyncQueryResult from './ad-network-analytics-sync-query-result';
 import AdNetworkAnalyticsAsyncQueryResult from './ad-network-analytics-async-query-result';
 import Business from './business';
 import Group from './group';
-import CustomAudience from './custom-audience';
 import AdAccount from './ad-account';
 import User from './user';
 import DACheck from './da-check';
-import DirectDeal from './direct-deal';
 import Event from './event';
-import Photo from './photo';
-import ProfilePictureSource from './profile-picture-source';
+import OpenGraphObject from './open-graph-object';
 
 /**
  * Application
@@ -61,7 +57,6 @@ export default class Application extends AbstractCrudObject {
       company: 'company',
       configured_ios_sso: 'configured_ios_sso',
       contact_email: 'contact_email',
-      context: 'context',
       created_time: 'created_time',
       creator_uid: 'creator_uid',
       daily_active_users: 'daily_active_users',
@@ -133,102 +128,27 @@ export default class Application extends AbstractCrudObject {
 
   static get SupportedPlatforms (): Object {
     return Object.freeze({
-      web: 'WEB',
-      canvas: 'CANVAS',
-      mobile_web: 'MOBILE_WEB',
-      iphone: 'IPHONE',
-      ipad: 'IPAD',
-      android: 'ANDROID',
-      windows: 'WINDOWS',
       amazon: 'AMAZON',
-      supplementary_images: 'SUPPLEMENTARY_IMAGES',
+      android: 'ANDROID',
+      canvas: 'CANVAS',
       gameroom: 'GAMEROOM',
-      instant_game: 'INSTANT_GAME'
+      instant_game: 'INSTANT_GAME',
+      ipad: 'IPAD',
+      iphone: 'IPHONE',
+      mobile_web: 'MOBILE_WEB',
+      supplementary_images: 'SUPPLEMENTARY_IMAGES',
+      web: 'WEB',
+      windows: 'WINDOWS'
     });
   }
   static get AnPlatforms (): Object {
     return Object.freeze({
-      ios: 'IOS',
       android: 'ANDROID',
-      mobile_web: 'MOBILE_WEB',
       desktop: 'DESKTOP',
       instant_articles: 'INSTANT_ARTICLES',
+      ios: 'IOS',
+      mobile_web: 'MOBILE_WEB',
       unknown: 'UNKNOWN'
-    });
-  }
-  static get AggregationPeriod (): Object {
-    return Object.freeze({
-      hour: 'HOUR',
-      day: 'DAY',
-      total: 'TOTAL'
-    });
-  }
-  static get Breakdowns (): Object {
-    return Object.freeze({
-      age: 'AGE',
-      app: 'APP',
-      country: 'COUNTRY',
-      delivery_method: 'DELIVERY_METHOD',
-      display_format: 'DISPLAY_FORMAT',
-      deal: 'DEAL',
-      deal_ad: 'DEAL_AD',
-      deal_page: 'DEAL_PAGE',
-      gender: 'GENDER',
-      placement: 'PLACEMENT',
-      platform: 'PLATFORM',
-      property: 'PROPERTY',
-      clicked_view_tag: 'CLICKED_VIEW_TAG',
-      fail_reason: 'FAIL_REASON'
-    });
-  }
-  static get Metrics (): Object {
-    return Object.freeze({
-      fb_ad_network_bidding_request: 'FB_AD_NETWORK_BIDDING_REQUEST',
-      fb_ad_network_bidding_response: 'FB_AD_NETWORK_BIDDING_RESPONSE',
-      fb_ad_network_bidding_bid_rate: 'FB_AD_NETWORK_BIDDING_BID_RATE',
-      fb_ad_network_bidding_win_rate: 'FB_AD_NETWORK_BIDDING_WIN_RATE',
-      fb_ad_network_request: 'FB_AD_NETWORK_REQUEST',
-      fb_ad_network_filled_request: 'FB_AD_NETWORK_FILLED_REQUEST',
-      fb_ad_network_fill_rate: 'FB_AD_NETWORK_FILL_RATE',
-      fb_ad_network_imp: 'FB_AD_NETWORK_IMP',
-      fb_ad_network_show_rate: 'FB_AD_NETWORK_SHOW_RATE',
-      fb_ad_network_click: 'FB_AD_NETWORK_CLICK',
-      fb_ad_network_ctr: 'FB_AD_NETWORK_CTR',
-      fb_ad_network_bidding_revenue: 'FB_AD_NETWORK_BIDDING_REVENUE',
-      fb_ad_network_revenue: 'FB_AD_NETWORK_REVENUE',
-      fb_ad_network_cpm: 'FB_AD_NETWORK_CPM',
-      fb_ad_network_video_guarantee_revenue: 'FB_AD_NETWORK_VIDEO_GUARANTEE_REVENUE',
-      fb_ad_network_video_view: 'FB_AD_NETWORK_VIDEO_VIEW',
-      fb_ad_network_video_view_rate: 'FB_AD_NETWORK_VIDEO_VIEW_RATE',
-      fb_ad_network_video_mrc: 'FB_AD_NETWORK_VIDEO_MRC',
-      fb_ad_network_video_mrc_rate: 'FB_AD_NETWORK_VIDEO_MRC_RATE',
-      fb_ad_network_win_rate: 'FB_AD_NETWORK_WIN_RATE',
-      fb_ad_network_direct_total_revenue: 'FB_AD_NETWORK_DIRECT_TOTAL_REVENUE',
-      fb_ad_network_direct_publisher_bill: 'FB_AD_NETWORK_DIRECT_PUBLISHER_BILL',
-      fb_ad_network_fast_click_rate: 'FB_AD_NETWORK_FAST_CLICK_RATE',
-      fb_ad_network_fast_return_rate: 'FB_AD_NETWORK_FAST_RETURN_RATE',
-      fb_ad_network_click_value_score: 'FB_AD_NETWORK_CLICK_VALUE_SCORE',
-      fb_ad_network_fast_click_numerator: 'FB_AD_NETWORK_FAST_CLICK_NUMERATOR',
-      fb_ad_network_fast_click_denominator: 'FB_AD_NETWORK_FAST_CLICK_DENOMINATOR',
-      fb_ad_network_fast_return_numerator: 'FB_AD_NETWORK_FAST_RETURN_NUMERATOR',
-      fb_ad_network_fast_return_denominator: 'FB_AD_NETWORK_FAST_RETURN_DENOMINATOR',
-      fb_ad_network_click_value_score_numerator: 'FB_AD_NETWORK_CLICK_VALUE_SCORE_NUMERATOR',
-      fb_ad_network_click_value_score_denominator: 'FB_AD_NETWORK_CLICK_VALUE_SCORE_DENOMINATOR',
-      fb_ad_network_no_fill: 'FB_AD_NETWORK_NO_FILL',
-      fb_ad_network_no_bid: 'FB_AD_NETWORK_NO_BID'
-    });
-  }
-  static get OrderingColumn (): Object {
-    return Object.freeze({
-      time: 'TIME',
-      value: 'VALUE',
-      metric: 'METRIC'
-    });
-  }
-  static get OrderingType (): Object {
-    return Object.freeze({
-      ascending: 'ASCENDING',
-      descending: 'DESCENDING'
     });
   }
   static get Platform (): Object {
@@ -240,21 +160,21 @@ export default class Application extends AbstractCrudObject {
   static get RequestType (): Object {
     return Object.freeze({
       app_indexing: 'APP_INDEXING',
-      plugin: 'PLUGIN',
-      button_sampling: 'BUTTON_SAMPLING'
+      button_sampling: 'BUTTON_SAMPLING',
+      plugin: 'PLUGIN'
     });
   }
   static get MutationMethod (): Object {
     return Object.freeze({
-      replace: 'REPLACE',
       add: 'ADD',
-      delete: 'DELETE'
+      delete: 'DELETE',
+      replace: 'REPLACE'
     });
   }
   static get PostMethod (): Object {
     return Object.freeze({
-      eymt: 'EYMT',
-      codeless: 'CODELESS'
+      codeless: 'CODELESS',
+      eymt: 'EYMT'
     });
   }
   static get ScoreType (): Object {
@@ -270,22 +190,17 @@ export default class Application extends AbstractCrudObject {
       lower_is_better: 'LOWER_IS_BETTER'
     });
   }
-  static get Role (): Object {
+  static get LoggingSource (): Object {
     return Object.freeze({
-      administrators: 'administrators',
-      developers: 'developers',
-      testers: 'testers',
-      insights_users: 'insights users'
+      messenger_bot: 'MESSENGER_BOT'
     });
   }
-
-  createLocalServiceBookingTest (fields, params): AbstractObject {
-    return this.createEdge(
-      '/LocalServiceBookingTest',
-      fields,
-      params
-
-    );
+  static get LoggingTarget (): Object {
+    return Object.freeze({
+      app: 'APP',
+      app_and_page: 'APP_AND_PAGE',
+      page: 'PAGE'
+    });
   }
 
   deleteAccounts (params): AbstractObject {
@@ -311,16 +226,6 @@ export default class Application extends AbstractCrudObject {
       fields,
       params
 
-    );
-  }
-
-  getAchievements (fields, params, fetchFirstPage = true): OpenGraphObject {
-    return this.getEdge(
-      OpenGraphObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/achievements'
     );
   }
 
@@ -372,16 +277,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getAndroidDialogConfigs (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/android_dialog_configs'
-    );
-  }
-
   getAppEventTypes (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
       AbstractObject,
@@ -410,16 +305,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getAppInsights (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/app_insights'
-    );
-  }
-
   getAppInstalledGroups (fields, params, fetchFirstPage = true): Group {
     return this.getEdge(
       Group,
@@ -427,15 +312,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/app_installed_groups'
-    );
-  }
-
-  createAppLinkHost (fields, params): AbstractObject {
-    return this.createEdge(
-      '/app_link_hosts',
-      fields,
-      params
-
     );
   }
 
@@ -467,16 +343,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getAudiences (fields, params, fetchFirstPage = true): CustomAudience {
-    return this.getEdge(
-      CustomAudience,
-      fields,
-      params,
-      fetchFirstPage,
-      '/audiences'
-    );
-  }
-
   deleteAuthorizedAdAccounts (params): AbstractObject {
     return super.deleteEdge(
       '/authorized_adaccounts',
@@ -503,13 +369,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  deleteBanned (params): AbstractObject {
-    return super.deleteEdge(
-      '/banned',
-      params
-    );
-  }
-
   getBanned (fields, params, fetchFirstPage = true): User {
     return this.getEdge(
       User,
@@ -517,15 +376,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/banned'
-    );
-  }
-
-  createBanned (fields, params): User {
-    return this.createEdge(
-      '/banned',
-      fields,
-      params,
-      User
     );
   }
 
@@ -566,16 +416,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getConnections (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/connections'
-    );
-  }
-
   getCustomAudienceThirdPartyId (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
       AbstractObject,
@@ -596,16 +436,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getDirectDeals (fields, params, fetchFirstPage = true): DirectDeal {
-    return this.getEdge(
-      DirectDeal,
-      fields,
-      params,
-      fetchFirstPage,
-      '/direct_deals'
-    );
-  }
-
   getEvents (fields, params, fetchFirstPage = true): Event {
     return this.getEdge(
       Event,
@@ -613,25 +443,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/events'
-    );
-  }
-
-  getFoodDrinkOrders (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/food_drink_orders'
-    );
-  }
-
-  createFoodDrinkOrder (fields, params): AbstractObject {
-    return this.createEdge(
-      '/food_drink_orders',
-      fields,
-      params
-
     );
   }
 
@@ -651,16 +462,6 @@ export default class Application extends AbstractCrudObject {
       fields,
       params
 
-    );
-  }
-
-  getInsightsEventLabels (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/insights_event_labels'
     );
   }
 
@@ -710,34 +511,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getLocalServiceBookingConfig (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/local_service_booking_config'
-    );
-  }
-
-  createLocalServiceBookingConfig (fields, params): AbstractObject {
-    return this.createEdge(
-      '/local_service_booking_config',
-      fields,
-      params
-
-    );
-  }
-
-  createMachine (fields, params): AbstractObject {
-    return this.createEdge(
-      '/machines',
-      fields,
-      params
-
-    );
-  }
-
   createMmpAuditing (fields, params): AbstractObject {
     return this.createEdge(
       '/mmp_auditing',
@@ -764,16 +537,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/moods_for_application'
-    );
-  }
-
-  getObjectTypes (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/object_types'
     );
   }
 
@@ -805,22 +568,21 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getOzoneRelease (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/ozone_release'
-    );
-  }
-
   createOzoneRelease (fields, params): AbstractObject {
     return this.createEdge(
       '/ozone_release',
       fields,
       params
 
+    );
+  }
+
+  createPageActivity (fields, params): Application {
+    return this.createEdge(
+      '/page_activities',
+      fields,
+      params,
+      Application
     );
   }
 
@@ -840,32 +602,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  deletePaymentsTestUsers (params): AbstractObject {
-    return super.deleteEdge(
-      '/payments_test_users',
-      params
-    );
-  }
-
-  getPaymentsTestUsers (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/payments_test_users'
-    );
-  }
-
-  createPaymentsTestUser (fields, params): Application {
-    return this.createEdge(
-      '/payments_test_users',
-      fields,
-      params,
-      Application
-    );
-  }
-
   getPermissions (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
       AbstractObject,
@@ -873,25 +609,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/permissions'
-    );
-  }
-
-  createPhoto (fields, params): Photo {
-    return this.createEdge(
-      '/photos',
-      fields,
-      params,
-      Photo
-    );
-  }
-
-  getPicture (fields, params, fetchFirstPage = true): ProfilePictureSource {
-    return this.getEdge(
-      ProfilePictureSource,
-      fields,
-      params,
-      fetchFirstPage,
-      '/picture'
     );
   }
 
@@ -915,13 +632,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  deleteRoles (params): AbstractObject {
-    return super.deleteEdge(
-      '/roles',
-      params
-    );
-  }
-
   getRoles (fields, params, fetchFirstPage = true): AbstractObject {
     return this.getEdge(
       AbstractObject,
@@ -932,18 +642,9 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  createRole (fields, params): Application {
-    return this.createEdge(
-      '/roles',
-      fields,
-      params,
-      Application
-    );
-  }
-
   createStagingResource (fields, params): Application {
     return this.createEdge(
-      '/stagingresources',
+      '/staging_resources',
       fields,
       params,
       Application
@@ -1010,15 +711,6 @@ export default class Application extends AbstractCrudObject {
       fields,
       params,
       Application
-    );
-  }
-
-  createUpload (fields, params): AbstractObject {
-    return this.createEdge(
-      '/uploads',
-      fields,
-      params
-
     );
   }
 

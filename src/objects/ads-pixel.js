@@ -11,8 +11,8 @@ import AbstractObject from './../abstract-object';
 import AssignedUser from './assigned-user';
 import CustomAudience from './custom-audience';
 import DACheck from './da-check';
-import Business from './business';
 import AdAccount from './ad-account';
+import Business from './business';
 import AdsPixelStatsResult from './ads-pixel-stats-result';
 
 /**
@@ -48,48 +48,34 @@ export default class AdsPixel extends AbstractCrudObject {
   }
   static get AutomaticMatchingFields (): Object {
     return Object.freeze({
+      ct: 'ct',
       em: 'em',
       fn: 'fn',
+      ge: 'ge',
       ln: 'ln',
       ph: 'ph',
-      ge: 'ge',
-      zp: 'zp',
-      ct: 'ct',
-      st: 'st'
+      st: 'st',
+      zp: 'zp'
     });
   }
   static get DataUseSetting (): Object {
     return Object.freeze({
-      empty: 'EMPTY',
       advertising_and_analytics: 'ADVERTISING_AND_ANALYTICS',
-      analytics_only: 'ANALYTICS_ONLY'
+      analytics_only: 'ANALYTICS_ONLY',
+      empty: 'EMPTY'
     });
   }
   static get FirstPartyCookieStatus (): Object {
     return Object.freeze({
       empty: 'EMPTY',
-      first_party_cookie_enabled: 'FIRST_PARTY_COOKIE_ENABLED',
-      first_party_cookie_disabled: 'FIRST_PARTY_COOKIE_DISABLED'
+      first_party_cookie_disabled: 'FIRST_PARTY_COOKIE_DISABLED',
+      first_party_cookie_enabled: 'FIRST_PARTY_COOKIE_ENABLED'
     });
   }
   static get Tasks (): Object {
     return Object.freeze({
-      edit: 'EDIT',
-      analyze: 'ANALYZE'
-    });
-  }
-  static get Type (): Object {
-    return Object.freeze({
-      primary: 'PRIMARY',
-      secondary: 'SECONDARY'
-    });
-  }
-  static get RelationshipType (): Object {
-    return Object.freeze({
-      ad_manager: 'AD_MANAGER',
-      audience_manager: 'AUDIENCE_MANAGER',
-      agency: 'AGENCY',
-      other: 'OTHER'
+      analyze: 'ANALYZE',
+      edit: 'EDIT'
     });
   }
 
@@ -129,15 +115,6 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  createCreateServerToServerKey (fields, params): AdsPixel {
-    return this.createEdge(
-      '/create_server_to_server_keys',
-      fields,
-      params,
-      AdsPixel
-    );
-  }
-
   getDaChecks (fields, params, fetchFirstPage = true): DACheck {
     return this.getEdge(
       DACheck,
@@ -145,25 +122,6 @@ export default class AdsPixel extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/da_checks'
-    );
-  }
-
-  getPendingSharedAgencies (fields, params, fetchFirstPage = true): Business {
-    return this.getEdge(
-      Business,
-      fields,
-      params,
-      fetchFirstPage,
-      '/pending_shared_agencies'
-    );
-  }
-
-  createResetServerToServerKey (fields, params): AdsPixel {
-    return this.createEdge(
-      '/reset_server_to_server_key',
-      fields,
-      params,
-      AdsPixel
     );
   }
 
@@ -193,13 +151,6 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  deleteSharedAgencies (params): AbstractObject {
-    return super.deleteEdge(
-      '/shared_agencies',
-      params
-    );
-  }
-
   getSharedAgencies (fields, params, fetchFirstPage = true): Business {
     return this.getEdge(
       Business,
@@ -207,15 +158,6 @@ export default class AdsPixel extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/shared_agencies'
-    );
-  }
-
-  createSharedAgency (fields, params): AdsPixel {
-    return this.createEdge(
-      '/shared_agencies',
-      fields,
-      params,
-      AdsPixel
     );
   }
 

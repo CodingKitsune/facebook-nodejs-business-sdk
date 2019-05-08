@@ -12,8 +12,6 @@ import User from './user';
 import Comment from './comment';
 import Page from './page';
 import LiveVideoError from './live-video-error';
-import VideoGameShow from './video-game-show';
-import LiveWithGuestSession from './live-with-guest-session';
 import Profile from './profile';
 import VideoPoll from './video-poll';
 
@@ -54,30 +52,11 @@ export default class LiveVideo extends AbstractCrudObject {
     });
   }
 
-  static get BroadcastStatus (): Object {
-    return Object.freeze({
-      unpublished: 'UNPUBLISHED',
-      live: 'LIVE',
-      live_stopped: 'LIVE_STOPPED',
-      processing: 'PROCESSING',
-      vod: 'VOD',
-      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
-      scheduled_live: 'SCHEDULED_LIVE',
-      scheduled_expired: 'SCHEDULED_EXPIRED',
-      scheduled_canceled: 'SCHEDULED_CANCELED'
-    });
-  }
   static get Projection (): Object {
     return Object.freeze({
-      equirectangular: 'EQUIRECTANGULAR',
       cubemap: 'CUBEMAP',
+      equirectangular: 'EQUIRECTANGULAR',
       half_equirectangular: 'HALF_EQUIRECTANGULAR'
-    });
-  }
-  static get Source (): Object {
-    return Object.freeze({
-      target: 'target',
-      owner: 'owner'
     });
   }
   static get SpatialAudioFormat (): Object {
@@ -87,39 +66,53 @@ export default class LiveVideo extends AbstractCrudObject {
   }
   static get Status (): Object {
     return Object.freeze({
-      unpublished: 'UNPUBLISHED',
       live_now: 'LIVE_NOW',
-      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
+      scheduled_canceled: 'SCHEDULED_CANCELED',
       scheduled_live: 'SCHEDULED_LIVE',
-      scheduled_canceled: 'SCHEDULED_CANCELED'
+      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
+      unpublished: 'UNPUBLISHED'
     });
   }
   static get StereoscopicMode (): Object {
     return Object.freeze({
-      mono: 'MONO',
       left_right: 'LEFT_RIGHT',
+      mono: 'MONO',
       top_bottom: 'TOP_BOTTOM'
     });
   }
   static get StreamType (): Object {
     return Object.freeze({
-      regular: 'REGULAR',
-      ambient: 'AMBIENT'
+      ambient: 'AMBIENT',
+      regular: 'REGULAR'
     });
   }
-  static get Type (): Object {
+  static get BroadcastStatus (): Object {
     return Object.freeze({
-      tagged: 'tagged',
-      uploaded: 'uploaded'
+      live: 'LIVE',
+      live_stopped: 'LIVE_STOPPED',
+      processing: 'PROCESSING',
+      scheduled_canceled: 'SCHEDULED_CANCELED',
+      scheduled_expired: 'SCHEDULED_EXPIRED',
+      scheduled_live: 'SCHEDULED_LIVE',
+      scheduled_unpublished: 'SCHEDULED_UNPUBLISHED',
+      unpublished: 'UNPUBLISHED',
+      vod: 'VOD'
+    });
+  }
+  static get Source (): Object {
+    return Object.freeze({
+      owner: 'owner',
+      target: 'target'
     });
   }
   static get LiveCommentModerationSetting (): Object {
     return Object.freeze({
-      follower: 'FOLLOWER',
-      slow: 'SLOW',
       discussion: 'DISCUSSION',
+      follower: 'FOLLOWER',
+      protected_mode: 'PROTECTED_MODE',
       restricted: 'RESTRICTED',
-      protected_mode: 'PROTECTED_MODE'
+      slow: 'SLOW',
+      supporter: 'SUPPORTER'
     });
   }
 
@@ -170,44 +163,6 @@ export default class LiveVideo extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/errors'
-    );
-  }
-
-  getGameShows (fields, params, fetchFirstPage = true): VideoGameShow {
-    return this.getEdge(
-      VideoGameShow,
-      fields,
-      params,
-      fetchFirstPage,
-      '/game_shows'
-    );
-  }
-
-  getGuestSessions (fields, params, fetchFirstPage = true): LiveWithGuestSession {
-    return this.getEdge(
-      LiveWithGuestSession,
-      fields,
-      params,
-      fetchFirstPage,
-      '/guest_sessions'
-    );
-  }
-
-  createGuestSession (fields, params): LiveWithGuestSession {
-    return this.createEdge(
-      '/guest_sessions',
-      fields,
-      params,
-      LiveWithGuestSession
-    );
-  }
-
-  createInputStream (fields, params): LiveVideo {
-    return this.createEdge(
-      '/input_streams',
-      fields,
-      params,
-      LiveVideo
     );
   }
 

@@ -7,7 +7,6 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import NativeOfferView from './native-offer-view';
 
 /**
  * NativeOffer
@@ -46,17 +45,6 @@ export default class NativeOffer extends AbstractCrudObject {
     });
   }
 
-  static get UniqueCodesFileCodeType (): Object {
-    return Object.freeze({
-      discount_codes: 'discount_codes',
-      barcodes: 'barcodes',
-      online_discount_codes: 'online_discount_codes',
-      instore_discount_codes: 'instore_discount_codes',
-      instore_barcodes: 'instore_barcodes',
-      discount_and_barcodes: 'discount_and_barcodes',
-      discount_and_discount: 'discount_and_discount'
-    });
-  }
   static get BarcodeType (): Object {
     return Object.freeze({
       code128: 'CODE128',
@@ -76,19 +64,10 @@ export default class NativeOffer extends AbstractCrudObject {
   }
   static get LocationType (): Object {
     return Object.freeze({
-      online: 'online',
+      both: 'both',
       offline: 'offline',
-      both: 'both'
+      online: 'online'
     });
-  }
-
-  createCode (fields, params): NativeOffer {
-    return this.createEdge(
-      '/codes',
-      fields,
-      params,
-      NativeOffer
-    );
   }
 
   createNativeOfferView (fields, params): NativeOffer {
@@ -97,16 +76,6 @@ export default class NativeOffer extends AbstractCrudObject {
       fields,
       params,
       NativeOffer
-    );
-  }
-
-  getViews (fields, params, fetchFirstPage = true): NativeOfferView {
-    return this.getEdge(
-      NativeOfferView,
-      fields,
-      params,
-      fetchFirstPage,
-      '/views'
     );
   }
 

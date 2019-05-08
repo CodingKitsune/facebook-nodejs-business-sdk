@@ -17,15 +17,14 @@ export default class Permission extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       permission: 'permission',
-      status: 'status',
-      id: 'id'
+      status: 'status'
     });
   }
 
   static get Status (): Object {
     return Object.freeze({
-      granted: 'granted',
-      declined: 'declined'
+      declined: 'declined',
+      granted: 'granted'
     });
   }
 }

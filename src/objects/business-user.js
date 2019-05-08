@@ -9,10 +9,8 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import AdAccount from './ad-account';
-import AdMonetizationProperty from './ad-monetization-property';
 import Page from './page';
 import ProductCatalog from './product-catalog';
-import BusinessSettingLogsData from './business-setting-logs-data';
 
 /**
  * BusinessUser
@@ -40,12 +38,11 @@ export default class BusinessUser extends AbstractCrudObject {
 
   static get Role (): Object {
     return Object.freeze({
-      finance_editor: 'FINANCE_EDITOR',
-      finance_analyst: 'FINANCE_ANALYST',
-      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       admin: 'ADMIN',
+      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       employee: 'EMPLOYEE',
-      fb_employee_sales_rep: 'FB_EMPLOYEE_SALES_REP'
+      finance_analyst: 'FINANCE_ANALYST',
+      finance_editor: 'FINANCE_EDITOR'
     });
   }
 
@@ -56,16 +53,6 @@ export default class BusinessUser extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/assigned_ad_accounts'
-    );
-  }
-
-  getAssignedMonetizationProperties (fields, params, fetchFirstPage = true): AdMonetizationProperty {
-    return this.getEdge(
-      AdMonetizationProperty,
-      fields,
-      params,
-      fetchFirstPage,
-      '/assigned_monetization_properties'
     );
   }
 
@@ -86,16 +73,6 @@ export default class BusinessUser extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/assigned_product_catalogs'
-    );
-  }
-
-  getBusinessSettingLogs (fields, params, fetchFirstPage = true): BusinessSettingLogsData {
-    return this.getEdge(
-      BusinessSettingLogsData,
-      fields,
-      params,
-      fetchFirstPage,
-      '/businesssettinglogs'
     );
   }
 
