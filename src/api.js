@@ -16,7 +16,7 @@ import {FacebookRequestError} from './exceptions';
 export default class FacebookAdsApi {
   _debug: boolean;
   accessToken: string;
-  appsecret_proof: string;
+  appsecretProof: string;
   locale: string;
   static _defaultApi: FacebookAdsApi;
   static get VERSION () {
@@ -34,12 +34,12 @@ export default class FacebookAdsApi {
    * @param {String} accessToken
    * @param {String} [locale]
    */
-  constructor (accessToken: string, appsecret_proof: string = null, locale: string = 'en_US') {
+  constructor (accessToken: string, appsecretProof: string = null, locale: string = 'en_US') {
     if (!accessToken) {
       throw new Error('Access token required');
     }
     this.accessToken = accessToken;
-    this.appsecret_proof = appsecret_proof
+    this.appsecretProof = appsecretProof;
     this.locale = locale;
     this._debug = false;
   }
@@ -94,23 +94,21 @@ export default class FacebookAdsApi {
     const domain = urlOverride || FacebookAdsApi.GRAPH;
     if (typeof path !== 'string' && !(path instanceof String)) {
       url = [domain, FacebookAdsApi.VERSION, ...path].join('/');
-      if(!params.access_token){
+      if (!params.access_token) {
         params['access_token'] = this.accessToken;
       }
 
       url += `?${FacebookAdsApi._encodeParams(params)}`;
     } else {
       url = path;
-      
     }
-  
-    if(this.appsecret_proof && !url.includes('appsecret_proof')){
+
+    if (this.appsecretProof && !url.includes('appsecret_proof')) {
       let connector: string = '?';
-      if(url.indexOf('?') > -1)
-      { 
-        connector ='&';
+      if (url.indexOf('?') > -1) {
+        connector = '&';
       }
-      url += connector + 'appsecret_proof=' + this.appsecret_proof;
+      url += connector + 'appsecret_proof=' + this.appsecretProof;
     }
     const strUrl: string = (url: any);
 
