@@ -96,21 +96,15 @@ export default class FacebookAdsApi {
       url = [domain, FacebookAdsApi.VERSION, ...path].join('/');
       if(!params.access_token){
         params['access_token'] = this.accessToken;
-      }else{
-        this.accessToken = params['accessToken']
       }
-      if(!params.appsecret_proof){
-        params['appsecret_proof'] = this.appsecret_proof;
-      }else{
-        this.appsecret_proof = params['appsecret_proof']
-      }
+
       url += `?${FacebookAdsApi._encodeParams(params)}`;
     } else {
       url = path;
       
     }
-
-    if(this.appsecret_proof ){
+  
+    if(this.appsecret_proof && !url.includes('appsecret_proof')){
       let connector: string = '?';
       if(url.indexOf('?') > -1)
       { 
