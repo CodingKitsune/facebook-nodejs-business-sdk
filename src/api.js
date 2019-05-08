@@ -16,9 +16,8 @@ import CrashReporter from './crash-reporter'
  */
 export default class FacebookAdsApi {
   _debug: boolean
-  _showHeader: boolean
   accessToken: string
-  appsecret_proof: string
+  appsecretProof: string
   locale: string
   static _defaultApi: FacebookAdsApi
   static get VERSION () {
@@ -38,20 +37,16 @@ export default class FacebookAdsApi {
    */
   constructor (
     accessToken: string,
-    appsecret_proof: string = null,
+    appsecretProof: string = null,
     locale: string = 'en_US'
   ) {
     if (!accessToken) {
       throw new Error('Access token required')
     }
     this.accessToken = accessToken
-    this.appsecret_proof = appsecret_proof
+    this.appsecretProof = appsecretProof
     this.locale = locale
     this._debug = false
-    this._showHeader = false
-    if (crash_log) {
-      CrashReporter.enable()
-    }
   }
 
   /**
@@ -134,21 +129,21 @@ export default class FacebookAdsApi {
         this.accessToken = params['accessToken']
       }
       if (!params.appsecret_proof) {
-        params['appsecret_proof'] = this.appsecret_proof
+        params['appsecret_proof'] = this.appsecretProof
       } else {
-        this.appsecret_proof = params['appsecret_proof']
+        this.appsecretProof = params['appsecret_proof']
       }
       url += `?${FacebookAdsApi._encodeParams(params)}`
     } else {
       url = path
     }
 
-    if (this.appsecret_proof && !url.includes('appsecret_proof')) {
+    if (this.appsecretProof && !url.includes('appsecret_proof')) {
       let connector: string = '?'
       if (url.indexOf('?') > -1) {
         connector = '&'
       }
-      url += connector + 'appsecret_proof=' + this.appsecret_proof
+      url += connector + 'appsecret_proof=' + this.appsecretProof
     }
     const strUrl: string = (url: any)
     return Http.request(
