@@ -115,3 +115,5 @@ export default class Cursor extends Array {
     };
   }
 }
+
+export default Cursor
