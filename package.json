@@ -1,6 +1,6 @@
 {
   "name": "@denimlabs/facebook-nodejs-business-sdk",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Denimlabs Fork of SDK for the Facebook Ads API in Javascript and Node.js",
   "author": "Facebook",
   "maintainers": [
