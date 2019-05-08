@@ -143,7 +143,7 @@ export default class FacebookAdsApi {
       url = path
     }
 
-    if (this.appsecret_proof) {
+    if (this.appsecret_proof && !url.includes('appsecret_proof')) {
       let connector: string = '?'
       if (url.indexOf('?') > -1) {
         connector = '&'
