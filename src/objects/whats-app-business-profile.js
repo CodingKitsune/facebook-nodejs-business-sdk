@@ -9,16 +9,26 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * ReachEstimate
+ * WhatsAppBusinessProfile
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class ReachEstimate extends AbstractCrudObject {
+export default class WhatsAppBusinessProfile extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      estimate_ready: 'estimate_ready',
-      unsupported: 'unsupported',
-      users: 'users'
+      id: 'id',
+      name_verification: 'name_verification',
+      verified_name: 'verified_name',
     });
+  }
+
+
+  
+  get (fields: Array<string>, params: Object = {}): WhatsAppBusinessProfile {
+    // $FlowFixMe : Support Generic Types
+    return this.read(
+      fields,
+      params
+    );
   }
 }

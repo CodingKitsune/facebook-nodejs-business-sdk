@@ -8,10 +8,12 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Comment from './comment';
 import InsightsResult from './insights-result';
 import Profile from './profile';
 import Post from './post';
+import Page from './page';
 import TaggableSubject from './taggable-subject';
 
 /**
@@ -48,7 +50,7 @@ export default class Photo extends AbstractCrudObject {
       target: 'target',
       updated_time: 'updated_time',
       webp_images: 'webp_images',
-      width: 'width'
+      width: 'width',
     });
   }
 
@@ -59,7 +61,7 @@ export default class Photo extends AbstractCrudObject {
       min: 'min',
       month: 'month',
       none: 'none',
-      year: 'year'
+      year: 'year',
     });
   }
   static get UnpublishedContentType (): Object {
@@ -68,18 +70,20 @@ export default class Photo extends AbstractCrudObject {
       draft: 'DRAFT',
       inline_created: 'INLINE_CREATED',
       published: 'PUBLISHED',
-      scheduled: 'SCHEDULED'
+      reviewable_branded_content: 'REVIEWABLE_BRANDED_CONTENT',
+      scheduled: 'SCHEDULED',
+      scheduled_recurring: 'SCHEDULED_RECURRING',
     });
   }
   static get Type (): Object {
     return Object.freeze({
       profile: 'profile',
       tagged: 'tagged',
-      uploaded: 'uploaded'
+      uploaded: 'uploaded',
     });
   }
 
-  getComments (fields, params, fetchFirstPage = true): Comment {
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Comment,
       fields,
@@ -89,7 +93,7 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  createComment (fields, params): Comment {
+  createComment (fields: Array<string>, params: Object = {}): Promise<Comment> {
     return this.createEdge(
       '/comments',
       fields,
@@ -98,7 +102,7 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  getInsights (fields, params, fetchFirstPage = true): InsightsResult {
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InsightsResult,
       fields,
@@ -108,7 +112,7 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  getLikes (fields, params, fetchFirstPage = true): Profile {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -118,7 +122,7 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  createLike (fields, params): Photo {
+  createLike (fields: Array<string>, params: Object = {}): Promise<Photo> {
     return this.createEdge(
       '/likes',
       fields,
@@ -127,7 +131,7 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  getReactions (fields, params, fetchFirstPage = true): Profile {
+  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -137,7 +141,7 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  getSharedPosts (fields, params, fetchFirstPage = true): Post {
+  getSharedPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Post,
       fields,
@@ -147,7 +151,17 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  getTags (fields, params, fetchFirstPage = true): TaggableSubject {
+  getSponsorTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Page,
+      fields,
+      params,
+      fetchFirstPage,
+      '/sponsor_tags'
+    );
+  }
+
+  getTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       TaggableSubject,
       fields,
@@ -157,13 +171,17 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): Photo {
+  
+  get (fields: Array<string>, params: Object = {}): Photo {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

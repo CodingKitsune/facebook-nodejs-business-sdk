@@ -9,16 +9,15 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AdCreativeOptimizationSpec
+ * CanvasBodyElement
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AdCreativeOptimizationSpec extends AbstractCrudObject {
+export default class CanvasBodyElement extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      bodies: 'bodies',
-      descriptions: 'descriptions',
-      titles: 'titles'
+      element: 'element',
     });
   }
+
 }

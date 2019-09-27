@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AssignedUser from './assigned-user';
 import CustomAudience from './custom-audience';
 import DACheck from './da-check';
@@ -33,17 +34,18 @@ export default class AdsPixel extends AbstractCrudObject {
       first_party_cookie_status: 'first_party_cookie_status',
       id: 'id',
       is_created_by_business: 'is_created_by_business',
+      is_unavailable: 'is_unavailable',
       last_fired_time: 'last_fired_time',
       name: 'name',
       owner_ad_account: 'owner_ad_account',
-      owner_business: 'owner_business'
+      owner_business: 'owner_business',
     });
   }
 
   static get SortBy (): Object {
     return Object.freeze({
       last_fired_time: 'LAST_FIRED_TIME',
-      name: 'NAME'
+      name: 'NAME',
     });
   }
   static get AutomaticMatchingFields (): Object {
@@ -55,38 +57,38 @@ export default class AdsPixel extends AbstractCrudObject {
       ln: 'ln',
       ph: 'ph',
       st: 'st',
-      zp: 'zp'
+      zp: 'zp',
     });
   }
   static get DataUseSetting (): Object {
     return Object.freeze({
       advertising_and_analytics: 'ADVERTISING_AND_ANALYTICS',
       analytics_only: 'ANALYTICS_ONLY',
-      empty: 'EMPTY'
+      empty: 'EMPTY',
     });
   }
   static get FirstPartyCookieStatus (): Object {
     return Object.freeze({
       empty: 'EMPTY',
       first_party_cookie_disabled: 'FIRST_PARTY_COOKIE_DISABLED',
-      first_party_cookie_enabled: 'FIRST_PARTY_COOKIE_ENABLED'
+      first_party_cookie_enabled: 'FIRST_PARTY_COOKIE_ENABLED',
     });
   }
   static get Tasks (): Object {
     return Object.freeze({
       analyze: 'ANALYZE',
-      edit: 'EDIT'
+      edit: 'EDIT',
     });
   }
 
-  deleteAssignedUsers (params): AbstractObject {
+  deleteAssignedUsers (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/assigned_users',
       params
     );
   }
 
-  getAssignedUsers (fields, params, fetchFirstPage = true): AssignedUser {
+  getAssignedUsers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AssignedUser,
       fields,
@@ -96,7 +98,7 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  createAssignedUser (fields, params): AdsPixel {
+  createAssignedUser (fields: Array<string>, params: Object = {}): Promise<AdsPixel> {
     return this.createEdge(
       '/assigned_users',
       fields,
@@ -105,7 +107,7 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  getAudiences (fields, params, fetchFirstPage = true): CustomAudience {
+  getAudiences (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       CustomAudience,
       fields,
@@ -115,7 +117,7 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  getDaChecks (fields, params, fetchFirstPage = true): DACheck {
+  getDaChecks (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       DACheck,
       fields,
@@ -125,14 +127,23 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  deleteSharedAccounts (params): AbstractObject {
+  createEvent (fields: Array<string>, params: Object = {}): Promise<AdsPixel> {
+    return this.createEdge(
+      '/events',
+      fields,
+      params,
+      AdsPixel
+    );
+  }
+
+  deleteSharedAccounts (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/shared_accounts',
       params
     );
   }
 
-  getSharedAccounts (fields, params, fetchFirstPage = true): AdAccount {
+  getSharedAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccount,
       fields,
@@ -142,7 +153,7 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  createSharedAccount (fields, params): AdsPixel {
+  createSharedAccount (fields: Array<string>, params: Object = {}): Promise<AdsPixel> {
     return this.createEdge(
       '/shared_accounts',
       fields,
@@ -151,7 +162,7 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  getSharedAgencies (fields, params, fetchFirstPage = true): Business {
+  getSharedAgencies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Business,
       fields,
@@ -161,7 +172,7 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  getStats (fields, params, fetchFirstPage = true): AdsPixelStatsResult {
+  getStats (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdsPixelStatsResult,
       fields,
@@ -171,14 +182,18 @@ export default class AdsPixel extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): AdsPixel {
+  
+  get (fields: Array<string>, params: Object = {}): AdsPixel {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): AdsPixel {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): AdsPixel {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

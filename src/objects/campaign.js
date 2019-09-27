@@ -8,6 +8,8 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
+import AdStudy from './ad-study';
 import AdRule from './ad-rule';
 import Ad from './ad';
 import AdSet from './ad-set';
@@ -47,12 +49,13 @@ export default class Campaign extends AbstractCrudObject {
       recommendations: 'recommendations',
       source_campaign: 'source_campaign',
       source_campaign_id: 'source_campaign_id',
+      special_ad_category: 'special_ad_category',
       spend_cap: 'spend_cap',
       start_time: 'start_time',
       status: 'status',
       stop_time: 'stop_time',
       topline_id: 'topline_id',
-      updated_time: 'updated_time'
+      updated_time: 'updated_time',
     });
   }
 
@@ -60,7 +63,7 @@ export default class Campaign extends AbstractCrudObject {
     return Object.freeze({
       lowest_cost_without_cap: 'LOWEST_COST_WITHOUT_CAP',
       lowest_cost_with_bid_cap: 'LOWEST_COST_WITH_BID_CAP',
-      target_cost: 'TARGET_COST'
+      target_cost: 'TARGET_COST',
     });
   }
   static get ConfiguredStatus (): Object {
@@ -68,22 +71,17 @@ export default class Campaign extends AbstractCrudObject {
       active: 'ACTIVE',
       archived: 'ARCHIVED',
       deleted: 'DELETED',
-      paused: 'PAUSED'
+      paused: 'PAUSED',
     });
   }
   static get EffectiveStatus (): Object {
     return Object.freeze({
       active: 'ACTIVE',
-      adset_paused: 'ADSET_PAUSED',
       archived: 'ARCHIVED',
-      campaign_paused: 'CAMPAIGN_PAUSED',
       deleted: 'DELETED',
-      disapproved: 'DISAPPROVED',
+      in_process: 'IN_PROCESS',
       paused: 'PAUSED',
-      pending_billing_info: 'PENDING_BILLING_INFO',
-      pending_review: 'PENDING_REVIEW',
-      preapproved: 'PREAPPROVED',
-      with_issues: 'WITH_ISSUES'
+      with_issues: 'WITH_ISSUES',
     });
   }
   static get Status (): Object {
@@ -91,7 +89,7 @@ export default class Campaign extends AbstractCrudObject {
       active: 'ACTIVE',
       archived: 'ARCHIVED',
       deleted: 'DELETED',
-      paused: 'PAUSED'
+      paused: 'PAUSED',
     });
   }
   static get DatePreset (): Object {
@@ -114,13 +112,13 @@ export default class Campaign extends AbstractCrudObject {
       this_week_sun_today: 'this_week_sun_today',
       this_year: 'this_year',
       today: 'today',
-      yesterday: 'yesterday'
+      yesterday: 'yesterday',
     });
   }
   static get ExecutionOptions (): Object {
     return Object.freeze({
       include_recommendations: 'include_recommendations',
-      validate_only: 'validate_only'
+      validate_only: 'validate_only',
     });
   }
   static get Objective (): Object {
@@ -138,31 +136,49 @@ export default class Campaign extends AbstractCrudObject {
       post_engagement: 'POST_ENGAGEMENT',
       product_catalog_sales: 'PRODUCT_CATALOG_SALES',
       reach: 'REACH',
-      video_views: 'VIDEO_VIEWS'
+      video_views: 'VIDEO_VIEWS',
+    });
+  }
+  static get SpecialAdCategory (): Object {
+    return Object.freeze({
+      credit: 'CREDIT',
+      employment: 'EMPLOYMENT',
+      housing: 'HOUSING',
+      none: 'NONE',
     });
   }
   static get Operator (): Object {
     return Object.freeze({
       all: 'ALL',
-      any: 'ANY'
+      any: 'ANY',
     });
   }
   static get StatusOption (): Object {
     return Object.freeze({
       active: 'ACTIVE',
       inherited_from_source: 'INHERITED_FROM_SOURCE',
-      paused: 'PAUSED'
+      paused: 'PAUSED',
     });
   }
 
-  deleteAdLabels (params): AbstractObject {
+  getAdStudies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AdStudy,
+      fields,
+      params,
+      fetchFirstPage,
+      '/ad_studies'
+    );
+  }
+
+  deleteAdLabels (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/adlabels',
       params
     );
   }
 
-  createAdLabel (fields, params): Campaign {
+  createAdLabel (fields: Array<string>, params: Object = {}): Promise<Campaign> {
     return this.createEdge(
       '/adlabels',
       fields,
@@ -171,7 +187,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  getAdRulesGoverned (fields, params, fetchFirstPage = true): AdRule {
+  getAdRulesGoverned (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdRule,
       fields,
@@ -181,7 +197,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  getAds (fields, params, fetchFirstPage = true): Ad {
+  getAds (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Ad,
       fields,
@@ -191,7 +207,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  getAdSets (fields, params, fetchFirstPage = true): AdSet {
+  getAdSets (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdSet,
       fields,
@@ -201,7 +217,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  getCopies (fields, params, fetchFirstPage = true): Campaign {
+  getCopies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Campaign,
       fields,
@@ -211,7 +227,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  createCopy (fields, params): Campaign {
+  createCopy (fields: Array<string>, params: Object = {}): Promise<Campaign> {
     return this.createEdge(
       '/copies',
       fields,
@@ -220,7 +236,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  getInsights (fields, params, fetchFirstPage = true): AdsInsights {
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdsInsights,
       fields,
@@ -230,7 +246,7 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  getInsightsAsync (fields, params): AdReportRun {
+  getInsightsAsync (fields: Array<string>, params: Object = {}): Promise<AdReportRun> {
     return this.createEdge(
       '/insights',
       fields,
@@ -239,20 +255,26 @@ export default class Campaign extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): Campaign {
+  
+  get (fields: Array<string>, params: Object = {}): Campaign {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): Campaign {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): Campaign {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

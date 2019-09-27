@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AbstractObject from './../abstract-object';
 
 /**
  * Lead
@@ -26,16 +27,29 @@ export default class Lead extends AbstractCrudObject {
       custom_disclaimer_responses: 'custom_disclaimer_responses',
       field_data: 'field_data',
       form_id: 'form_id',
+      home_listing: 'home_listing',
       id: 'id',
       is_organic: 'is_organic',
       partner_name: 'partner_name',
       platform: 'platform',
       post: 'post',
-      retailer_item_id: 'retailer_item_id'
+      retailer_item_id: 'retailer_item_id',
+      vehicle: 'vehicle',
     });
   }
 
-  get (fields, params): Lead {
+
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
+    return super.delete(
+      params
+    );
+  }
+
+  
+  get (fields: Array<string>, params: Object = {}): Lead {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

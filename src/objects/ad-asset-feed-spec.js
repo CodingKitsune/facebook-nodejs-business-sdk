@@ -19,7 +19,6 @@ export default class AdAssetFeedSpec extends AbstractCrudObject {
       ad_formats: 'ad_formats',
       additional_data: 'additional_data',
       asset_customization_rules: 'asset_customization_rules',
-      autotranslate: 'autotranslate',
       bodies: 'bodies',
       call_to_action_types: 'call_to_action_types',
       captions: 'captions',
@@ -29,7 +28,7 @@ export default class AdAssetFeedSpec extends AbstractCrudObject {
       link_urls: 'link_urls',
       optimization_type: 'optimization_type',
       titles: 'titles',
-      videos: 'videos'
+      videos: 'videos',
     });
   }
 
@@ -87,7 +86,7 @@ export default class AdAssetFeedSpec extends AbstractCrudObject {
       watch_more: 'WATCH_MORE',
       watch_video: 'WATCH_VIDEO',
       whatsapp_message: 'WHATSAPP_MESSAGE',
-      woodhenge_support: 'WOODHENGE_SUPPORT'
+      woodhenge_support: 'WOODHENGE_SUPPORT',
     });
   }
 }

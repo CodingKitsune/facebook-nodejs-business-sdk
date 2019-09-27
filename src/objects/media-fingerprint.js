@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AbstractObject from './../abstract-object';
 
 /**
  * MediaFingerprint
@@ -17,14 +18,12 @@ export default class MediaFingerprint extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
       duration_in_sec: 'duration_in_sec',
-      expiration_time: 'expiration_time',
       fingerprint_content_type: 'fingerprint_content_type',
       fingerprint_type: 'fingerprint_type',
-      fingerprint_validity: 'fingerprint_validity',
       id: 'id',
       metadata: 'metadata',
       title: 'title',
-      universal_content_id: 'universal_content_id'
+      universal_content_id: 'universal_content_id',
     });
   }
 
@@ -34,18 +33,37 @@ export default class MediaFingerprint extends AbstractCrudObject {
       episode: 'EPISODE',
       movie: 'MOVIE',
       other: 'OTHER',
-      songtrack: 'SONGTRACK'
+      songtrack: 'SONGTRACK',
+    });
+  }
+  static get FingerprintValidity (): Object {
+    return Object.freeze({
+      expired: 'EXPIRED',
+      expiring: 'EXPIRING',
+      valid: 'VALID',
     });
   }
 
-  get (fields, params): MediaFingerprint {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
+    return super.delete(
+      params
+    );
+  }
+
+  
+  get (fields: Array<string>, params: Object = {}): MediaFingerprint {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): MediaFingerprint {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): MediaFingerprint {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

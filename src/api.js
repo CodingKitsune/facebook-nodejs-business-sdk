@@ -19,10 +19,10 @@ export default class FacebookAdsApi {
   appsecretProof: string;
   locale: string;
   static _defaultApi: FacebookAdsApi;
-  static get VERSION () {
-    return 'v3.3';
+  static get VERSION() {
+    return 'v4.0';
   }
-  static get GRAPH () {
+  static get GRAPH() {
     return 'https://graph.facebook.com';
   }
 
@@ -50,21 +50,21 @@ export default class FacebookAdsApi {
    * @param  {String} [locale]
    * @return {FacebookAdsApi}
    */
-  static init (accessToken: string, locale: string = 'en_US') {
+  static init(accessToken: string, locale: string = 'en_US') {
     const api = new this(accessToken, locale);
     this.setDefaultApi(api);
     return api;
   }
 
-  static setDefaultApi (api: FacebookAdsApi) {
+  static setDefaultApi(api: FacebookAdsApi) {
     this._defaultApi = api;
   }
 
-  static getDefaultApi () {
+  static getDefaultApi() {
     return this._defaultApi;
   }
 
-  setDebug (flag: boolean) {
+  setDebug(flag: boolean) {
     this._debug = flag;
     return this;
   }
@@ -77,13 +77,13 @@ export default class FacebookAdsApi {
    * @param  {Object} [files]
    * @return {Promise}
    */
-  call (
+  call(
     method: string,
     path: string | Array<string> | String,
     params: Object = {},
     files: Object = {},
-    useMultipartFormData: Boolean = false,
-    urlOverride: string
+    useMultipartFormData: boolean = false,
+    urlOverride: string = '',
   ): Promise<*> {
     let url: any;
     let data: Object = {};
@@ -116,10 +116,10 @@ export default class FacebookAdsApi {
       .then(response => {
         if (this._debug) {
           console.log(
-            `200 ${method} ${url} ${data ? JSON.stringify(data) : ''}`
+            `200 ${method} ${url} ${data ? JSON.stringify(data) : ''}`,
           );
           console.log(
-            `Response: ${response ? JSON.stringify(response) : ''}`
+            `Response: ${response ? JSON.stringify(response) : ''}`,
           );
         }
         return Promise.resolve(response);
@@ -128,14 +128,14 @@ export default class FacebookAdsApi {
         if (this._debug) {
           console.log(
             `${response.status} ${method} ${url}
-            ${data ? JSON.stringify(data) : ''}`
+            ${data ? JSON.stringify(data) : ''}`,
           );
         }
         throw new FacebookRequestError(response, method, url, data);
       });
   }
 
-  static _encodeParams (params: Object) {
+  static _encodeParams(params: Object) {
     return Object.keys(params)
       .map(key => {
         var param = params[key];

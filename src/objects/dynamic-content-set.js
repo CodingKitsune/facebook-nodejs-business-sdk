@@ -18,11 +18,14 @@ export default class DynamicContentSet extends AbstractCrudObject {
     return Object.freeze({
       business_id: 'business_id',
       id: 'id',
-      name: 'name'
+      name: 'name',
     });
   }
 
-  get (fields, params): DynamicContentSet {
+
+  
+  get (fields: Array<string>, params: Object = {}): DynamicContentSet {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

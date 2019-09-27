@@ -21,11 +21,14 @@ export default class SavedMessageResponse extends AbstractCrudObject {
       image: 'image',
       is_enabled: 'is_enabled',
       message: 'message',
-      title: 'title'
+      title: 'title',
     });
   }
 
-  get (fields, params): SavedMessageResponse {
+
+  
+  get (fields: Array<string>, params: Object = {}): SavedMessageResponse {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

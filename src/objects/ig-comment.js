@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 
 /**
  * IGComment
@@ -24,11 +25,12 @@ export default class IGComment extends AbstractCrudObject {
       text: 'text',
       timestamp: 'timestamp',
       user: 'user',
-      username: 'username'
+      username: 'username',
     });
   }
 
-  getReplies (fields, params, fetchFirstPage = true): IGComment {
+
+  getReplies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       IGComment,
       fields,
@@ -38,7 +40,7 @@ export default class IGComment extends AbstractCrudObject {
     );
   }
 
-  createReply (fields, params): IGComment {
+  createReply (fields: Array<string>, params: Object = {}): Promise<IGComment> {
     return this.createEdge(
       '/replies',
       fields,
@@ -47,20 +49,26 @@ export default class IGComment extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): IGComment {
+  
+  get (fields: Array<string>, params: Object = {}): IGComment {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): IGComment {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): IGComment {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

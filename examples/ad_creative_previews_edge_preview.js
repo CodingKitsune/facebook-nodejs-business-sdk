@@ -9,13 +9,13 @@
 
  'use strict';
 const bizSdk = require('facebook-nodejs-business-sdk');
-const AdAccount = bizSdk.AdAccount;
 const AdCreative = bizSdk.AdCreative;
+const AdPreview = bizSdk.AdPreview;
 
 const access_token = '<ACCESS_TOKEN>';
 const app_secret = '<APP_SECRET>';
 const app_id = '<APP_ID>';
-const id = '<AD_ACCOUNT_ID>';
+const id = '<AD_CREATIVE_ID>';
 const api = bizSdk.FacebookAdsApi.init(access_token);
 const showDebugingInfo = true; // Setting this to true shows more debugging info.
 if (showDebugingInfo) {
@@ -33,12 +33,10 @@ let fields, params;
 fields = [
 ];
 params = {
-  'name' : 'Dynamic Ad Template Creative Sample',
-  'object_story_spec' : {'page_id':'<pageID>','template_data':{'call_to_action':{'type':'INSTALL_MOBILE_APP','value':{'link':'http://www.example.com/appstoreurl'}},'message':'Test {{product.name | titleize}}','link':'http://www.example.com/appstoreurl','name':'Headline {{product.price}}','description':'Description {{product.description}}'}},
-  'product_set_id' : '<productSetID>',
+  'ad_format' : 'DESKTOP_FEED_STANDARD',
 };
-const adcreatives = (new AdAccount(id)).createAdCreative(
+const previewss = (new AdCreative(id)).getPreviews(
   fields,
   params
 );
-logApiCallResult('adcreatives api call complete.', adcreatives);
+logApiCallResult('previewss api call complete.', previewss);

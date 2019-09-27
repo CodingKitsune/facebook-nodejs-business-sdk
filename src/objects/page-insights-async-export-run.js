@@ -24,11 +24,14 @@ export default class PageInsightsAsyncExportRun extends AbstractCrudObject {
       report_end_date: 'report_end_date',
       report_start_date: 'report_start_date',
       sorters: 'sorters',
-      status: 'status'
+      status: 'status',
     });
   }
 
-  get (fields, params): PageInsightsAsyncExportRun {
+
+  
+  get (fields: Array<string>, params: Object = {}): PageInsightsAsyncExportRun {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

@@ -18,6 +18,7 @@ export default class AdPromotedObject extends AbstractCrudObject {
     return Object.freeze({
       application_id: 'application_id',
       custom_conversion_id: 'custom_conversion_id',
+      custom_event_str: 'custom_event_str',
       custom_event_type: 'custom_event_type',
       event_id: 'event_id',
       fundraiser_campaign_id: 'fundraiser_campaign_id',
@@ -32,7 +33,7 @@ export default class AdPromotedObject extends AbstractCrudObject {
       product_catalog_id: 'product_catalog_id',
       product_item_id: 'product_item_id',
       product_set_id: 'product_set_id',
-      retention_days: 'retention_days'
+      retention_days: 'retention_days',
     });
   }
 
@@ -65,7 +66,7 @@ export default class AdPromotedObject extends AbstractCrudObject {
       start_trial: 'START_TRIAL',
       submit_application: 'SUBMIT_APPLICATION',
       subscribe: 'SUBSCRIBE',
-      tutorial_completion: 'TUTORIAL_COMPLETION'
+      tutorial_completion: 'TUTORIAL_COMPLETION',
     });
   }
 }

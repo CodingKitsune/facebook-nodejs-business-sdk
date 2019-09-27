@@ -8,12 +8,13 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Comment from './comment';
 import RTBDynamicPost from './rtb-dynamic-post';
 import InsightsResult from './insights-result';
 import Profile from './profile';
-import User from './user';
 import Post from './post';
+import Page from './page';
 
 /**
  * PagePost
@@ -76,7 +77,7 @@ export default class PagePost extends AbstractCrudObject {
       updated_time: 'updated_time',
       via: 'via',
       video_buying_eligibility: 'video_buying_eligibility',
-      width: 'width'
+      width: 'width',
     });
   }
 
@@ -87,7 +88,7 @@ export default class PagePost extends AbstractCrudObject {
       min: 'min',
       month: 'month',
       none: 'none',
-      year: 'year'
+      year: 'year',
     });
   }
   static get CheckinEntryPoint (): Object {
@@ -95,19 +96,19 @@ export default class PagePost extends AbstractCrudObject {
       branding_checkin: 'BRANDING_CHECKIN',
       branding_other: 'BRANDING_OTHER',
       branding_photo: 'BRANDING_PHOTO',
-      branding_status: 'BRANDING_STATUS'
+      branding_status: 'BRANDING_STATUS',
     });
   }
   static get Formatting (): Object {
     return Object.freeze({
       markdown: 'MARKDOWN',
-      plaintext: 'PLAINTEXT'
+      plaintext: 'PLAINTEXT',
     });
   }
   static get PlaceAttachmentSetting (): Object {
     return Object.freeze({
       value_1: '1',
-      value_2: '2'
+      value_2: '2',
     });
   }
   static get PostSurfacesBlacklist (): Object {
@@ -116,19 +117,19 @@ export default class PagePost extends AbstractCrudObject {
       value_2: '2',
       value_3: '3',
       value_4: '4',
-      value_5: '5'
+      value_5: '5',
     });
   }
   static get PostingToRedspace (): Object {
     return Object.freeze({
       disabled: 'disabled',
-      enabled: 'enabled'
+      enabled: 'enabled',
     });
   }
   static get TargetSurface (): Object {
     return Object.freeze({
       story: 'STORY',
-      timeline: 'TIMELINE'
+      timeline: 'TIMELINE',
     });
   }
   static get UnpublishedContentType (): Object {
@@ -137,29 +138,31 @@ export default class PagePost extends AbstractCrudObject {
       draft: 'DRAFT',
       inline_created: 'INLINE_CREATED',
       published: 'PUBLISHED',
-      scheduled: 'SCHEDULED'
+      reviewable_branded_content: 'REVIEWABLE_BRANDED_CONTENT',
+      scheduled: 'SCHEDULED',
+      scheduled_recurring: 'SCHEDULED_RECURRING',
     });
   }
   static get With (): Object {
     return Object.freeze({
-      location: 'LOCATION'
+      location: 'LOCATION',
     });
   }
   static get FeedStoryVisibility (): Object {
     return Object.freeze({
       hidden: 'hidden',
-      visible: 'visible'
+      visible: 'visible',
     });
   }
   static get TimelineVisibility (): Object {
     return Object.freeze({
       forced_allow: 'forced_allow',
       hidden: 'hidden',
-      normal: 'normal'
+      normal: 'normal',
     });
   }
 
-  getAttachments (fields, params, fetchFirstPage = true): AbstractObject {
+  getAttachments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
       fields,
@@ -169,7 +172,7 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getComments (fields, params, fetchFirstPage = true): Comment {
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Comment,
       fields,
@@ -179,7 +182,7 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  createComment (fields, params): Comment {
+  createComment (fields: Array<string>, params: Object = {}): Promise<Comment> {
     return this.createEdge(
       '/comments',
       fields,
@@ -188,7 +191,7 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getDynamicPosts (fields, params, fetchFirstPage = true): RTBDynamicPost {
+  getDynamicPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       RTBDynamicPost,
       fields,
@@ -198,7 +201,17 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getInsights (fields, params, fetchFirstPage = true): InsightsResult {
+  getEditActions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AbstractObject,
+      fields,
+      params,
+      fetchFirstPage,
+      '/edit_actions'
+    );
+  }
+
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InsightsResult,
       fields,
@@ -208,14 +221,14 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  deleteLikes (params): AbstractObject {
+  deleteLikes (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/likes',
       params
     );
   }
 
-  getLikes (fields, params, fetchFirstPage = true): Profile {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -225,7 +238,7 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  createLike (fields, params): PagePost {
+  createLike (fields: Array<string>, params: Object = {}): Promise<PagePost> {
     return this.createEdge(
       '/likes',
       fields,
@@ -234,7 +247,16 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getReactions (fields, params, fetchFirstPage = true): Profile {
+  createPrivateReply (fields: Array<string>, params: Object = {}): Promise<PagePost> {
+    return this.createEdge(
+      '/private_replies',
+      fields,
+      params,
+      PagePost
+    );
+  }
+
+  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -244,17 +266,7 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getSeen (fields, params, fetchFirstPage = true): User {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/seen'
-    );
-  }
-
-  getSharedPosts (fields, params, fetchFirstPage = true): Post {
+  getSharedPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Post,
       fields,
@@ -264,7 +276,17 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  getTo (fields, params, fetchFirstPage = true): Profile {
+  getSponsorTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Page,
+      fields,
+      params,
+      fetchFirstPage,
+      '/sponsor_tags'
+    );
+  }
+
+  getTo (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -274,20 +296,36 @@ export default class PagePost extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  getWithTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/with_tags'
+    );
+  }
+
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): PagePost {
+  
+  get (fields: Array<string>, params: Object = {}): PagePost {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): PagePost {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): PagePost {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

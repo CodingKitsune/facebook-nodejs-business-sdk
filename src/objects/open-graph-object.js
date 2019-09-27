@@ -7,6 +7,9 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import Cursor from './../cursor';
+import Comment from './comment';
+import Profile from './profile';
 import ProfilePictureSource from './profile-picture-source';
 
 /**
@@ -20,7 +23,6 @@ export default class OpenGraphObject extends AbstractCrudObject {
       admins: 'admins',
       application: 'application',
       audio: 'audio',
-      context: 'context',
       created_time: 'created_time',
       description: 'description',
       determiner: 'determiner',
@@ -38,11 +40,32 @@ export default class OpenGraphObject extends AbstractCrudObject {
       title: 'title',
       type: 'type',
       updated_time: 'updated_time',
-      video: 'video'
+      video: 'video',
     });
   }
 
-  getPicture (fields, params, fetchFirstPage = true): ProfilePictureSource {
+
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Comment,
+      fields,
+      params,
+      fetchFirstPage,
+      '/comments'
+    );
+  }
+
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/likes'
+    );
+  }
+
+  getPicture (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ProfilePictureSource,
       fields,
@@ -52,7 +75,19 @@ export default class OpenGraphObject extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): OpenGraphObject {
+  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/reactions'
+    );
+  }
+
+  
+  get (fields: Array<string>, params: Object = {}): OpenGraphObject {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

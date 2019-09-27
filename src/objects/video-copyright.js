@@ -31,7 +31,7 @@ export default class VideoCopyright extends AbstractCrudObject {
       reference_file_expired: 'reference_file_expired',
       reference_owner_id: 'reference_owner_id',
       rule_ids: 'rule_ids',
-      whitelisted_ids: 'whitelisted_ids'
+      whitelisted_ids: 'whitelisted_ids',
     });
   }
 
@@ -39,25 +39,29 @@ export default class VideoCopyright extends AbstractCrudObject {
     return Object.freeze({
       episode: 'episode',
       movie: 'movie',
-      web: 'web'
+      web: 'web',
     });
   }
   static get MonitoringType (): Object {
     return Object.freeze({
       audio_only: 'AUDIO_ONLY',
       video_and_audio: 'VIDEO_AND_AUDIO',
-      video_only: 'VIDEO_ONLY'
+      video_only: 'VIDEO_ONLY',
     });
   }
 
-  get (fields, params): VideoCopyright {
+  
+  get (fields: Array<string>, params: Object = {}): VideoCopyright {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): VideoCopyright {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): VideoCopyright {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

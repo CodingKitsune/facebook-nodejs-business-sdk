@@ -8,7 +8,9 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AdAccount from './ad-account';
+import BusinessAssetGroup from './business-asset-group';
 import Page from './page';
 import ProductCatalog from './product-catalog';
 
@@ -32,7 +34,7 @@ export default class BusinessUser extends AbstractCrudObject {
       pending_email: 'pending_email',
       role: 'role',
       title: 'title',
-      two_fac_status: 'two_fac_status'
+      two_fac_status: 'two_fac_status',
     });
   }
 
@@ -42,11 +44,11 @@ export default class BusinessUser extends AbstractCrudObject {
       ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
       employee: 'EMPLOYEE',
       finance_analyst: 'FINANCE_ANALYST',
-      finance_editor: 'FINANCE_EDITOR'
+      finance_editor: 'FINANCE_EDITOR',
     });
   }
 
-  getAssignedAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+  getAssignedAdAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccount,
       fields,
@@ -56,7 +58,17 @@ export default class BusinessUser extends AbstractCrudObject {
     );
   }
 
-  getAssignedPages (fields, params, fetchFirstPage = true): Page {
+  getAssignedBusinessAssetGroups (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      BusinessAssetGroup,
+      fields,
+      params,
+      fetchFirstPage,
+      '/assigned_business_asset_groups'
+    );
+  }
+
+  getAssignedPages (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Page,
       fields,
@@ -66,7 +78,7 @@ export default class BusinessUser extends AbstractCrudObject {
     );
   }
 
-  getAssignedProductCatalogs (fields, params, fetchFirstPage = true): ProductCatalog {
+  getAssignedProductCatalogs (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ProductCatalog,
       fields,
@@ -76,20 +88,26 @@ export default class BusinessUser extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): BusinessUser {
+  
+  get (fields: Array<string>, params: Object = {}): BusinessUser {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): BusinessUser {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): BusinessUser {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

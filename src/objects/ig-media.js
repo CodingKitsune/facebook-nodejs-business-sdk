@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import Cursor from './../cursor';
 import IGComment from './ig-comment';
 import InstagramInsightsResult from './instagram-insights-result';
 
@@ -31,11 +32,12 @@ export default class IGMedia extends AbstractCrudObject {
       shortcode: 'shortcode',
       thumbnail_url: 'thumbnail_url',
       timestamp: 'timestamp',
-      username: 'username'
+      username: 'username',
     });
   }
 
-  getChildren (fields, params, fetchFirstPage = true): IGMedia {
+
+  getChildren (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       IGMedia,
       fields,
@@ -45,7 +47,7 @@ export default class IGMedia extends AbstractCrudObject {
     );
   }
 
-  getComments (fields, params, fetchFirstPage = true): IGComment {
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       IGComment,
       fields,
@@ -55,7 +57,7 @@ export default class IGMedia extends AbstractCrudObject {
     );
   }
 
-  createComment (fields, params): IGComment {
+  createComment (fields: Array<string>, params: Object = {}): Promise<IGComment> {
     return this.createEdge(
       '/comments',
       fields,
@@ -64,7 +66,7 @@ export default class IGMedia extends AbstractCrudObject {
     );
   }
 
-  getInsights (fields, params, fetchFirstPage = true): InstagramInsightsResult {
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstagramInsightsResult,
       fields,
@@ -74,14 +76,18 @@ export default class IGMedia extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): IGMedia {
+  
+  get (fields: Array<string>, params: Object = {}): IGMedia {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): IGMedia {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): IGMedia {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

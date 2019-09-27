@@ -25,18 +25,23 @@ export default class Canvas extends AbstractCrudObject {
       last_editor: 'last_editor',
       name: 'name',
       owner: 'owner',
-      update_time: 'update_time'
+      update_time: 'update_time',
     });
   }
 
-  get (fields, params): Canvas {
+
+  
+  get (fields: Array<string>, params: Object = {}): Canvas {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): Canvas {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): Canvas {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );
