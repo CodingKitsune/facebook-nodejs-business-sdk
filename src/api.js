@@ -36,7 +36,7 @@ export default class FacebookAdsApi {
    * @param {String} accessToken
    * @param {String} [locale]
    */
-  constructor (accessToken: string, appsecretProof: string = null, locale: string = 'en_US', crash_log: bool = true) {
+  constructor (accessToken: string, appsecretProof: string = '', locale: string = 'en_US', crash_log: bool = true) {
     if (!accessToken) {
       throw new Error('Access token required');
     }
@@ -56,8 +56,8 @@ export default class FacebookAdsApi {
    * @param  {String} [locale]
    * @return {FacebookAdsApi}
    */
-  static init(accessToken: string, locale: string = 'en_US', crash_log: bool = true) {
-    const api = new this(accessToken, locale, crash_log);
+  static init(accessToken: string, appsecretProof: string = '', locale: string = 'en_US', crash_log: bool = true) {
+    const api = new this(accessToken, appsecretProof, locale, crash_log);
     this.setDefaultApi(api);
     return api;
   }
