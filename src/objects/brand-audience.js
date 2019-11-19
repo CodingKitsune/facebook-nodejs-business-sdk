@@ -9,32 +9,30 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AdToplineDetail
+ * BrandAudience
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AdToplineDetail extends AbstractCrudObject {
+export default class BrandAudience extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      active_status: 'active_status',
-      ad_account_id: 'ad_account_id',
-      flight_end_date: 'flight_end_date',
-      flight_start_date: 'flight_start_date',
+      account: 'account',
+      delivery_targeting: 'delivery_targeting',
+      description: 'description',
       id: 'id',
-      io_number: 'io_number',
-      line_number: 'line_number',
-      price: 'price',
-      quantity: 'quantity',
-      sf_detail_line_id: 'sf_detail_line_id',
-      subline_id: 'subline_id',
-      targets: 'targets',
+      name: 'name',
+      sentence_lines: 'sentence_lines',
+      status: 'status',
+      targeting: 'targeting',
       time_created: 'time_created',
       time_updated: 'time_updated',
-      topline_id: 'topline_id'
     });
   }
 
-  get (fields, params): AdToplineDetail {
+
+  
+  get (fields: Array<string>, params: Object = {}): BrandAudience {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

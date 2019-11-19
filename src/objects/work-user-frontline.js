@@ -9,16 +9,16 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AdCreativeOptimizationSpec
+ * WorkUserFrontline
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AdCreativeOptimizationSpec extends AbstractCrudObject {
+export default class WorkUserFrontline extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      bodies: 'bodies',
-      descriptions: 'descriptions',
-      titles: 'titles'
+      has_access: 'has_access',
+      is_frontline: 'is_frontline',
     });
   }
+
 }

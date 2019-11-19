@@ -10,7 +10,7 @@
  'use strict';
 const bizSdk = require('facebook-nodejs-business-sdk');
 const AdAccount = bizSdk.AdAccount;
-const AdSet = bizSdk.AdSet;
+const AdPreview = bizSdk.AdPreview;
 
 const access_token = '<ACCESS_TOKEN>';
 const app_secret = '<APP_SECRET>';
@@ -33,18 +33,11 @@ let fields, params;
 fields = [
 ];
 params = {
-  'name' : 'My First AdSet',
-  'daily_budget' : '10000',
-  'bid_amount' : '300',
-  'billing_event' : 'IMPRESSIONS',
-  'optimization_goal' : 'REACH',
-  'campaign_id' : '<adCampaignLinkClicksID>',
-  'promoted_object' : {'page_id':'<pageID>'},
-  'targeting' : {'geo_locations':{'countries':['US'],'regions':[{'key':'4081'}],'cities':[{'key':777934,'radius':10,'distance_unit':'mile'}]},'genders':[1],'age_max':24,'age_min':20,'publisher_platforms':['facebook','audience_network'],'device_platforms':['mobile'],'flexible_spec':[{'interests':[{'id':'<adsInterestID>','name':'<adsInterestName>'}]}]},
-  'status' : 'PAUSED',
+  'creative' : {'object_story_spec':{'link_data':{'call_to_action':{'type':'USE_APP','value':{'link':'<url>'}},'description':'Description','link':'<url>','message':'Message','name':'Name','picture':'<imageURL>'},'page_id':'<pageID>'}},
+  'ad_format' : 'MOBILE_FEED_STANDARD',
 };
-const adsets = (new AdAccount(id)).createAdSet(
+const generatepreviewss = (new AdAccount(id)).getGeneratePreviews(
   fields,
   params
 );
-logApiCallResult('adsets api call complete.', adsets);
+logApiCallResult('generatepreviewss api call complete.', generatepreviewss);

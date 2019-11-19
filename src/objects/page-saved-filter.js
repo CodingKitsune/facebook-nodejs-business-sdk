@@ -22,11 +22,14 @@ export default class PageSavedFilter extends AbstractCrudObject {
       page_id: 'page_id',
       section: 'section',
       time_created: 'time_created',
-      time_updated: 'time_updated'
+      time_updated: 'time_updated',
     });
   }
 
-  get (fields, params): PageSavedFilter {
+
+  
+  get (fields: Array<string>, params: Object = {}): PageSavedFilter {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

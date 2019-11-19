@@ -8,16 +8,15 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
-import PageAdminNote from './page-admin-note';
-import User from './user';
+import Cursor from './../cursor';
 import PagePost from './page-post';
 import Business from './business';
 import Album from './album';
 import AssignedUser from './assigned-user';
-import AudioCopyright from './audio-copyright';
 import Profile from './profile';
 import BusinessProject from './business-project';
 import PageCallToAction from './page-call-to-action';
+import CanvasBodyElement from './canvas-body-element';
 import Canvas from './canvas';
 import URL from './url';
 import UnifiedThread from './unified-thread';
@@ -40,16 +39,20 @@ import NativeOffer from './native-offer';
 import Persona from './persona';
 import Photo from './photo';
 import ProfilePictureSource from './profile-picture-source';
+import PlaceTopic from './place-topic';
+import ProductCatalog from './product-catalog';
 import Recommendation from './recommendation';
+import User from './user';
 import RTBDynamicPost from './rtb-dynamic-post';
 import Application from './application';
 import PageSettings from './page-settings';
+import VideoList from './video-list';
 import Tab from './tab';
 import PageThreadOwner from './page-thread-owner';
 import EventTour from './event-tour';
+import PageUpcomingChange from './page-upcoming-change';
 import VideoCopyrightRule from './video-copyright-rule';
 import VideoCopyright from './video-copyright';
-import VideoList from './video-list';
 
 /**
  * Page
@@ -84,7 +87,6 @@ export default class Page extends AbstractCrudObject {
       company_overview: 'company_overview',
       connected_instagram_account: 'connected_instagram_account',
       contact_address: 'contact_address',
-      copyright_attribution_insights: 'copyright_attribution_insights',
       copyright_whitelisted_ig_partners: 'copyright_whitelisted_ig_partners',
       country_page_likes: 'country_page_likes',
       cover: 'cover',
@@ -131,8 +133,6 @@ export default class Page extends AbstractCrudObject {
       is_webhooks_subscribed: 'is_webhooks_subscribed',
       keywords: 'keywords',
       leadgen_form_preview_details: 'leadgen_form_preview_details',
-      leadgen_has_crm_integration: 'leadgen_has_crm_integration',
-      leadgen_has_fat_ping_crm_integration: 'leadgen_has_fat_ping_crm_integration',
       leadgen_tos_acceptance_time: 'leadgen_tos_acceptance_time',
       leadgen_tos_accepted: 'leadgen_tos_accepted',
       leadgen_tos_accepting_user: 'leadgen_tos_accepting_user',
@@ -200,7 +200,7 @@ export default class Page extends AbstractCrudObject {
       website: 'website',
       were_here_count: 'were_here_count',
       whatsapp_number: 'whatsapp_number',
-      written_by: 'written_by'
+      written_by: 'written_by',
     });
   }
 
@@ -208,7 +208,7 @@ export default class Page extends AbstractCrudObject {
     return Object.freeze({
       casual: 'Casual',
       dressy: 'Dressy',
-      unspecified: 'Unspecified'
+      unspecified: 'Unspecified',
     });
   }
   static get FoodStyles (): Object {
@@ -269,14 +269,7 @@ export default class Page extends AbstractCrudObject {
       turkish: 'Turkish',
       vegan: 'Vegan',
       vegetarian: 'Vegetarian',
-      vietnamese: 'Vietnamese'
-    });
-  }
-  static get Setting (): Object {
-    return Object.freeze({
-      email_notif: 'EMAIL_NOTIF',
-      mobile_notif: 'MOBILE_NOTIF',
-      post_as_self: 'POST_AS_SELF'
+      vietnamese: 'Vietnamese',
     });
   }
   static get PermittedTasks (): Object {
@@ -286,12 +279,16 @@ export default class Page extends AbstractCrudObject {
       create_content: 'CREATE_CONTENT',
       manage: 'MANAGE',
       manage_jobs: 'MANAGE_JOBS',
+      manage_leads: 'MANAGE_LEADS',
       moderate: 'MODERATE',
       moderate_community: 'MODERATE_COMMUNITY',
       pages_messaging: 'PAGES_MESSAGING',
       pages_messaging_subscriptions: 'PAGES_MESSAGING_SUBSCRIPTIONS',
+      platform_manage_pages: 'PLATFORM_MANAGE_PAGES',
+      platform_pages_manage_instant_articles: 'PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES',
+      platform_read_insights: 'PLATFORM_READ_INSIGHTS',
       read_page_mailboxes: 'READ_PAGE_MAILBOXES',
-      view_monetization_insights: 'VIEW_MONETIZATION_INSIGHTS'
+      view_monetization_insights: 'VIEW_MONETIZATION_INSIGHTS',
     });
   }
   static get Tasks (): Object {
@@ -301,45 +298,49 @@ export default class Page extends AbstractCrudObject {
       create_content: 'CREATE_CONTENT',
       manage: 'MANAGE',
       manage_jobs: 'MANAGE_JOBS',
+      manage_leads: 'MANAGE_LEADS',
       moderate: 'MODERATE',
       moderate_community: 'MODERATE_COMMUNITY',
       pages_messaging: 'PAGES_MESSAGING',
       pages_messaging_subscriptions: 'PAGES_MESSAGING_SUBSCRIPTIONS',
+      platform_manage_pages: 'PLATFORM_MANAGE_PAGES',
+      platform_pages_manage_instant_articles: 'PLATFORM_PAGES_MANAGE_INSTANT_ARTICLES',
+      platform_read_insights: 'PLATFORM_READ_INSIGHTS',
       read_page_mailboxes: 'READ_PAGE_MAILBOXES',
-      view_monetization_insights: 'VIEW_MONETIZATION_INSIGHTS'
+      view_monetization_insights: 'VIEW_MONETIZATION_INSIGHTS',
+    });
+  }
+  static get PublishStatus (): Object {
+    return Object.freeze({
+      draft: 'DRAFT',
+      live: 'LIVE',
     });
   }
   static get MessagingType (): Object {
     return Object.freeze({
       message_tag: 'MESSAGE_TAG',
       response: 'RESPONSE',
-      update: 'UPDATE'
+      update: 'UPDATE',
     });
   }
   static get NotificationType (): Object {
     return Object.freeze({
       no_push: 'NO_PUSH',
       regular: 'REGULAR',
-      silent_push: 'SILENT_PUSH'
-    });
-  }
-  static get PublishStatus (): Object {
-    return Object.freeze({
-      draft: 'DRAFT',
-      live: 'LIVE'
+      silent_push: 'SILENT_PUSH',
     });
   }
   static get SenderAction (): Object {
     return Object.freeze({
       mark_seen: 'MARK_SEEN',
       typing_off: 'TYPING_OFF',
-      typing_on: 'TYPING_ON'
+      typing_on: 'TYPING_ON',
     });
   }
   static get Type (): Object {
     return Object.freeze({
       ref: 'REF',
-      standard: 'STANDARD'
+      standard: 'STANDARD',
     });
   }
   static get Model (): Object {
@@ -366,7 +367,7 @@ export default class Page extends AbstractCrudObject {
       romanian: 'ROMANIAN',
       spanish: 'SPANISH',
       swedish: 'SWEDISH',
-      vietnamese: 'VIETNAMESE'
+      vietnamese: 'VIETNAMESE',
     });
   }
   static get SubscribedFields (): Object {
@@ -379,6 +380,7 @@ export default class Page extends AbstractCrudObject {
       branded_camera: 'branded_camera',
       category: 'category',
       checkins: 'checkins',
+      commerce_order: 'commerce_order',
       company_overview: 'company_overview',
       conversations: 'conversations',
       culinary_team: 'culinary_team',
@@ -392,6 +394,7 @@ export default class Page extends AbstractCrudObject {
       general_manager: 'general_manager',
       hometown: 'hometown',
       hours: 'hours',
+      invoice_access_invoice_change: 'invoice_access_invoice_change',
       leadgen: 'leadgen',
       leadgen_fat: 'leadgen_fat',
       live_videos: 'live_videos',
@@ -401,6 +404,8 @@ export default class Page extends AbstractCrudObject {
       merchant_review: 'merchant_review',
       message_deliveries: 'message_deliveries',
       message_echoes: 'message_echoes',
+      message_mention: 'message_mention',
+      message_reactions: 'message_reactions',
       message_reads: 'message_reads',
       messages: 'messages',
       messaging_account_linking: 'messaging_account_linking',
@@ -436,20 +441,21 @@ export default class Page extends AbstractCrudObject {
       ratings: 'ratings',
       registration: 'registration',
       standby: 'standby',
+      video_text_question_responses: 'video_text_question_responses',
       videos: 'videos',
-      website: 'website'
+      website: 'website',
     });
   }
   static get DomainActionType (): Object {
     return Object.freeze({
       add: 'ADD',
-      remove: 'REMOVE'
+      remove: 'REMOVE',
     });
   }
   static get PaymentDevModeAction (): Object {
     return Object.freeze({
       add: 'ADD',
-      remove: 'REMOVE'
+      remove: 'REMOVE',
     });
   }
   static get SettingType (): Object {
@@ -458,52 +464,17 @@ export default class Page extends AbstractCrudObject {
       call_to_actions: 'CALL_TO_ACTIONS',
       domain_whitelisting: 'DOMAIN_WHITELISTING',
       greeting: 'GREETING',
-      payment: 'PAYMENT'
+      payment: 'PAYMENT',
     });
   }
   static get ThreadState (): Object {
     return Object.freeze({
       existing_thread: 'EXISTING_THREAD',
-      new_thread: 'NEW_THREAD'
+      new_thread: 'NEW_THREAD',
     });
   }
 
-  getAdminNotes (fields, params, fetchFirstPage = true): PageAdminNote {
-    return this.getEdge(
-      PageAdminNote,
-      fields,
-      params,
-      fetchFirstPage,
-      '/admin_notes'
-    );
-  }
-
-  createAdminSetting (fields, params): Page {
-    return this.createEdge(
-      '/admin_settings',
-      fields,
-      params,
-      Page
-    );
-  }
-
-  deleteAdmins (params): AbstractObject {
-    return super.deleteEdge(
-      '/admins',
-      params
-    );
-  }
-
-  createAdmin (fields, params): User {
-    return this.createEdge(
-      '/admins',
-      fields,
-      params,
-      User
-    );
-  }
-
-  getAdsPosts (fields, params, fetchFirstPage = true): PagePost {
+  getAdsPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -513,14 +484,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteAgencies (params): AbstractObject {
+  deleteAgencies (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/agencies',
       params
     );
   }
 
-  getAgencies (fields, params, fetchFirstPage = true): Business {
+  getAgencies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Business,
       fields,
@@ -530,7 +501,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createAgency (fields, params): Page {
+  createAgency (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/agencies',
       fields,
@@ -539,7 +510,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getAlbums (fields, params, fetchFirstPage = true): Album {
+  getAlbums (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Album,
       fields,
@@ -549,7 +520,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createAlbum (fields, params): Album {
+  createAlbum (fields: Array<string>, params: Object = {}): Promise<Album> {
     return this.createEdge(
       '/albums',
       fields,
@@ -558,14 +529,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteAssignedUsers (params): AbstractObject {
+  deleteAssignedUsers (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/assigned_users',
       params
     );
   }
 
-  getAssignedUsers (fields, params, fetchFirstPage = true): AssignedUser {
+  getAssignedUsers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AssignedUser,
       fields,
@@ -575,7 +546,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createAssignedUser (fields, params): Page {
+  createAssignedUser (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/assigned_users',
       fields,
@@ -584,24 +555,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getAudioMediaCopyrights (fields, params, fetchFirstPage = true): AudioCopyright {
-    return this.getEdge(
-      AudioCopyright,
-      fields,
-      params,
-      fetchFirstPage,
-      '/audio_media_copyrights'
-    );
-  }
-
-  deleteBlocked (params): AbstractObject {
+  deleteBlocked (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/blocked',
       params
     );
   }
 
-  getBlocked (fields, params, fetchFirstPage = true): Profile {
+  getBlocked (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -611,34 +572,16 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createBlocked (fields, params): AbstractObject {
+  createBlocked (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/blocked',
       fields,
-      params
-
-    );
-  }
-
-  createBroadcastMessage (fields, params): Page {
-    return this.createEdge(
-      '/broadcast_messages',
-      fields,
       params,
-      Page
+      
     );
   }
 
-  createBroadcastReachEstimation (fields, params): Page {
-    return this.createEdge(
-      '/broadcast_reach_estimations',
-      fields,
-      params,
-      Page
-    );
-  }
-
-  getBusinessProjects (fields, params, fetchFirstPage = true): BusinessProject {
+  getBusinessProjects (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       BusinessProject,
       fields,
@@ -648,7 +591,17 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createCallToAction (fields, params): PageCallToAction {
+  getCallToActions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      PageCallToAction,
+      fields,
+      params,
+      fetchFirstPage,
+      '/call_to_actions'
+    );
+  }
+
+  createCallToAction (fields: Array<string>, params: Object = {}): Promise<PageCallToAction> {
     return this.createEdge(
       '/call_to_actions',
       fields,
@@ -657,16 +610,26 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createCanvasElement (fields, params): AbstractObject {
-    return this.createEdge(
-      '/canvas_elements',
+  getCanvasElements (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      CanvasBodyElement,
       fields,
-      params
-
+      params,
+      fetchFirstPage,
+      '/canvas_elements'
     );
   }
 
-  getCanvases (fields, params, fetchFirstPage = true): Canvas {
+  createCanvasElement (fields: Array<string>, params: Object = {}): Promise<CanvasBodyElement> {
+    return this.createEdge(
+      '/canvas_elements',
+      fields,
+      params,
+      CanvasBodyElement
+    );
+  }
+
+  getCanvases (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Canvas,
       fields,
@@ -676,7 +639,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createCanvase (fields, params): Canvas {
+  createCanvase (fields: Array<string>, params: Object = {}): Promise<Canvas> {
     return this.createEdge(
       '/canvases',
       fields,
@@ -685,14 +648,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteClaimedUrls (params): AbstractObject {
+  deleteClaimedUrls (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/claimed_urls',
       params
     );
   }
 
-  getClaimedUrls (fields, params, fetchFirstPage = true): URL {
+  getClaimedUrls (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       URL,
       fields,
@@ -702,7 +665,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createClaimedUrl (fields, params): Page {
+  createClaimedUrl (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/claimed_urls',
       fields,
@@ -711,7 +674,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getConversations (fields, params, fetchFirstPage = true): UnifiedThread {
+  getConversations (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       UnifiedThread,
       fields,
@@ -721,32 +684,16 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createCopyrightManualClaim (fields, params): AbstractObject {
+  createCopyrightManualClaim (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/copyright_manual_claims',
       fields,
-      params
-
+      params,
+      
     );
   }
 
-  deleteCopyrightWhitelistedIgPartners (params): AbstractObject {
-    return super.deleteEdge(
-      '/copyright_whitelisted_ig_partners',
-      params
-    );
-  }
-
-  createCopyrightWhitelistedIgPartner (fields, params): AbstractObject {
-    return this.createEdge(
-      '/copyright_whitelisted_ig_partners',
-      fields,
-      params
-
-    );
-  }
-
-  getCopyrightWhitelistedPartners (fields, params, fetchFirstPage = true): Profile {
+  getCopyrightWhitelistedPartners (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Profile,
       fields,
@@ -756,7 +703,27 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createCustomLabel (fields, params): PageUserMessageThreadLabel {
+  getCrosspostWhitelistedPages (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Page,
+      fields,
+      params,
+      fetchFirstPage,
+      '/crosspost_whitelisted_pages'
+    );
+  }
+
+  getCustomLabels (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      PageUserMessageThreadLabel,
+      fields,
+      params,
+      fetchFirstPage,
+      '/custom_labels'
+    );
+  }
+
+  createCustomLabel (fields: Array<string>, params: Object = {}): Promise<PageUserMessageThreadLabel> {
     return this.createEdge(
       '/custom_labels',
       fields,
@@ -765,7 +732,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getEvents (fields, params, fetchFirstPage = true): Event {
+  getEvents (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Event,
       fields,
@@ -775,7 +742,17 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getFeed (fields, params, fetchFirstPage = true): PagePost {
+  getFeaturedVideosCollection (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AdVideo,
+      fields,
+      params,
+      fetchFirstPage,
+      '/featured_videos_collection'
+    );
+  }
+
+  getFeed (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -785,7 +762,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createFeed (fields, params): PagePost {
+  createFeed (fields: Array<string>, params: Object = {}): Promise<PagePost> {
     return this.createEdge(
       '/feed',
       fields,
@@ -794,7 +771,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getGlobalBrandChildren (fields, params, fetchFirstPage = true): Page {
+  getGlobalBrandChildren (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Page,
       fields,
@@ -804,7 +781,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getIndexedVideos (fields, params, fetchFirstPage = true): AdVideo {
+  getIndexedVideos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdVideo,
       fields,
@@ -814,7 +791,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getInsights (fields, params, fetchFirstPage = true): InsightsResult {
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InsightsResult,
       fields,
@@ -824,7 +801,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getInsightsExports (fields, params, fetchFirstPage = true): PageInsightsAsyncExportRun {
+  getInsightsExports (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PageInsightsAsyncExportRun,
       fields,
@@ -834,7 +811,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getInstagramAccounts (fields, params, fetchFirstPage = true): InstagramUser {
+  getInstagramAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstagramUser,
       fields,
@@ -844,7 +821,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getInstantArticles (fields, params, fetchFirstPage = true): InstantArticle {
+  getInstantArticles (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstantArticle,
       fields,
@@ -854,7 +831,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createInstantArticle (fields, params): InstantArticle {
+  createInstantArticle (fields: Array<string>, params: Object = {}): Promise<InstantArticle> {
     return this.createEdge(
       '/instant_articles',
       fields,
@@ -863,7 +840,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getInstantArticlesInsights (fields, params, fetchFirstPage = true): InstantArticleInsightsQueryResult {
+  getInstantArticlesInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstantArticleInsightsQueryResult,
       fields,
@@ -873,7 +850,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createInstantArticlesPublish (fields, params): Page {
+  createInstantArticlesPublish (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/instant_articles_publish',
       fields,
@@ -882,7 +859,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getLeadGenForms (fields, params, fetchFirstPage = true): LeadgenForm {
+  getLeadGenForms (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       LeadgenForm,
       fields,
@@ -892,7 +869,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createLeadGenForm (fields, params): LeadgenForm {
+  createLeadGenForm (fields: Array<string>, params: Object = {}): Promise<LeadgenForm> {
     return this.createEdge(
       '/leadgen_forms',
       fields,
@@ -901,7 +878,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getLikes (fields, params, fetchFirstPage = true): Page {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Page,
       fields,
@@ -911,7 +888,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getLiveEncoders (fields, params, fetchFirstPage = true): LiveEncoder {
+  getLiveEncoders (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       LiveEncoder,
       fields,
@@ -921,7 +898,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createLiveEncoder (fields, params): LiveEncoder {
+  createLiveEncoder (fields: Array<string>, params: Object = {}): Promise<LiveEncoder> {
     return this.createEdge(
       '/live_encoders',
       fields,
@@ -930,7 +907,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getLiveVideos (fields, params, fetchFirstPage = true): LiveVideo {
+  getLiveVideos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       LiveVideo,
       fields,
@@ -940,7 +917,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createLiveVideo (fields, params): LiveVideo {
+  createLiveVideo (fields: Array<string>, params: Object = {}): Promise<LiveVideo> {
     return this.createEdge(
       '/live_videos',
       fields,
@@ -949,14 +926,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteLocations (params): AbstractObject {
+  deleteLocations (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/locations',
       params
     );
   }
 
-  getLocations (fields, params, fetchFirstPage = true): Page {
+  getLocations (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Page,
       fields,
@@ -966,7 +943,26 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createMediaFingerprint (fields, params): MediaFingerprint {
+  createLocation (fields: Array<string>, params: Object = {}): Promise<Page> {
+    return this.createEdge(
+      '/locations',
+      fields,
+      params,
+      Page
+    );
+  }
+
+  getMediaFingerprints (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      MediaFingerprint,
+      fields,
+      params,
+      fetchFirstPage,
+      '/media_fingerprints'
+    );
+  }
+
+  createMediaFingerprint (fields: Array<string>, params: Object = {}): Promise<MediaFingerprint> {
     return this.createEdge(
       '/media_fingerprints',
       fields,
@@ -975,25 +971,16 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createMessageAttachment (fields, params): AbstractObject {
+  createMessageAttachment (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/message_attachments',
       fields,
-      params
-
-    );
-  }
-
-  createMessageCreative (fields, params): Page {
-    return this.createEdge(
-      '/message_creatives',
-      fields,
       params,
-      Page
+      
     );
   }
 
-  createMessage (fields, params): Page {
+  createMessage (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/messages',
       fields,
@@ -1002,7 +989,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getMessagingFeatureReview (fields, params, fetchFirstPage = true): MessagingFeatureReview {
+  getMessagingFeatureReview (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       MessagingFeatureReview,
       fields,
@@ -1012,7 +999,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getMessengerAdsPageWelcomeMessages (fields, params, fetchFirstPage = true): MessengerDestinationPageWelcomeMessage {
+  getMessengerAdsPageWelcomeMessages (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       MessengerDestinationPageWelcomeMessage,
       fields,
@@ -1022,7 +1009,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createMessengerCode (fields, params): Page {
+  createMessengerCode (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/messenger_codes',
       fields,
@@ -1031,14 +1018,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteMessengerProfile (params): AbstractObject {
+  deleteMessengerProfile (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/messenger_profile',
       params
     );
   }
 
-  getMessengerProfile (fields, params, fetchFirstPage = true): MessengerProfile {
+  getMessengerProfile (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       MessengerProfile,
       fields,
@@ -1048,7 +1035,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createMessengerProfile (fields, params): Page {
+  createMessengerProfile (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/messenger_profile',
       fields,
@@ -1057,7 +1044,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getNativeOffers (fields, params, fetchFirstPage = true): NativeOffer {
+  getNativeOffers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       NativeOffer,
       fields,
@@ -1067,7 +1054,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createNativeOffer (fields, params): NativeOffer {
+  createNativeOffer (fields: Array<string>, params: Object = {}): Promise<NativeOffer> {
     return this.createEdge(
       '/nativeoffers',
       fields,
@@ -1076,7 +1063,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createNlpConfig (fields, params): Page {
+  createNlpConfig (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/nlp_configs',
       fields,
@@ -1085,7 +1072,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPageAboutStory (fields, params): Page {
+  createPageAboutStory (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/page_about_story',
       fields,
@@ -1094,7 +1081,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getPageBackedInstagramAccounts (fields, params, fetchFirstPage = true): InstagramUser {
+  getPageBackedInstagramAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstagramUser,
       fields,
@@ -1104,7 +1091,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPageBackedInstagramAccount (fields, params): InstagramUser {
+  createPageBackedInstagramAccount (fields: Array<string>, params: Object = {}): Promise<InstagramUser> {
     return this.createEdge(
       '/page_backed_instagram_accounts',
       fields,
@@ -1113,7 +1100,16 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPassThreadControl (fields, params): Page {
+  createPageWhatsappNumberVerification (fields: Array<string>, params: Object = {}): Promise<Page> {
+    return this.createEdge(
+      '/page_whatsapp_number_verification',
+      fields,
+      params,
+      Page
+    );
+  }
+
+  createPassThreadControl (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/pass_thread_control',
       fields,
@@ -1122,7 +1118,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getPersonas (fields, params, fetchFirstPage = true): Persona {
+  getPersonas (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Persona,
       fields,
@@ -1132,7 +1128,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPersona (fields, params): Persona {
+  createPersona (fields: Array<string>, params: Object = {}): Promise<Persona> {
     return this.createEdge(
       '/personas',
       fields,
@@ -1141,7 +1137,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getPhotos (fields, params, fetchFirstPage = true): Photo {
+  getPhotos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Photo,
       fields,
@@ -1151,7 +1147,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPhoto (fields, params): Photo {
+  createPhoto (fields: Array<string>, params: Object = {}): Promise<Photo> {
     return this.createEdge(
       '/photos',
       fields,
@@ -1160,7 +1156,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getPicture (fields, params, fetchFirstPage = true): ProfilePictureSource {
+  getPicture (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ProfilePictureSource,
       fields,
@@ -1170,7 +1166,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPicture (fields, params): ProfilePictureSource {
+  createPicture (fields: Array<string>, params: Object = {}): Promise<ProfilePictureSource> {
     return this.createEdge(
       '/picture',
       fields,
@@ -1179,7 +1175,17 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getPosts (fields, params, fetchFirstPage = true): PagePost {
+  getPlaceTopics (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      PlaceTopic,
+      fields,
+      params,
+      fetchFirstPage,
+      '/place_topics'
+    );
+  }
+
+  getPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -1189,16 +1195,26 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createPromotion (fields, params): AbstractObject {
-    return this.createEdge(
-      '/promotions',
+  getProductCatalogs (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      ProductCatalog,
       fields,
-      params
-
+      params,
+      fetchFirstPage,
+      '/product_catalogs'
     );
   }
 
-  getPublishedPosts (fields, params, fetchFirstPage = true): PagePost {
+  createPromotion (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/promotions',
+      fields,
+      params,
+      
+    );
+  }
+
+  getPublishedPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -1208,7 +1224,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getRatings (fields, params, fetchFirstPage = true): Recommendation {
+  getRatings (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Recommendation,
       fields,
@@ -1218,7 +1234,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createRequestThreadControl (fields, params): Page {
+  createRequestThreadControl (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/request_thread_control',
       fields,
@@ -1227,7 +1243,17 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getRtbDynamicPosts (fields, params, fetchFirstPage = true): RTBDynamicPost {
+  getRoles (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      User,
+      fields,
+      params,
+      fetchFirstPage,
+      '/roles'
+    );
+  }
+
+  getRtbDynamicPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       RTBDynamicPost,
       fields,
@@ -1237,7 +1263,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getScheduledPosts (fields, params, fetchFirstPage = true): PagePost {
+  getScheduledPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -1247,7 +1273,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getSecondaryReceivers (fields, params, fetchFirstPage = true): Application {
+  getSecondaryReceivers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Application,
       fields,
@@ -1257,7 +1283,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getSettings (fields, params, fetchFirstPage = true): PageSettings {
+  getSettings (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PageSettings,
       fields,
@@ -1267,7 +1293,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createSetting (fields, params): Page {
+  createSetting (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/settings',
       fields,
@@ -1276,14 +1302,24 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteSubscribedApps (params): AbstractObject {
+  getShowPlaylists (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      VideoList,
+      fields,
+      params,
+      fetchFirstPage,
+      '/show_playlists'
+    );
+  }
+
+  deleteSubscribedApps (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/subscribed_apps',
       params
     );
   }
 
-  getSubscribedApps (fields, params, fetchFirstPage = true): Application {
+  getSubscribedApps (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Application,
       fields,
@@ -1293,7 +1329,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createSubscribedApp (fields, params): Page {
+  createSubscribedApp (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/subscribed_apps',
       fields,
@@ -1302,14 +1338,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteTabs (params): AbstractObject {
+  deleteTabs (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/tabs',
       params
     );
   }
 
-  getTabs (fields, params, fetchFirstPage = true): Tab {
+  getTabs (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Tab,
       fields,
@@ -1319,7 +1355,16 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getTagged (fields, params, fetchFirstPage = true): PagePost {
+  createTab (fields: Array<string>, params: Object = {}): Promise<Page> {
+    return this.createEdge(
+      '/tabs',
+      fields,
+      params,
+      Page
+    );
+  }
+
+  getTagged (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -1329,7 +1374,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createTakeThreadControl (fields, params): Page {
+  createTakeThreadControl (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/take_thread_control',
       fields,
@@ -1338,7 +1383,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getThreadOwner (fields, params, fetchFirstPage = true): PageThreadOwner {
+  getThreadOwner (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PageThreadOwner,
       fields,
@@ -1348,24 +1393,14 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  deleteThreadSettings (params): AbstractObject {
+  deleteThreadSettings (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/thread_settings',
       params
     );
   }
 
-  getThreadSettings (fields, params, fetchFirstPage = true): AbstractObject {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/thread_settings'
-    );
-  }
-
-  createThreadSetting (fields, params): Page {
+  createThreadSetting (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/thread_settings',
       fields,
@@ -1374,7 +1409,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getThreads (fields, params, fetchFirstPage = true): UnifiedThread {
+  getThreads (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       UnifiedThread,
       fields,
@@ -1384,7 +1419,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getTours (fields, params, fetchFirstPage = true): EventTour {
+  getTours (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       EventTour,
       fields,
@@ -1394,7 +1429,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createUnlinkAccount (fields, params): Page {
+  createUnlinkAccount (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/unlink_accounts',
       fields,
@@ -1403,7 +1438,17 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getVideoCopyrightRules (fields, params, fetchFirstPage = true): VideoCopyrightRule {
+  getUpcomingChanges (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      PageUpcomingChange,
+      fields,
+      params,
+      fetchFirstPage,
+      '/upcoming_changes'
+    );
+  }
+
+  getVideoCopyrightRules (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       VideoCopyrightRule,
       fields,
@@ -1413,7 +1458,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createVideoCopyright (fields, params): VideoCopyright {
+  createVideoCopyright (fields: Array<string>, params: Object = {}): Promise<VideoCopyright> {
     return this.createEdge(
       '/video_copyrights',
       fields,
@@ -1422,7 +1467,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getVideoLists (fields, params, fetchFirstPage = true): VideoList {
+  getVideoLists (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       VideoList,
       fields,
@@ -1432,7 +1477,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getVideos (fields, params, fetchFirstPage = true): AdVideo {
+  getVideos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdVideo,
       fields,
@@ -1442,7 +1487,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createVideo (fields, params): AdVideo {
+  createVideo (fields: Array<string>, params: Object = {}): Promise<AdVideo> {
     return this.createEdge(
       '/videos',
       fields,
@@ -1451,7 +1496,7 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  getVisitorPosts (fields, params, fetchFirstPage = true): PagePost {
+  getVisitorPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       PagePost,
       fields,
@@ -1461,14 +1506,18 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): Page {
+  
+  get (fields: Array<string>, params: Object = {}): Page {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): Page {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): Page {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

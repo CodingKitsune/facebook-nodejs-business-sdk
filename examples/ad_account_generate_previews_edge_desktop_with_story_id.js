@@ -9,12 +9,13 @@
 
  'use strict';
 const bizSdk = require('facebook-nodejs-business-sdk');
-const AdCreative = bizSdk.AdCreative;
+const AdAccount = bizSdk.AdAccount;
+const AdPreview = bizSdk.AdPreview;
 
 const access_token = '<ACCESS_TOKEN>';
 const app_secret = '<APP_SECRET>';
 const app_id = '<APP_ID>';
-const id = '<AD_CREATIVE_ID>';
+const id = '<AD_ACCOUNT_ID>';
 const api = bizSdk.FacebookAdsApi.init(access_token);
 const showDebugingInfo = true; // Setting this to true shows more debugging info.
 if (showDebugingInfo) {
@@ -30,12 +31,13 @@ const logApiCallResult = (apiCallName, data) => {
 
 let fields, params;
 fields = [
-  'link_destination_display_url',
 ];
 params = {
+  'creative' : {'object_story_id':'<pageID>_<postID>'},
+  'ad_format' : 'DESKTOP_FEED_STANDARD',
 };
-const sample_code = (new AdCreative(id)).get(
+const generatepreviewss = (new AdAccount(id)).getGeneratePreviews(
   fields,
   params
 );
-logApiCallResult('sample_code api call complete.', sample_code);
+logApiCallResult('generatepreviewss api call complete.', generatepreviewss);

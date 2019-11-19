@@ -99,9 +99,8 @@ export default class ReachFrequencyPrediction extends AbstractCrudObject {
       timezone_name: 'timezone_name',
       topline_id: 'topline_id',
       tv_viewer_cluster_map: 'tv_viewer_cluster_map',
-      video_view_benchmark_map: 'video_view_benchmark_map',
       video_view_length_constraint: 'video_view_length_constraint',
-      viewtag: 'viewtag'
+      viewtag: 'viewtag',
     });
   }
 
@@ -109,7 +108,7 @@ export default class ReachFrequencyPrediction extends AbstractCrudObject {
     return Object.freeze({
       cancel: 'cancel',
       quote: 'quote',
-      reserve: 'reserve'
+      reserve: 'reserve',
     });
   }
   static get BuyingType (): Object {
@@ -120,7 +119,7 @@ export default class ReachFrequencyPrediction extends AbstractCrudObject {
       mixed: 'MIXED',
       reachblock: 'REACHBLOCK',
       research_poll: 'RESEARCH_POLL',
-      reserved: 'RESERVED'
+      reserved: 'RESERVED',
     });
   }
   static get InstreamPackages (): Object {
@@ -137,11 +136,14 @@ export default class ReachFrequencyPrediction extends AbstractCrudObject {
       regular_sports: 'REGULAR_SPORTS',
       regular_style: 'REGULAR_STYLE',
       regular_tv_movies: 'REGULAR_TV_MOVIES',
-      sports: 'SPORTS'
+      spanish: 'SPANISH',
+      sports: 'SPORTS',
     });
   }
 
-  get (fields, params): ReachFrequencyPrediction {
+  
+  get (fields: Array<string>, params: Object = {}): ReachFrequencyPrediction {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

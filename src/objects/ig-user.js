@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import InstagramInsightsResult from './instagram-insights-result';
 import IGMedia from './ig-media';
 
@@ -31,11 +32,12 @@ export default class IGUser extends AbstractCrudObject {
       name: 'name',
       profile_picture_url: 'profile_picture_url',
       username: 'username',
-      website: 'website'
+      website: 'website',
     });
   }
 
-  getInsights (fields, params, fetchFirstPage = true): InstagramInsightsResult {
+
+  getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstagramInsightsResult,
       fields,
@@ -45,7 +47,7 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  getMedia (fields, params, fetchFirstPage = true): IGMedia {
+  getMedia (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       IGMedia,
       fields,
@@ -55,7 +57,7 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  createMedia (fields, params): IGMedia {
+  createMedia (fields: Array<string>, params: Object = {}): Promise<IGMedia> {
     return this.createEdge(
       '/media',
       fields,
@@ -64,7 +66,7 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  createMediaPublish (fields, params): IGMedia {
+  createMediaPublish (fields: Array<string>, params: Object = {}): Promise<IGMedia> {
     return this.createEdge(
       '/media_publish',
       fields,
@@ -73,16 +75,16 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  createMention (fields, params): AbstractObject {
+  createMention (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/mentions',
       fields,
-      params
-
+      params,
+      
     );
   }
 
-  getRecentlySearchedHashtags (fields, params, fetchFirstPage = true): AbstractObject {
+  getRecentlySearchedHashtags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
       fields,
@@ -92,7 +94,7 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  getStories (fields, params, fetchFirstPage = true): IGMedia {
+  getStories (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       IGMedia,
       fields,
@@ -102,7 +104,7 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  getTags (fields, params, fetchFirstPage = true): IGMedia {
+  getTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       IGMedia,
       fields,
@@ -112,7 +114,9 @@ export default class IGUser extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): IGUser {
+  
+  get (fields: Array<string>, params: Object = {}): IGUser {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

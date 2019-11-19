@@ -7,7 +7,10 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import Cursor from './../cursor';
+import Comment from './comment';
 import InstagramComment from './instagram-comment';
+import Profile from './profile';
 
 /**
  * RTBDynamicPost
@@ -27,11 +30,22 @@ export default class RTBDynamicPost extends AbstractCrudObject {
       owner_id: 'owner_id',
       place_id: 'place_id',
       product_id: 'product_id',
-      title: 'title'
+      title: 'title',
     });
   }
 
-  getInstagramComments (fields, params, fetchFirstPage = true): InstagramComment {
+
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Comment,
+      fields,
+      params,
+      fetchFirstPage,
+      '/comments'
+    );
+  }
+
+  getInstagramComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InstagramComment,
       fields,
@@ -41,7 +55,19 @@ export default class RTBDynamicPost extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): RTBDynamicPost {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/likes'
+    );
+  }
+
+  
+  get (fields: Array<string>, params: Object = {}): RTBDynamicPost {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

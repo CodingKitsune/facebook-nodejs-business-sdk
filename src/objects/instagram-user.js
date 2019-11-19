@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Business from './business';
 import AdAccount from './ad-account';
 
@@ -27,18 +28,19 @@ export default class InstagramUser extends AbstractCrudObject {
       is_published: 'is_published',
       media_count: 'media_count',
       profile_pic: 'profile_pic',
-      username: 'username'
+      username: 'username',
     });
   }
 
-  deleteAgencies (params): AbstractObject {
+
+  deleteAgencies (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/agencies',
       params
     );
   }
 
-  getAgencies (fields, params, fetchFirstPage = true): Business {
+  getAgencies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Business,
       fields,
@@ -48,14 +50,7 @@ export default class InstagramUser extends AbstractCrudObject {
     );
   }
 
-  deleteAuthorizedAdAccounts (params): AbstractObject {
-    return super.deleteEdge(
-      '/authorized_adaccounts',
-      params
-    );
-  }
-
-  getAuthorizedAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+  getAuthorizedAdAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccount,
       fields,
@@ -65,7 +60,7 @@ export default class InstagramUser extends AbstractCrudObject {
     );
   }
 
-  createAuthorizedAdAccount (fields, params): InstagramUser {
+  createAuthorizedAdAccount (fields: Array<string>, params: Object = {}): Promise<InstagramUser> {
     return this.createEdge(
       '/authorized_adaccounts',
       fields,
@@ -74,7 +69,9 @@ export default class InstagramUser extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): InstagramUser {
+  
+  get (fields: Array<string>, params: Object = {}): InstagramUser {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

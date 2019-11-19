@@ -9,14 +9,15 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AdCreativeDegreesOfFreedomSpec
+ * PlatformSessionKey
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AdCreativeDegreesOfFreedomSpec extends AbstractCrudObject {
+export default class PlatformSessionKey extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      degrees_of_freedom_type: 'degrees_of_freedom_type'
+      id: 'id',
     });
   }
+
 }

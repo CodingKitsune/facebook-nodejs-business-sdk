@@ -8,6 +8,7 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AdAccount from './ad-account';
 import Ad from './ad';
 import CustomAudiencePrefillState from './custom-audience-prefill-state';
@@ -56,7 +57,7 @@ export default class CustomAudience extends AbstractCrudObject {
       subtype: 'subtype',
       time_content_updated: 'time_content_updated',
       time_created: 'time_created',
-      time_updated: 'time_updated'
+      time_updated: 'time_updated',
     });
   }
 
@@ -69,7 +70,7 @@ export default class CustomAudience extends AbstractCrudObject {
       product: 'PRODUCT',
       travel: 'TRAVEL',
       vehicle: 'VEHICLE',
-      vehicle_offer: 'VEHICLE_OFFER'
+      vehicle_offer: 'VEHICLE_OFFER',
     });
   }
   static get ContentType (): Object {
@@ -80,16 +81,17 @@ export default class CustomAudience extends AbstractCrudObject {
       home_listing: 'HOME_LISTING',
       hotel: 'HOTEL',
       media_title: 'MEDIA_TITLE',
+      offline_product: 'OFFLINE_PRODUCT',
       product: 'PRODUCT',
       vehicle: 'VEHICLE',
-      vehicle_offer: 'VEHICLE_OFFER'
+      vehicle_offer: 'VEHICLE_OFFER',
     });
   }
   static get CustomerFileSource (): Object {
     return Object.freeze({
       both_user_and_partner_provided: 'BOTH_USER_AND_PARTNER_PROVIDED',
       partner_provided_only: 'PARTNER_PROVIDED_ONLY',
-      user_provided_only: 'USER_PROVIDED_ONLY'
+      user_provided_only: 'USER_PROVIDED_ONLY',
     });
   }
   static get Subtype (): Object {
@@ -108,18 +110,18 @@ export default class CustomAudience extends AbstractCrudObject {
       regulated_categories_audience: 'REGULATED_CATEGORIES_AUDIENCE',
       study_rule_audience: 'STUDY_RULE_AUDIENCE',
       video: 'VIDEO',
-      website: 'WEBSITE'
+      website: 'WEBSITE',
     });
   }
 
-  deleteAdAccounts (params): AbstractObject {
+  deleteAdAccounts (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/adaccounts',
       params
     );
   }
 
-  getAdAccounts (fields, params, fetchFirstPage = true): AdAccount {
+  getAdAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccount,
       fields,
@@ -129,7 +131,7 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  createAdAccount (fields, params): CustomAudience {
+  createAdAccount (fields: Array<string>, params: Object = {}): Promise<CustomAudience> {
     return this.createEdge(
       '/adaccounts',
       fields,
@@ -138,7 +140,7 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  getAds (fields, params, fetchFirstPage = true): Ad {
+  getAds (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Ad,
       fields,
@@ -148,25 +150,7 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  createCapability (fields, params): AbstractObject {
-    return this.createEdge(
-      '/capabilities',
-      fields,
-      params
-
-    );
-  }
-
-  createDatum (fields, params): AbstractObject {
-    return this.createEdge(
-      '/data',
-      fields,
-      params
-
-    );
-  }
-
-  getPrefills (fields, params, fetchFirstPage = true): CustomAudiencePrefillState {
+  getPrefills (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       CustomAudiencePrefillState,
       fields,
@@ -176,7 +160,7 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  getSessions (fields, params, fetchFirstPage = true): CustomAudienceSession {
+  getSessions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       CustomAudienceSession,
       fields,
@@ -186,7 +170,7 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  getSharedAccountInfo (fields, params, fetchFirstPage = true): CustomAudiencesharedAccountInfo {
+  getSharedAccountInfo (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       CustomAudiencesharedAccountInfo,
       fields,
@@ -196,14 +180,14 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  deleteUpload (params): AbstractObject {
+  deleteUpload (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/upload',
       params
     );
   }
 
-  createUpload (fields, params): CustomAudience {
+  createUpload (fields: Array<string>, params: Object = {}): Promise<CustomAudience> {
     return this.createEdge(
       '/upload',
       fields,
@@ -212,14 +196,14 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  deleteUsers (params): AbstractObject {
+  deleteUsers (params: Object = {}): Promise<*> {
     return super.deleteEdge(
       '/users',
       params
     );
   }
 
-  createUser (fields, params): CustomAudience {
+  createUser (fields: Array<string>, params: Object = {}): Promise<CustomAudience> {
     return this.createEdge(
       '/users',
       fields,
@@ -228,20 +212,26 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): CustomAudience {
+  
+  get (fields: Array<string>, params: Object = {}): CustomAudience {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): CustomAudience {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): CustomAudience {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

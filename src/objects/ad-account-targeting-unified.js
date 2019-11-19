@@ -37,7 +37,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       source: 'source',
       spend: 'spend',
       type: 'type',
-      valid: 'valid'
+      valid: 'valid',
     });
   }
 
@@ -68,7 +68,15 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       relationship_statuses: 'relationship_statuses',
       user_adclusters: 'user_adclusters',
       work_employers: 'work_employers',
-      work_positions: 'work_positions'
+      work_positions: 'work_positions',
+    });
+  }
+  static get RegulatedCategories (): Object {
+    return Object.freeze({
+      credit: 'CREDIT',
+      employment: 'EMPLOYMENT',
+      housing: 'HOUSING',
+      none: 'NONE',
     });
   }
   static get WhitelistedTypes (): Object {
@@ -109,6 +117,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       ethnic_affinity: 'ethnic_affinity',
       exclude_previous_days: 'exclude_previous_days',
       exclude_reached_since: 'exclude_reached_since',
+      excluded_brand_safety_content_types: 'excluded_brand_safety_content_types',
       excluded_connections: 'excluded_connections',
       excluded_custom_audiences: 'excluded_custom_audiences',
       excluded_dynamic_audience_ids: 'excluded_dynamic_audience_ids',
@@ -137,6 +146,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       home_type: 'home_type',
       home_value: 'home_value',
       household_composition: 'household_composition',
+      id: 'id',
       income: 'income',
       industries: 'industries',
       instagram_positions: 'instagram_positions',
@@ -144,6 +154,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       interest_defaults_source: 'interest_defaults_source',
       interested_in: 'interested_in',
       interests: 'interests',
+      is_instagram_destination_ad: 'is_instagram_destination_ad',
       is_whatsapp_destination_ad: 'is_whatsapp_destination_ad',
       keywords: 'keywords',
       life_events: 'life_events',
@@ -164,7 +175,6 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       product_audience_specs: 'product_audience_specs',
       prospecting_audience: 'prospecting_audience',
       publisher_platforms: 'publisher_platforms',
-      publisher_visibility_categories: 'publisher_visibility_categories',
       radius: 'radius',
       regions: 'regions',
       relationship_statuses: 'relationship_statuses',
@@ -184,7 +194,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       wireless_carrier: 'wireless_carrier',
       work_employers: 'work_employers',
       work_positions: 'work_positions',
-      zips: 'zips'
+      zips: 'zips',
     });
   }
   static get Mode (): Object {
@@ -192,7 +202,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       best_performing: 'best_performing',
       recently_used: 'recently_used',
       related: 'related',
-      suggestions: 'suggestions'
+      suggestions: 'suggestions',
     });
   }
   static get Objective (): Object {
@@ -210,7 +220,7 @@ export default class AdAccountTargetingUnified extends AbstractCrudObject {
       post_engagement: 'POST_ENGAGEMENT',
       product_catalog_sales: 'PRODUCT_CATALOG_SALES',
       reach: 'REACH',
-      video_views: 'VIDEO_VIEWS'
+      video_views: 'VIDEO_VIEWS',
     });
   }
 }

@@ -20,10 +20,12 @@ export default class MessengerProfile extends AbstractCrudObject {
       get_started: 'get_started',
       greeting: 'greeting',
       home_url: 'home_url',
+      ice_breakers: 'ice_breakers',
       payment_settings: 'payment_settings',
       persistent_menu: 'persistent_menu',
       target_audience: 'target_audience',
-      whitelisted_domains: 'whitelisted_domains'
+      whitelisted_domains: 'whitelisted_domains',
     });
   }
+
 }

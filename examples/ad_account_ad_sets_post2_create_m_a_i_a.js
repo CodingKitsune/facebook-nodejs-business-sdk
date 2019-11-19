@@ -9,13 +9,13 @@
 
  'use strict';
 const bizSdk = require('facebook-nodejs-business-sdk');
-const Page = bizSdk.Page;
-const PageAdminNote = bizSdk.PageAdminNote;
+const AdAccount = bizSdk.AdAccount;
+const AdSet = bizSdk.AdSet;
 
 const access_token = '<ACCESS_TOKEN>';
 const app_secret = '<APP_SECRET>';
 const app_id = '<APP_ID>';
-const id = '<ID>';
+const id = '<AD_ACCOUNT_ID>';
 const api = bizSdk.FacebookAdsApi.init(access_token);
 const showDebugingInfo = true; // Setting this to true shows more debugging info.
 if (showDebugingInfo) {
@@ -33,11 +33,18 @@ let fields, params;
 fields = [
 ];
 params = {
-  'body' : 'text',
-  'user_id' : '<customerID>',
+  'name' : 'Mobile App Installs Ad Set',
+  'daily_budget' : '1000',
+  'bid_amount' : '2',
+  'billing_event' : 'IMPRESSIONS',
+  'optimization_goal' : 'APP_INSTALLS',
+  'campaign_id' : '<adCampaignAppInstallsID>',
+  'promoted_object' : {'application_id':'<appID>','object_store_url':'<appLink>'},
+  'targeting' : {'device_platforms':['mobile'],'facebook_positions':['feed'],'geo_locations':{'countries':['US']},'publisher_platforms':['facebook','audience_network'],'user_os':['IOS']},
+  'status' : 'PAUSED',
 };
-const admin_notes = (new Page(id)).createAdminNote(
+const adsets = (new AdAccount(id)).createAdSet(
   fields,
   params
 );
-logApiCallResult('admin_notes api call complete.', admin_notes);
+logApiCallResult('adsets api call complete.', adsets);

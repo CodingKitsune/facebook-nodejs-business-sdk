@@ -9,17 +9,15 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * BusinessAdvertisableApplicationsResult
+ * CanvasBodyElement
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class BusinessAdvertisableApplicationsResult extends AbstractCrudObject {
+export default class CanvasBodyElement extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      has_insight_permission: 'has_insight_permission',
-      id: 'id',
-      name: 'name',
-      photo_url: 'photo_url'
+      element: 'element',
     });
   }
+
 }

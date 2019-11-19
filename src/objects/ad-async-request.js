@@ -25,7 +25,7 @@ export default class AdAsyncRequest extends AbstractCrudObject {
       scope_object_id: 'scope_object_id',
       status: 'status',
       type: 'type',
-      updated_time: 'updated_time'
+      updated_time: 'updated_time',
     });
   }
 
@@ -39,17 +39,23 @@ export default class AdAsyncRequest extends AbstractCrudObject {
       initial: 'INITIAL',
       in_progress: 'IN_PROGRESS',
       pending_dependency: 'PENDING_DEPENDENCY',
-      success: 'SUCCESS'
+      success: 'SUCCESS',
+      user_canceled: 'USER_CANCELED',
+      user_canceled_dependency: 'USER_CANCELED_DEPENDENCY',
     });
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): AdAsyncRequest {
+  
+  get (fields: Array<string>, params: Object = {}): AdAsyncRequest {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

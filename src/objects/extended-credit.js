@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import Cursor from './../cursor';
 import ExtendedCreditInvoiceGroup from './extended-credit-invoice-group';
 import ExtendedCreditAllocationConfig from './extended-credit-allocation-config';
 
@@ -33,12 +34,12 @@ export default class ExtendedCredit extends AbstractCrudObject {
       owner_business: 'owner_business',
       owner_business_name: 'owner_business_name',
       partition_from: 'partition_from',
-      receiving_credit_allocation_config: 'receiving_credit_allocation_config',
-      send_bill_to_biz_name: 'send_bill_to_biz_name'
+      send_bill_to_biz_name: 'send_bill_to_biz_name',
     });
   }
 
-  getExtendedCreditInvoiceGroups (fields, params, fetchFirstPage = true): ExtendedCreditInvoiceGroup {
+
+  getExtendedCreditInvoiceGroups (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ExtendedCreditInvoiceGroup,
       fields,
@@ -48,7 +49,7 @@ export default class ExtendedCredit extends AbstractCrudObject {
     );
   }
 
-  createExtendedCreditInvoiceGroup (fields, params): ExtendedCreditInvoiceGroup {
+  createExtendedCreditInvoiceGroup (fields: Array<string>, params: Object = {}): Promise<ExtendedCreditInvoiceGroup> {
     return this.createEdge(
       '/extended_credit_invoice_groups',
       fields,
@@ -57,7 +58,7 @@ export default class ExtendedCredit extends AbstractCrudObject {
     );
   }
 
-  getOwningCreditAllocationConfigs (fields, params, fetchFirstPage = true): ExtendedCreditAllocationConfig {
+  getOwningCreditAllocationConfigs (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ExtendedCreditAllocationConfig,
       fields,
@@ -67,7 +68,7 @@ export default class ExtendedCredit extends AbstractCrudObject {
     );
   }
 
-  createOwningCreditAllocationConfig (fields, params): ExtendedCreditAllocationConfig {
+  createOwningCreditAllocationConfig (fields: Array<string>, params: Object = {}): Promise<ExtendedCreditAllocationConfig> {
     return this.createEdge(
       '/owning_credit_allocation_configs',
       fields,
@@ -76,7 +77,9 @@ export default class ExtendedCredit extends AbstractCrudObject {
     );
   }
 
-  get (fields, params): ExtendedCredit {
+  
+  get (fields: Array<string>, params: Object = {}): ExtendedCredit {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

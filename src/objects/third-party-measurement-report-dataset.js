@@ -20,26 +20,24 @@ export default class ThirdPartyMeasurementReportDataset extends AbstractCrudObje
       id: 'id',
       partner: 'partner',
       product: 'product',
-      schema: 'schema'
+      schema: 'schema',
     });
   }
 
-  static get Category (): Object {
-    return Object.freeze({
-      mta: 'MTA'
-    });
-  }
-  static get Product (): Object {
-    return Object.freeze({
-      custom: 'CUSTOM',
-      mta: 'MTA',
-      viewability: 'VIEWABILITY'
-    });
-  }
 
-  get (fields, params): ThirdPartyMeasurementReportDataset {
+  
+  get (fields: Array<string>, params: Object = {}): ThirdPartyMeasurementReportDataset {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
+      params
+    );
+  }
+
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): ThirdPartyMeasurementReportDataset {
+    // $FlowFixMe : Support Generic Types
+    return super.update(
       params
     );
   }

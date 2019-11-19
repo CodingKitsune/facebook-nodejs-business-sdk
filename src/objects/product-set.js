@@ -8,12 +8,14 @@
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import AutomotiveModel from './automotive-model';
 import Destination from './destination';
 import Flight from './flight';
 import HomeListing from './home-listing';
 import Hotel from './hotel';
 import ProductItem from './product-item';
+import VehicleOffer from './vehicle-offer';
 import Vehicle from './vehicle';
 
 /**
@@ -29,11 +31,12 @@ export default class ProductSet extends AbstractCrudObject {
       id: 'id',
       name: 'name',
       product_catalog: 'product_catalog',
-      product_count: 'product_count'
+      product_count: 'product_count',
     });
   }
 
-  getAutomotiveModels (fields, params, fetchFirstPage = true): AutomotiveModel {
+
+  getAutomotiveModels (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AutomotiveModel,
       fields,
@@ -43,7 +46,7 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  getDestinations (fields, params, fetchFirstPage = true): Destination {
+  getDestinations (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Destination,
       fields,
@@ -53,7 +56,7 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  getFlights (fields, params, fetchFirstPage = true): Flight {
+  getFlights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Flight,
       fields,
@@ -63,7 +66,7 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  getHomeListings (fields, params, fetchFirstPage = true): HomeListing {
+  getHomeListings (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       HomeListing,
       fields,
@@ -73,7 +76,7 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  getHotels (fields, params, fetchFirstPage = true): Hotel {
+  getHotels (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Hotel,
       fields,
@@ -83,7 +86,7 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  getProducts (fields, params, fetchFirstPage = true): ProductItem {
+  getProducts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       ProductItem,
       fields,
@@ -93,7 +96,17 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  getVehicles (fields, params, fetchFirstPage = true): Vehicle {
+  getVehicleOffers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      VehicleOffer,
+      fields,
+      params,
+      fetchFirstPage,
+      '/vehicle_offers'
+    );
+  }
+
+  getVehicles (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Vehicle,
       fields,
@@ -103,20 +116,26 @@ export default class ProductSet extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
+  // $FlowFixMe : Support Generic Types
+  delete (fields: Array<string>, params: Object = {}): AbstractObject {
+    // $FlowFixMe : Support Generic Types
     return super.delete(
       params
     );
   }
 
-  get (fields, params): ProductSet {
+  
+  get (fields: Array<string>, params: Object = {}): ProductSet {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params
     );
   }
 
-  update (fields, params): ProductSet {
+  // $FlowFixMe : Support Generic Types
+  update (fields: Array<string>, params: Object = {}): ProductSet {
+    // $FlowFixMe : Support Generic Types
     return super.update(
       params
     );

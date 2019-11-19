@@ -7,8 +7,9 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
+import Cursor from './../cursor';
 import Comment from './comment';
+import Profile from './profile';
 import Post from './post';
 
 /**
@@ -30,11 +31,22 @@ export default class Link extends AbstractCrudObject {
       multi_share_optimized: 'multi_share_optimized',
       name: 'name',
       privacy: 'privacy',
-      via: 'via'
+      via: 'via',
     });
   }
 
-  createComment (fields, params): Comment {
+
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Comment,
+      fields,
+      params,
+      fetchFirstPage,
+      '/comments'
+    );
+  }
+
+  createComment (fields: Array<string>, params: Object = {}): Promise<Comment> {
     return this.createEdge(
       '/comments',
       fields,
@@ -43,7 +55,27 @@ export default class Link extends AbstractCrudObject {
     );
   }
 
-  getSharedPosts (fields, params, fetchFirstPage = true): Post {
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/likes'
+    );
+  }
+
+  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/reactions'
+    );
+  }
+
+  getSharedPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Post,
       fields,
@@ -53,13 +85,9 @@ export default class Link extends AbstractCrudObject {
     );
   }
 
-  delete (fields, params): AbstractObject {
-    return super.delete(
-      params
-    );
-  }
-
-  get (fields, params): Link {
+  
+  get (fields: Array<string>, params: Object = {}): Link {
+    // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
       params

@@ -9,16 +9,15 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * ReachEstimate
+ * AdCreativeInsights
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class ReachEstimate extends AbstractCrudObject {
+export default class AdCreativeInsights extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      estimate_ready: 'estimate_ready',
-      unsupported: 'unsupported',
-      users: 'users'
+      aesthetics: 'aesthetics',
     });
   }
+
 }

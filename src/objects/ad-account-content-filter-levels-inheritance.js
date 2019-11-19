@@ -9,13 +9,18 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * NullNode
+ * AdAccountContentFilterLevelsInheritance
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class NullNode extends AbstractCrudObject {
+export default class AdAccountContentFilterLevelsInheritance extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
+      an_business_ids: 'an_business_ids',
+      an_level: 'an_level',
+      facebook_business_ids: 'facebook_business_ids',
+      facebook_level: 'facebook_level',
     });
   }
+
 }

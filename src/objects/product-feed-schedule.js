@@ -24,7 +24,8 @@ export default class ProductFeedSchedule extends AbstractCrudObject {
       minute: 'minute',
       timezone: 'timezone',
       url: 'url',
-      username: 'username'
+      username: 'username',
+      id: 'id',
     });
   }
 
@@ -36,7 +37,7 @@ export default class ProductFeedSchedule extends AbstractCrudObject {
       sunday: 'SUNDAY',
       thursday: 'THURSDAY',
       tuesday: 'TUESDAY',
-      wednesday: 'WEDNESDAY'
+      wednesday: 'WEDNESDAY',
     });
   }
   static get Interval (): Object {
@@ -44,7 +45,16 @@ export default class ProductFeedSchedule extends AbstractCrudObject {
       daily: 'DAILY',
       hourly: 'HOURLY',
       monthly: 'MONTHLY',
-      weekly: 'WEEKLY'
+      weekly: 'WEEKLY',
     });
+  }
+
+  
+  get (fields: Array<string>, params: Object = {}): ProductFeedSchedule {
+    // $FlowFixMe : Support Generic Types
+    return this.read(
+      fields,
+      params
+    );
   }
 }
