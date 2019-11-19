@@ -9,13 +9,13 @@
 
  'use strict';
 const bizSdk = require('facebook-nodejs-business-sdk');
-const Page = bizSdk.Page;
-const PageAdminNote = bizSdk.PageAdminNote;
+const AdCreative = bizSdk.AdCreative;
+const AdCreativeInsights = bizSdk.AdCreativeInsights;
 
 const access_token = '<ACCESS_TOKEN>';
 const app_secret = '<APP_SECRET>';
 const app_id = '<APP_ID>';
-const id = '<ID>';
+const id = '<CREATIVE_ID>';
 const api = bizSdk.FacebookAdsApi.init(access_token);
 const showDebugingInfo = true; // Setting this to true shows more debugging info.
 if (showDebugingInfo) {
@@ -31,13 +31,12 @@ const logApiCallResult = (apiCallName, data) => {
 
 let fields, params;
 fields = [
+  'creative_compass_scores',
 ];
 params = {
-  'body' : 'text',
-  'user_id' : '<customerID>',
 };
-const admin_notes = (new Page(id)).createAdminNote(
+const creative_insightss = (new AdCreative(id)).getCreativeInsights(
   fields,
   params
 );
-logApiCallResult('admin_notes api call complete.', admin_notes);
+logApiCallResult('creative_insightss api call complete.', creative_insightss);

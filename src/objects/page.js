@@ -44,7 +44,6 @@ import ProductCatalog from './product-catalog';
 import Recommendation from './recommendation';
 import User from './user';
 import RTBDynamicPost from './rtb-dynamic-post';
-import ScreenName from './screen-name';
 import Application from './application';
 import PageSettings from './page-settings';
 import VideoList from './video-list';
@@ -134,8 +133,6 @@ export default class Page extends AbstractCrudObject {
       is_webhooks_subscribed: 'is_webhooks_subscribed',
       keywords: 'keywords',
       leadgen_form_preview_details: 'leadgen_form_preview_details',
-      leadgen_has_crm_integration: 'leadgen_has_crm_integration',
-      leadgen_has_fat_ping_crm_integration: 'leadgen_has_fat_ping_crm_integration',
       leadgen_tos_acceptance_time: 'leadgen_tos_acceptance_time',
       leadgen_tos_accepted: 'leadgen_tos_accepted',
       leadgen_tos_accepting_user: 'leadgen_tos_accepting_user',
@@ -397,6 +394,7 @@ export default class Page extends AbstractCrudObject {
       general_manager: 'general_manager',
       hometown: 'hometown',
       hours: 'hours',
+      invoice_access_invoice_change: 'invoice_access_invoice_change',
       leadgen: 'leadgen',
       leadgen_fat: 'leadgen_fat',
       live_videos: 'live_videos',
@@ -406,6 +404,8 @@ export default class Page extends AbstractCrudObject {
       merchant_review: 'merchant_review',
       message_deliveries: 'message_deliveries',
       message_echoes: 'message_echoes',
+      message_mention: 'message_mention',
+      message_reactions: 'message_reactions',
       message_reads: 'message_reads',
       messages: 'messages',
       messaging_account_linking: 'messaging_account_linking',
@@ -687,22 +687,6 @@ export default class Page extends AbstractCrudObject {
   createCopyrightManualClaim (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
     return this.createEdge(
       '/copyright_manual_claims',
-      fields,
-      params,
-      
-    );
-  }
-
-  deleteCopyrightWhitelistedIgPartners (params: Object = {}): Promise<*> {
-    return super.deleteEdge(
-      '/copyright_whitelisted_ig_partners',
-      params
-    );
-  }
-
-  createCopyrightWhitelistedIgPartner (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/copyright_whitelisted_ig_partners',
       fields,
       params,
       
@@ -996,15 +980,6 @@ export default class Page extends AbstractCrudObject {
     );
   }
 
-  createMessageCreative (fields: Array<string>, params: Object = {}): Promise<Page> {
-    return this.createEdge(
-      '/message_creatives',
-      fields,
-      params,
-      Page
-    );
-  }
-
   createMessage (fields: Array<string>, params: Object = {}): Promise<Page> {
     return this.createEdge(
       '/messages',
@@ -1122,6 +1097,15 @@ export default class Page extends AbstractCrudObject {
       fields,
       params,
       InstagramUser
+    );
+  }
+
+  createPageWhatsappNumberVerification (fields: Array<string>, params: Object = {}): Promise<Page> {
+    return this.createEdge(
+      '/page_whatsapp_number_verification',
+      fields,
+      params,
+      Page
     );
   }
 
@@ -1286,16 +1270,6 @@ export default class Page extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/scheduled_posts'
-    );
-  }
-
-  getScreenNames (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      ScreenName,
-      fields,
-      params,
-      fetchFirstPage,
-      '/screennames'
     );
   }
 

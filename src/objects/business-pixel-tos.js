@@ -9,25 +9,21 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * PartnerCouponOffer
+ * BusinessPixelTOS
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class PartnerCouponOffer extends AbstractCrudObject {
+export default class BusinessPixelTOS extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      claim_by: 'claim_by',
-      currency: 'currency',
-      expiration_days: 'expiration_days',
+      accept_time: 'accept_time',
       id: 'id',
-      minimum_spend: 'minimum_spend',
-      offer_amount: 'offer_amount',
     });
   }
 
 
   
-  get (fields: Array<string>, params: Object = {}): PartnerCouponOffer {
+  get (fields: Array<string>, params: Object = {}): BusinessPixelTOS {
     // $FlowFixMe : Support Generic Types
     return this.read(
       fields,

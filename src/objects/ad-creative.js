@@ -9,6 +9,7 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
+import AdCreativeInsights from './ad-creative-insights';
 import AdPreview from './ad-preview';
 
 /**
@@ -35,6 +36,7 @@ export default class AdCreative extends AbstractCrudObject {
       destination_set_id: 'destination_set_id',
       dynamic_ad_voice: 'dynamic_ad_voice',
       effective_authorization_category: 'effective_authorization_category',
+      effective_instagram_media_id: 'effective_instagram_media_id',
       effective_instagram_story_id: 'effective_instagram_story_id',
       effective_object_story_id: 'effective_object_story_id',
       enable_direct_install: 'enable_direct_install',
@@ -48,6 +50,7 @@ export default class AdCreative extends AbstractCrudObject {
       instagram_story_id: 'instagram_story_id',
       interactive_components_spec: 'interactive_components_spec',
       link_deep_link_url: 'link_deep_link_url',
+      link_destination_display_url: 'link_destination_display_url',
       link_og_id: 'link_og_id',
       link_url: 'link_url',
       messenger_sponsored_message: 'messenger_sponsored_message',
@@ -148,6 +151,7 @@ export default class AdCreative extends AbstractCrudObject {
       offer: 'OFFER',
       page: 'PAGE',
       photo: 'PHOTO',
+      post_deleted: 'POST_DELETED',
       share: 'SHARE',
       status: 'STATUS',
       store_item: 'STORE_ITEM',
@@ -209,6 +213,16 @@ export default class AdCreative extends AbstractCrudObject {
       fields,
       params,
       AdCreative
+    );
+  }
+
+  getCreativeInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AdCreativeInsights,
+      fields,
+      params,
+      fetchFirstPage,
+      '/creative_insights'
     );
   }
 

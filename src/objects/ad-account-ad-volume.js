@@ -9,22 +9,19 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * MessengerProfile
+ * AdAccountAdVolume
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class MessengerProfile extends AbstractCrudObject {
+export default class AdAccountAdVolume extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      account_linking_url: 'account_linking_url',
-      get_started: 'get_started',
-      greeting: 'greeting',
-      home_url: 'home_url',
-      ice_breakers: 'ice_breakers',
-      payment_settings: 'payment_settings',
-      persistent_menu: 'persistent_menu',
-      target_audience: 'target_audience',
-      whitelisted_domains: 'whitelisted_domains',
+      actor_id: 'actor_id',
+      ads_running_or_in_review_count: 'ads_running_or_in_review_count',
+      has_hit_total_live_ads_limit: 'has_hit_total_live_ads_limit',
+      live_ads_quota_left: 'live_ads_quota_left',
+      total_live_ads_in_current_account: 'total_live_ads_in_current_account',
+      total_live_ads_limit: 'total_live_ads_limit',
     });
   }
 

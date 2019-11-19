@@ -9,16 +9,13 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * ScreenName
+ * CampaignGroupCollaborativeAdsPartnerInfo
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class ScreenName extends AbstractCrudObject {
+export default class CampaignGroupCollaborativeAdsPartnerInfo extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      service_name: 'service_name',
-      service_type: 'service_type',
-      value: 'value',
     });
   }
 

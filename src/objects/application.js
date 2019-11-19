@@ -17,7 +17,6 @@ import AdAccount from './ad-account';
 import User from './user';
 import DACheck from './da-check';
 import Event from './event';
-import OpenGraphObject from './open-graph-object';
 
 /**
  * Application
@@ -115,6 +114,7 @@ export default class Application extends AbstractCrudObject {
       smart_login_menu_icon_url: 'smart_login_menu_icon_url',
       social_discovery: 'social_discovery',
       subcategory: 'subcategory',
+      suggested_events_setting: 'suggested_events_setting',
       supported_platforms: 'supported_platforms',
       supports_apprequests_fast_app_switch: 'supports_apprequests_fast_app_switch',
       supports_attribution: 'supports_attribution',
@@ -550,35 +550,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/mobile_sdk_gk'
-    );
-  }
-
-  getMoodsForApplication (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/moods_for_application'
-    );
-  }
-
-  getObjects (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      OpenGraphObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/objects'
-    );
-  }
-
-  createObject (fields: Array<string>, params: Object = {}): Promise<OpenGraphObject> {
-    return this.createEdge(
-      '/objects',
-      fields,
-      params,
-      OpenGraphObject
     );
   }
 
