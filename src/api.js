@@ -119,19 +119,19 @@ export default class FacebookAdsApi {
       if (!params.access_token) {
         params['access_token'] = this.accessToken;
       }
-
       url += `?${FacebookAdsApi._encodeParams(params)}`;
+      if (this.appsecretProof && !url.includes('appsecret_proof')) {
+        let connector: string = '?';
+        if (url.indexOf('?') > -1) {
+          connector = '&';
+        }
+        url += connector + 'appsecret_proof=' + this.appsecretProof;
+      }
     } else {
       url = path;
     }
 
-    if (this.appsecretProof && !url.includes('appsecret_proof')) {
-      let connector: string = '?';
-      if (url.indexOf('?') > -1) {
-        connector = '&';
-      }
-      url += connector + 'appsecret_proof=' + this.appsecretProof;
-    }
+
     const strUrl: string = (url: any);
     return Http.request(method, strUrl, data, files, useMultipartFormData, this._showHeader)
       .then(response => {
