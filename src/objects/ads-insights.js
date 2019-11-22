@@ -6,7 +6,7 @@
  * LICENSE file in the root directory of this source tree.
  * @flow
  */
-import {AbstractCrudObject} from './../abstract-crud-object';
+import { AbstractCrudObject } from './../abstract-crud-object'
 
 /**
  * AdsInsights
@@ -64,22 +64,31 @@ export default class AdsInsights extends AbstractCrudObject {
       canvas_avg_view_time: 'canvas_avg_view_time',
       card_views: 'card_views',
       catalog_segment_actions: 'catalog_segment_actions',
-      catalog_segment_value_in_catalog_currency: 'catalog_segment_value_in_catalog_currency',
-      catalog_segment_value_mobile_purchase_roas: 'catalog_segment_value_mobile_purchase_roas',
-      catalog_segment_value_website_purchase_roas: 'catalog_segment_value_website_purchase_roas',
+      catalog_segment_value_in_catalog_currency:
+        'catalog_segment_value_in_catalog_currency',
+      catalog_segment_value_mobile_purchase_roas:
+        'catalog_segment_value_mobile_purchase_roas',
+      catalog_segment_value_website_purchase_roas:
+        'catalog_segment_value_website_purchase_roas',
       clicks: 'clicks',
-      conditional_time_spent_ms_over_10s_actions: 'conditional_time_spent_ms_over_10s_actions',
-      conditional_time_spent_ms_over_15s_actions: 'conditional_time_spent_ms_over_15s_actions',
-      conditional_time_spent_ms_over_2s_actions: 'conditional_time_spent_ms_over_2s_actions',
-      conditional_time_spent_ms_over_3s_actions: 'conditional_time_spent_ms_over_3s_actions',
-      conditional_time_spent_ms_over_6s_actions: 'conditional_time_spent_ms_over_6s_actions',
+      conditional_time_spent_ms_over_10s_actions:
+        'conditional_time_spent_ms_over_10s_actions',
+      conditional_time_spent_ms_over_15s_actions:
+        'conditional_time_spent_ms_over_15s_actions',
+      conditional_time_spent_ms_over_2s_actions:
+        'conditional_time_spent_ms_over_2s_actions',
+      conditional_time_spent_ms_over_3s_actions:
+        'conditional_time_spent_ms_over_3s_actions',
+      conditional_time_spent_ms_over_6s_actions:
+        'conditional_time_spent_ms_over_6s_actions',
       contact_actions: 'contact_actions',
       contact_value: 'contact_value',
       conversion_rate_ranking: 'conversion_rate_ranking',
       conversion_values: 'conversion_values',
       conversions: 'conversions',
       cost_per_15_sec_video_view: 'cost_per_15_sec_video_view',
-      cost_per_2_sec_continuous_video_view: 'cost_per_2_sec_continuous_video_view',
+      cost_per_2_sec_continuous_video_view:
+        'cost_per_2_sec_continuous_video_view',
       cost_per_action_result: 'cost_per_action_result',
       cost_per_action_type: 'cost_per_action_type',
       cost_per_ad_click: 'cost_per_ad_click',
@@ -97,7 +106,8 @@ export default class AdsInsights extends AbstractCrudObject {
       cost_per_find_location: 'cost_per_find_location',
       cost_per_inline_link_click: 'cost_per_inline_link_click',
       cost_per_inline_post_engagement: 'cost_per_inline_post_engagement',
-      cost_per_one_thousand_ad_impression: 'cost_per_one_thousand_ad_impression',
+      cost_per_one_thousand_ad_impression:
+        'cost_per_one_thousand_ad_impression',
       cost_per_outbound_click: 'cost_per_outbound_click',
       cost_per_schedule: 'cost_per_schedule',
       cost_per_start_trial: 'cost_per_start_trial',
@@ -139,8 +149,10 @@ export default class AdsInsights extends AbstractCrudObject {
       earned_impression: 'earned_impression',
       engagement_rate_ranking: 'engagement_rate_ranking',
       estimated_ad_recall_rate: 'estimated_ad_recall_rate',
-      estimated_ad_recall_rate_lower_bound: 'estimated_ad_recall_rate_lower_bound',
-      estimated_ad_recall_rate_upper_bound: 'estimated_ad_recall_rate_upper_bound',
+      estimated_ad_recall_rate_lower_bound:
+        'estimated_ad_recall_rate_lower_bound',
+      estimated_ad_recall_rate_upper_bound:
+        'estimated_ad_recall_rate_upper_bound',
       estimated_ad_recallers: 'estimated_ad_recallers',
       estimated_ad_recallers_lower_bound: 'estimated_ad_recallers_lower_bound',
       estimated_ad_recallers_upper_bound: 'estimated_ad_recallers_upper_bound',
@@ -152,8 +164,10 @@ export default class AdsInsights extends AbstractCrudObject {
       full_view_reach: 'full_view_reach',
       gender: 'gender',
       gender_targeting: 'gender_targeting',
-      hourly_stats_aggregated_by_advertiser_time_zone: 'hourly_stats_aggregated_by_advertiser_time_zone',
-      hourly_stats_aggregated_by_audience_time_zone: 'hourly_stats_aggregated_by_audience_time_zone',
+      hourly_stats_aggregated_by_advertiser_time_zone:
+        'hourly_stats_aggregated_by_advertiser_time_zone',
+      hourly_stats_aggregated_by_audience_time_zone:
+        'hourly_stats_aggregated_by_audience_time_zone',
       image_asset: 'image_asset',
       impression_device: 'impression_device',
       impressions: 'impressions',
@@ -192,15 +206,12 @@ export default class AdsInsights extends AbstractCrudObject {
       quality_score_enfbr: 'quality_score_enfbr',
       quality_score_organic: 'quality_score_organic',
       reach: 'reach',
-<<<<<<< HEAD
-      recurring_subscription_payment_actions: 'recurring_subscription_payment_actions',
+      recurring_subscription_payment_actions:
+        'recurring_subscription_payment_actions',
       region: 'region',
       rule_asset: 'rule_asset',
       schedule_actions: 'schedule_actions',
       schedule_value: 'schedule_value',
-=======
-      relevance_score: 'relevance_score',
->>>>>>> Removed social_impressions from ads-insights.js, as it is deprecated from facebook api.
       social_spend: 'social_spend',
       spend: 'spend',
       start_trial_actions: 'start_trial_actions',
@@ -225,7 +236,8 @@ export default class AdsInsights extends AbstractCrudObject {
       unique_link_clicks_ctr: 'unique_link_clicks_ctr',
       unique_outbound_clicks: 'unique_outbound_clicks',
       unique_outbound_clicks_ctr: 'unique_outbound_clicks_ctr',
-      unique_video_continuous_2_sec_watched_actions: 'unique_video_continuous_2_sec_watched_actions',
+      unique_video_continuous_2_sec_watched_actions:
+        'unique_video_continuous_2_sec_watched_actions',
       unique_video_view_15_sec: 'unique_video_view_15_sec',
       updated_time: 'updated_time',
       video_15_sec_watched_actions: 'video_15_sec_watched_actions',
@@ -233,8 +245,10 @@ export default class AdsInsights extends AbstractCrudObject {
       video_asset: 'video_asset',
       video_avg_time_watched_actions: 'video_avg_time_watched_actions',
       video_complete_watched_actions: 'video_complete_watched_actions',
-      video_completed_view_or_15s_passed_actions: 'video_completed_view_or_15s_passed_actions',
-      video_continuous_2_sec_watched_actions: 'video_continuous_2_sec_watched_actions',
+      video_completed_view_or_15s_passed_actions:
+        'video_completed_view_or_15s_passed_actions',
+      video_continuous_2_sec_watched_actions:
+        'video_continuous_2_sec_watched_actions',
       video_p100_watched_actions: 'video_p100_watched_actions',
       video_p25_watched_actions: 'video_p25_watched_actions',
       video_p50_watched_actions: 'video_p50_watched_actions',
@@ -242,16 +256,18 @@ export default class AdsInsights extends AbstractCrudObject {
       video_p95_watched_actions: 'video_p95_watched_actions',
       video_play_actions: 'video_play_actions',
       video_play_curve_actions: 'video_play_curve_actions',
-      video_play_retention_0_to_15s_actions: 'video_play_retention_0_to_15s_actions',
-      video_play_retention_20_to_60s_actions: 'video_play_retention_20_to_60s_actions',
+      video_play_retention_0_to_15s_actions:
+        'video_play_retention_0_to_15s_actions',
+      video_play_retention_20_to_60s_actions:
+        'video_play_retention_20_to_60s_actions',
       video_play_retention_graph_actions: 'video_play_retention_graph_actions',
       video_thruplay_watched_actions: 'video_thruplay_watched_actions',
       video_time_watched_actions: 'video_time_watched_actions',
       website_clicks: 'website_clicks',
       website_ctr: 'website_ctr',
       website_purchase_roas: 'website_purchase_roas',
-      wish_bid: 'wish_bid',
-    });
+      wish_bid: 'wish_bid'
+    })
   }
 
   static get ActionAttributionWindows (): Object {
@@ -262,8 +278,8 @@ export default class AdsInsights extends AbstractCrudObject {
       value_28d_view: '28d_view',
       value_7d_click: '7d_click',
       value_7d_view: '7d_view',
-      default: 'default',
-    });
+      default: 'default'
+    })
   }
   static get ActionBreakdowns (): Object {
     return Object.freeze({
@@ -276,14 +292,14 @@ export default class AdsInsights extends AbstractCrudObject {
       action_target_id: 'action_target_id',
       action_type: 'action_type',
       action_video_sound: 'action_video_sound',
-      action_video_type: 'action_video_type',
-    });
+      action_video_type: 'action_video_type'
+    })
   }
   static get ActionReportTime (): Object {
     return Object.freeze({
       conversion: 'conversion',
-      impression: 'impression',
-    });
+      impression: 'impression'
+    })
   }
   static get Breakdowns (): Object {
     return Object.freeze({
@@ -297,8 +313,10 @@ export default class AdsInsights extends AbstractCrudObject {
       dma: 'dma',
       frequency_value: 'frequency_value',
       gender: 'gender',
-      hourly_stats_aggregated_by_advertiser_time_zone: 'hourly_stats_aggregated_by_advertiser_time_zone',
-      hourly_stats_aggregated_by_audience_time_zone: 'hourly_stats_aggregated_by_audience_time_zone',
+      hourly_stats_aggregated_by_advertiser_time_zone:
+        'hourly_stats_aggregated_by_advertiser_time_zone',
+      hourly_stats_aggregated_by_audience_time_zone:
+        'hourly_stats_aggregated_by_audience_time_zone',
       image_asset: 'image_asset',
       impression_device: 'impression_device',
       link_url_asset: 'link_url_asset',
@@ -308,8 +326,8 @@ export default class AdsInsights extends AbstractCrudObject {
       publisher_platform: 'publisher_platform',
       region: 'region',
       title_asset: 'title_asset',
-      video_asset: 'video_asset',
-    });
+      video_asset: 'video_asset'
+    })
   }
   static get DatePreset (): Object {
     return Object.freeze({
@@ -331,16 +349,16 @@ export default class AdsInsights extends AbstractCrudObject {
       this_week_sun_today: 'this_week_sun_today',
       this_year: 'this_year',
       today: 'today',
-      yesterday: 'yesterday',
-    });
+      yesterday: 'yesterday'
+    })
   }
   static get Level (): Object {
     return Object.freeze({
       account: 'account',
       ad: 'ad',
       adset: 'adset',
-      campaign: 'campaign',
-    });
+      campaign: 'campaign'
+    })
   }
   static get SummaryActionBreakdowns (): Object {
     return Object.freeze({
@@ -353,7 +371,7 @@ export default class AdsInsights extends AbstractCrudObject {
       action_target_id: 'action_target_id',
       action_type: 'action_type',
       action_video_sound: 'action_video_sound',
-      action_video_type: 'action_video_type',
-    });
+      action_video_type: 'action_video_type'
+    })
   }
 }
