@@ -21,10 +21,10 @@ export default class FacebookAdsApi {
   appsecretProof: string;
   locale: string;
   static _defaultApi: FacebookAdsApi;
-  static get VERSION() {
+  static get VERSION () {
     return 'v5.0';
   }
-  static get GRAPH() {
+  static get GRAPH () {
     return 'https://graph.facebook.com';
   }
 
@@ -62,11 +62,11 @@ export default class FacebookAdsApi {
     return api;
   }
 
-  static setDefaultApi(api: FacebookAdsApi) {
+  static setDefaultApi (api: FacebookAdsApi) {
     this._defaultApi = api;
   }
 
-  static getDefaultApi() {
+  static getDefaultApi () {
     return this._defaultApi;
   }
 
@@ -75,13 +75,14 @@ export default class FacebookAdsApi {
     let params = {};
     params['access_token'] = this.accessToken;
     params['input_token'] = this.accessToken;
+    params['appsecret_proof'] = this.appsecretProof;
     params['fields'] = 'app_id';
     url += `?${FacebookAdsApi._encodeParams(params)}`;
 
     return Http.request('GET', url, {}, {}, false);
   }
 
-  setDebug(flag: boolean) {
+  setDebug (flag: boolean) {
     this._debug = flag;
     return this;
   }
@@ -99,7 +100,7 @@ export default class FacebookAdsApi {
    * @param  {Object} [files]
    * @return {Promise}
    */
-  call(
+  call (
     method: string,
     path: string | Array<string> | String,
     params: Object = {},
@@ -131,8 +132,15 @@ export default class FacebookAdsApi {
       url = path;
     }
 
-
+    if (this.appsecretProof && !url.includes('appsecret_proof')) {
+      let connector: string = '?';
+      if (url.indexOf('?') > -1) {
+        connector = '&';
+      }
+      url += connector + 'appsecret_proof=' + this.appsecretProof;
+    }
     const strUrl: string = (url: any);
+
     return Http.request(method, strUrl, data, files, useMultipartFormData, this._showHeader)
       .then(response => {
         if (this._showHeader) {
@@ -159,7 +167,7 @@ export default class FacebookAdsApi {
       });
   }
 
-  static _encodeParams(params: Object) {
+  static _encodeParams (params: Object) {
     return Object.keys(params)
       .map(key => {
         var param = params[key];
@@ -169,5 +177,5 @@ export default class FacebookAdsApi {
         return `${encodeURIComponent(key)}=${encodeURIComponent(param)}`;
       })
       .join('&');
-    }
+  }
 }
