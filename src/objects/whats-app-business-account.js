@@ -9,7 +9,6 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
-import AssignedUser from './assigned-user';
 
 /**
  * WhatsAppBusinessAccount
@@ -21,9 +20,7 @@ export default class WhatsAppBusinessAccount extends AbstractCrudObject {
     return Object.freeze({
       analytics: 'analytics',
       currency: 'currency',
-      eligible_for_sending_notifications: 'eligible_for_sending_notifications',
       id: 'id',
-      ineligible_for_sending_notifications_reason: 'ineligible_for_sending_notifications_reason',
       message_template_namespace: 'message_template_namespace',
       name: 'name',
       on_behalf_of_business_info: 'on_behalf_of_business_info',
@@ -47,16 +44,6 @@ export default class WhatsAppBusinessAccount extends AbstractCrudObject {
       ticket_update: 'TICKET_UPDATE',
       transportation_update: 'TRANSPORTATION_UPDATE',
     });
-  }
-
-  getAssignedUsers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AssignedUser,
-      fields,
-      params,
-      fetchFirstPage,
-      '/assigned_users'
-    );
   }
 
   deleteMessageTemplates (params: Object = {}): Promise<*> {

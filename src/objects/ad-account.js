@@ -29,9 +29,7 @@ import AssignedUser from './assigned-user';
 import Campaign from './campaign';
 import AsyncRequest from './async-request';
 import AdAsyncRequestSet from './ad-async-request-set';
-import BrandAudience from './brand-audience';
 import BroadTargetingCategories from './broad-targeting-categories';
-import BusinessProject from './business-project';
 import ContentDeliveryReport from './content-delivery-report';
 import CustomAudience from './custom-audience';
 import CustomAudiencesTOS from './custom-audiences-tos';
@@ -227,6 +225,7 @@ export default class AdAccount extends AbstractCrudObject {
       flight: 'FLIGHT',
       home_listing: 'HOME_LISTING',
       hotel: 'HOTEL',
+      location_based_item: 'LOCATION_BASED_ITEM',
       media_title: 'MEDIA_TITLE',
       offline_product: 'OFFLINE_PRODUCT',
       product: 'PRODUCT',
@@ -412,15 +411,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  createAdReportSchedule (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/adreportschedules',
-      fields,
-      params,
-      
-    );
-  }
-
   getAdRulesHistory (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccountAdRulesHistory,
@@ -447,13 +437,6 @@ export default class AdAccount extends AbstractCrudObject {
       fields,
       params,
       AdRule
-    );
-  }
-
-  deleteAds (params: Object = {}): Promise<*> {
-    return super.deleteEdge(
-      '/ads',
-      params
     );
   }
 
@@ -699,40 +682,12 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  createBatchReplace (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/batchreplace',
-      fields,
-      params,
-      
-    );
-  }
-
-  createBatchUpload (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/batchupload',
-      fields,
-      params,
-      
-    );
-  }
-
   createBlockListDraft (fields: Array<string>, params: Object = {}): Promise<AdAccount> {
     return this.createEdge(
       '/block_list_drafts',
       fields,
       params,
       AdAccount
-    );
-  }
-
-  getBrandAudiences (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      BrandAudience,
-      fields,
-      params,
-      fetchFirstPage,
-      '/brand_audiences'
     );
   }
 
@@ -743,16 +698,6 @@ export default class AdAccount extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/broadtargetingcategories'
-    );
-  }
-
-  getBusinessProjects (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      BusinessProject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/businessprojects'
     );
   }
 
@@ -859,15 +804,6 @@ export default class AdAccount extends AbstractCrudObject {
     );
   }
 
-  createDeactivate (fields: Array<string>, params: Object = {}): Promise<AdAccount> {
-    return this.createEdge(
-      '/deactivate',
-      fields,
-      params,
-      AdAccount
-    );
-  }
-
   getDeliveryEstimate (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AdAccountDeliveryEstimate,
@@ -885,15 +821,6 @@ export default class AdAccount extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/deprecatedtargetingadsets'
-    );
-  }
-
-  createEmailImport (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/emailimport',
-      fields,
-      params,
-      
     );
   }
 

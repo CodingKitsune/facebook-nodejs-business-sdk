@@ -22,9 +22,12 @@ export default class BusinessCreativeFolder extends AbstractCrudObject {
     return Object.freeze({
       business: 'business',
       creation_time: 'creation_time',
+      creative_insight_permissions: 'creative_insight_permissions',
       description: 'description',
       id: 'id',
+      media_library_url: 'media_library_url',
       name: 'name',
+      parent_folder: 'parent_folder',
     });
   }
 
@@ -45,13 +48,6 @@ export default class BusinessCreativeFolder extends AbstractCrudObject {
       view_content: 'VIEW_CONTENT',
       view_insights: 'VIEW_INSIGHTS',
     });
-  }
-
-  deleteAgencies (params: Object = {}): Promise<*> {
-    return super.deleteEdge(
-      '/agencies',
-      params
-    );
   }
 
   getAgencies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
@@ -89,6 +85,16 @@ export default class BusinessCreativeFolder extends AbstractCrudObject {
       fields,
       params,
       BusinessCreativeFolder
+    );
+  }
+
+  getSubFolders (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      BusinessCreativeFolder,
+      fields,
+      params,
+      fetchFirstPage,
+      '/subfolders'
     );
   }
 

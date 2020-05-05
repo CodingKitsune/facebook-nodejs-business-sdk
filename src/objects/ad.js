@@ -157,13 +157,6 @@ export default class Ad extends AbstractCrudObject {
     );
   }
 
-  deleteAdLabels (params: Object = {}): Promise<*> {
-    return super.deleteEdge(
-      '/adlabels',
-      params
-    );
-  }
-
   createAdLabel (fields: Array<string>, params: Object = {}): Promise<Ad> {
     return this.createEdge(
       '/adlabels',
@@ -248,15 +241,6 @@ export default class Ad extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/targetingsentencelines'
-    );
-  }
-
-  createTrackingTag (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/trackingtag',
-      fields,
-      params,
-      
     );
   }
 

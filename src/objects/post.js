@@ -50,6 +50,7 @@ export default class Post extends AbstractCrudObject {
       is_eligible_for_promotion: 'is_eligible_for_promotion',
       is_expired: 'is_expired',
       is_hidden: 'is_hidden',
+      is_inline_created: 'is_inline_created',
       is_instagram_eligible: 'is_instagram_eligible',
       is_popular: 'is_popular',
       is_published: 'is_published',
@@ -110,11 +111,6 @@ export default class Post extends AbstractCrudObject {
       normal: 'normal',
     });
   }
-  static get With (): Object {
-    return Object.freeze({
-      location: 'LOCATION',
-    });
-  }
 
   getAttachments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
@@ -155,16 +151,6 @@ export default class Post extends AbstractCrudObject {
     );
   }
 
-  getEditActions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/edit_actions'
-    );
-  }
-
   getInsights (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       InsightsResult,
@@ -179,16 +165,6 @@ export default class Post extends AbstractCrudObject {
     return super.deleteEdge(
       '/likes',
       params
-    );
-  }
-
-  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/likes'
     );
   }
 
@@ -247,16 +223,6 @@ export default class Post extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/to'
-    );
-  }
-
-  getWithTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/with_tags'
     );
   }
 

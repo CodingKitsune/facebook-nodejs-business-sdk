@@ -14,7 +14,6 @@ import AdNetworkAnalyticsAsyncQueryResult from './ad-network-analytics-async-que
 import Business from './business';
 import Group from './group';
 import AdAccount from './ad-account';
-import User from './user';
 import DACheck from './da-check';
 import Event from './event';
 
@@ -373,16 +372,6 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  getBanned (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/banned'
-    );
-  }
-
   getButtonAutoDetectionDeviceSelection (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
@@ -402,31 +391,12 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
-  createCodelessEventBinding (fields: Array<string>, params: Object = {}): Promise<Application> {
-    return this.createEdge(
-      '/codeless_event_bindings',
-      fields,
-      params,
-      Application
-    );
-  }
-
   createCodelessEventMapping (fields: Array<string>, params: Object = {}): Promise<Application> {
     return this.createEdge(
       '/codeless_event_mappings',
       fields,
       params,
       Application
-    );
-  }
-
-  getCustomAudienceThirdPartyId (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/custom_audience_third_party_id'
     );
   }
 
@@ -447,25 +417,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/events'
-    );
-  }
-
-  getFullAppIndexingInfos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/full_app_indexing_infos'
-    );
-  }
-
-  createFullAppIndexingInfo (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/full_app_indexing_infos',
-      fields,
-      params,
-      
     );
   }
 
@@ -559,6 +510,16 @@ export default class Application extends AbstractCrudObject {
       fields,
       params,
       
+    );
+  }
+
+  getOzoneRelease (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AbstractObject,
+      fields,
+      params,
+      fetchFirstPage,
+      '/ozone_release'
     );
   }
 

@@ -7,12 +7,10 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
-import Profile from './profile';
+import NullNode from './null-node';
 import LiveVideo from './live-video';
-import Photo from './photo';
-import ProfilePictureSource from './profile-picture-source';
+import Profile from './profile';
 
 /**
  * Event
@@ -36,6 +34,7 @@ export default class Event extends AbstractCrudObject {
       interested_count: 'interested_count',
       is_canceled: 'is_canceled',
       is_draft: 'is_draft',
+      is_online: 'is_online',
       is_page_owned: 'is_page_owned',
       maybe_count: 'maybe_count',
       name: 'name',
@@ -106,30 +105,34 @@ export default class Event extends AbstractCrudObject {
       upcoming: 'upcoming',
     });
   }
-  static get PromotableEventTypes (): Object {
-    return Object.freeze({
-      offsite_ticket: 'OFFSITE_TICKET',
-      onsite_ticket: 'ONSITE_TICKET',
-      rsvp: 'RSVP',
-    });
-  }
 
-  getAdmins (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+  getComments (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
-      Profile,
+      NullNode,
       fields,
       params,
       fetchFirstPage,
-      '/admins'
+      '/comments'
     );
   }
 
-  createFeed (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/feed',
+  getFeed (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      NullNode,
       fields,
       params,
-      
+      fetchFirstPage,
+      '/feed'
+    );
+  }
+
+  getLiveVideos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/live_videos'
     );
   }
 
@@ -142,22 +145,33 @@ export default class Event extends AbstractCrudObject {
     );
   }
 
-  createPhoto (fields: Array<string>, params: Object = {}): Promise<Photo> {
-    return this.createEdge(
-      '/photos',
+  getPhotos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      NullNode,
       fields,
       params,
-      Photo
+      fetchFirstPage,
+      '/photos'
     );
   }
 
   getPicture (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
-      ProfilePictureSource,
+      NullNode,
       fields,
       params,
       fetchFirstPage,
       '/picture'
+    );
+  }
+
+  getPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/posts'
     );
   }
 
@@ -168,6 +182,16 @@ export default class Event extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/roles'
+    );
+  }
+
+  getVideos (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      NullNode,
+      fields,
+      params,
+      fetchFirstPage,
+      '/videos'
     );
   }
 

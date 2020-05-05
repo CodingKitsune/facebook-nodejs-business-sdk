@@ -49,7 +49,7 @@ export default class AdAccountDeliveryEstimate extends AbstractCrudObject {
       thruplay: 'THRUPLAY',
       two_second_continuous_video_views: 'TWO_SECOND_CONTINUOUS_VIDEO_VIEWS',
       value: 'VALUE',
-      video_views: 'VIDEO_VIEWS',
+      visit_instagram_profile: 'VISIT_INSTAGRAM_PROFILE',
     });
   }
 }

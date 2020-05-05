@@ -9,16 +9,17 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AudiencePermission
+ * AdCreativePhotoDataMediaElements
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AudiencePermission extends AbstractCrudObject {
+export default class AdCreativePhotoDataMediaElements extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      audience: 'audience',
-      share_account_id: 'share_account_id',
-      share_account_name: 'share_account_name',
+      element_id: 'element_id',
+      element_type: 'element_type',
+      x: 'x',
+      y: 'y',
     });
   }
 

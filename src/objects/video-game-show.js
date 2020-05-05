@@ -7,8 +7,6 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
-import Cursor from './../cursor';
 
 /**
  * VideoGameShow
@@ -26,45 +24,12 @@ export default class VideoGameShow extends AbstractCrudObject {
     });
   }
 
-  static get Action (): Object {
-    return Object.freeze({
-      end_game: 'END_GAME',
-      start_game: 'START_GAME',
-    });
-  }
-
-  getQuestions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/questions'
-    );
-  }
-
-  createQuestion (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/questions',
-      fields,
-      params,
-      
-    );
-  }
 
   
   get (fields: Array<string>, params: Object = {}): VideoGameShow {
     // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
-      params
-    );
-  }
-
-  // $FlowFixMe : Support Generic Types
-  update (fields: Array<string>, params: Object = {}): VideoGameShow {
-    // $FlowFixMe : Support Generic Types
-    return super.update(
       params
     );
   }

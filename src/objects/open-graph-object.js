@@ -10,7 +10,6 @@ import {AbstractCrudObject} from './../abstract-crud-object';
 import Cursor from './../cursor';
 import Comment from './comment';
 import Profile from './profile';
-import ProfilePictureSource from './profile-picture-source';
 
 /**
  * OpenGraphObject
@@ -52,26 +51,6 @@ export default class OpenGraphObject extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/comments'
-    );
-  }
-
-  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/likes'
-    );
-  }
-
-  getPicture (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      ProfilePictureSource,
-      fields,
-      params,
-      fetchFirstPage,
-      '/picture'
     );
   }
 

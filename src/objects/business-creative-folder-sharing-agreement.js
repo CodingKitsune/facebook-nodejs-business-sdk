@@ -9,15 +9,17 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * BusinessAgreement
+ * BusinessCreativeFolderSharingAgreement
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class BusinessAgreement extends AbstractCrudObject {
+export default class BusinessCreativeFolderSharingAgreement extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
+      folder_id: 'folder_id',
       id: 'id',
-      request_status: 'request_status',
+      requesting_business: 'requesting_business',
+      status: 'status',
     });
   }
 
@@ -27,22 +29,15 @@ export default class BusinessAgreement extends AbstractCrudObject {
       decline: 'DECLINE',
       expired: 'EXPIRED',
       in_progress: 'IN_PROGRESS',
+      pending: 'PENDING',
     });
   }
 
   
-  get (fields: Array<string>, params: Object = {}): BusinessAgreement {
+  get (fields: Array<string>, params: Object = {}): BusinessCreativeFolderSharingAgreement {
     // $FlowFixMe : Support Generic Types
     return this.read(
       fields,
-      params
-    );
-  }
-
-  // $FlowFixMe : Support Generic Types
-  update (fields: Array<string>, params: Object = {}): BusinessAgreement {
-    // $FlowFixMe : Support Generic Types
-    return super.update(
       params
     );
   }

@@ -1,6 +1,6 @@
 {
   "name": "@denimlabs/facebook-nodejs-business-sdk",
-  "version": "5.0.2",
+  "version": "6.0.4",
   "description": "Denimlabs Fork of SDK for the Facebook Ads API in Javascript and Node.js",
   "author": "Facebook",
   "maintainers": [
@@ -30,6 +30,9 @@
     "url": "git://github.com/denimlabs/facebook-nodejs-business-sdk.git"
   },
   "dependencies": {
+    "currency-codes": "^1.5.1",
+    "iso-3166-1-alpha-2": "1.0.0",
+    "js-sha256": "^0.9.0",
     "mixwith": "~0.1.1",
     "request": "^2.88.0",
     "request-promise": "~4.1.1"

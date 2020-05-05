@@ -14,7 +14,6 @@ import InsightsResult from './insights-result';
 import Profile from './profile';
 import Post from './post';
 import Page from './page';
-import TaggableSubject from './taggable-subject';
 
 /**
  * Photo
@@ -131,16 +130,6 @@ export default class Photo extends AbstractCrudObject {
     );
   }
 
-  getReactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/reactions'
-    );
-  }
-
   getSharedPosts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Post,
@@ -158,16 +147,6 @@ export default class Photo extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/sponsor_tags'
-    );
-  }
-
-  getTags (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      TaggableSubject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/tags'
     );
   }
 

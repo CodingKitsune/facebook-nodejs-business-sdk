@@ -62,6 +62,7 @@ export default class Campaign extends AbstractCrudObject {
 
   static get BidStrategy (): Object {
     return Object.freeze({
+      cost_cap: 'COST_CAP',
       lowest_cost_without_cap: 'LOWEST_COST_WITHOUT_CAP',
       lowest_cost_with_bid_cap: 'LOWEST_COST_WITH_BID_CAP',
       target_cost: 'TARGET_COST',
@@ -169,13 +170,6 @@ export default class Campaign extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/ad_studies'
-    );
-  }
-
-  deleteAdLabels (params: Object = {}): Promise<*> {
-    return super.deleteEdge(
-      '/adlabels',
-      params
     );
   }
 

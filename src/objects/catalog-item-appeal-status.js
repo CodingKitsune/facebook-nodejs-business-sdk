@@ -9,28 +9,18 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * PageLabel
+ * CatalogItemAppealStatus
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class PageLabel extends AbstractCrudObject {
+export default class CatalogItemAppealStatus extends AbstractCrudObject {
   static get Fields () {
     return Object.freeze({
-      creation_time: 'creation_time',
-      creator_id: 'creator_id',
-      from: 'from',
-      id: 'id',
-      name: 'name',
+      handle: 'handle',
+      item_id: 'item_id',
+      status: 'status',
+      use_cases: 'use_cases',
     });
   }
 
-
-  
-  get (fields: Array<string>, params: Object = {}): PageLabel {
-    // $FlowFixMe : Support Generic Types
-    return this.read(
-      fields,
-      params
-    );
-  }
 }

@@ -34,6 +34,7 @@ export default class ExtendedCredit extends AbstractCrudObject {
       owner_business: 'owner_business',
       owner_business_name: 'owner_business_name',
       partition_from: 'partition_from',
+      receiving_credit_allocation_config: 'receiving_credit_allocation_config',
       send_bill_to_biz_name: 'send_bill_to_biz_name',
     });
   }

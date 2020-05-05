@@ -42,9 +42,11 @@ export default class PageCallToAction extends AbstractCrudObject {
   static get AndroidDestinationType (): Object {
     return Object.freeze({
       app_deeplink: 'APP_DEEPLINK',
+      become_a_volunteer: 'BECOME_A_VOLUNTEER',
       email: 'EMAIL',
       facebook_app: 'FACEBOOK_APP',
       messenger: 'MESSENGER',
+      mini_shop: 'MINI_SHOP',
       none: 'NONE',
       phone_call: 'PHONE_CALL',
       shop_on_facebook: 'SHOP_ON_FACEBOOK',
@@ -54,9 +56,11 @@ export default class PageCallToAction extends AbstractCrudObject {
   static get IphoneDestinationType (): Object {
     return Object.freeze({
       app_deeplink: 'APP_DEEPLINK',
+      become_a_volunteer: 'BECOME_A_VOLUNTEER',
       email: 'EMAIL',
       facebook_app: 'FACEBOOK_APP',
       messenger: 'MESSENGER',
+      mini_shop: 'MINI_SHOP',
       none: 'NONE',
       phone_call: 'PHONE_CALL',
       shop_on_facebook: 'SHOP_ON_FACEBOOK',
@@ -65,6 +69,7 @@ export default class PageCallToAction extends AbstractCrudObject {
   }
   static get Type (): Object {
     return Object.freeze({
+      become_a_volunteer: 'BECOME_A_VOLUNTEER',
       book_appointment: 'BOOK_APPOINTMENT',
       book_now: 'BOOK_NOW',
       buy_tickets: 'BUY_TICKETS',
@@ -84,11 +89,13 @@ export default class PageCallToAction extends AbstractCrudObject {
       open_app: 'OPEN_APP',
       play_music: 'PLAY_MUSIC',
       play_now: 'PLAY_NOW',
+      purchase_gift_cards: 'PURCHASE_GIFT_CARDS',
       request_appointment: 'REQUEST_APPOINTMENT',
       request_quote: 'REQUEST_QUOTE',
       shop_now: 'SHOP_NOW',
       shop_on_facebook: 'SHOP_ON_FACEBOOK',
       sign_up: 'SIGN_UP',
+      view_shop: 'VIEW_SHOP',
       visit_group: 'VISIT_GROUP',
       watch_now: 'WATCH_NOW',
       woodhenge_support: 'WOODHENGE_SUPPORT',
@@ -96,6 +103,7 @@ export default class PageCallToAction extends AbstractCrudObject {
   }
   static get WebDestinationType (): Object {
     return Object.freeze({
+      become_a_volunteer: 'BECOME_A_VOLUNTEER',
       become_supporter: 'BECOME_SUPPORTER',
       email: 'EMAIL',
       messenger: 'MESSENGER',

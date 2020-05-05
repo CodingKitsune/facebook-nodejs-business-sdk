@@ -10,7 +10,6 @@ import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
 import AssignedUser from './assigned-user';
-import CustomAudience from './custom-audience';
 import DACheck from './da-check';
 import AdAccount from './ad-account';
 import Business from './business';
@@ -81,13 +80,6 @@ export default class AdsPixel extends AbstractCrudObject {
     });
   }
 
-  deleteAssignedUsers (params: Object = {}): Promise<*> {
-    return super.deleteEdge(
-      '/assigned_users',
-      params
-    );
-  }
-
   getAssignedUsers (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AssignedUser,
@@ -104,16 +96,6 @@ export default class AdsPixel extends AbstractCrudObject {
       fields,
       params,
       AdsPixel
-    );
-  }
-
-  getAudiences (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      CustomAudience,
-      fields,
-      params,
-      fetchFirstPage,
-      '/audiences'
     );
   }
 
