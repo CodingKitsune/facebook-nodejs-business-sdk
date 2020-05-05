@@ -18,12 +18,13 @@ export default class FacebookAdsApi {
   _debug: boolean;
   _showHeader: boolean;
   accessToken: string;
+  appsecretProof: string;
   locale: string;
   static _defaultApi: FacebookAdsApi;
   static get VERSION() {
     return 'v6.0';
   }
-  static get GRAPH() {
+  static get GRAPH () {
     return 'https://graph.facebook.com';
   }
 
@@ -35,11 +36,12 @@ export default class FacebookAdsApi {
    * @param {String} accessToken
    * @param {String} [locale]
    */
-  constructor(accessToken: string, locale: string = 'en_US', crash_log: bool = true) {
+  constructor (accessToken: string, appsecretProof: string = '', locale: string = 'en_US', crash_log: bool = true) {
     if (!accessToken) {
       throw new Error('Access token required');
     }
     this.accessToken = accessToken;
+    this.appsecretProof = appsecretProof;
     this.locale = locale;
     this._debug = false;
     this._showHeader = false;
@@ -54,17 +56,17 @@ export default class FacebookAdsApi {
    * @param  {String} [locale]
    * @return {FacebookAdsApi}
    */
-  static init(accessToken: string, locale: string = 'en_US', crash_log: bool = true) {
-    const api = new this(accessToken, locale, crash_log);
+  static init(accessToken: string, appsecretProof: string = '', locale: string = 'en_US', crash_log: bool = true) {
+    const api = new this(accessToken, appsecretProof, locale, crash_log);
     this.setDefaultApi(api);
     return api;
   }
 
-  static setDefaultApi(api: FacebookAdsApi) {
+  static setDefaultApi (api: FacebookAdsApi) {
     this._defaultApi = api;
   }
 
-  static getDefaultApi() {
+  static getDefaultApi () {
     return this._defaultApi;
   }
 
@@ -73,13 +75,14 @@ export default class FacebookAdsApi {
     let params = {};
     params['access_token'] = this.accessToken;
     params['input_token'] = this.accessToken;
+    params['appsecret_proof'] = this.appsecretProof;
     params['fields'] = 'app_id';
     url += `?${FacebookAdsApi._encodeParams(params)}`;
 
     return Http.request('GET', url, {}, {}, false);
   }
 
-  setDebug(flag: boolean) {
+  setDebug (flag: boolean) {
     this._debug = flag;
     return this;
   }
@@ -97,7 +100,7 @@ export default class FacebookAdsApi {
    * @param  {Object} [files]
    * @return {Promise}
    */
-  call(
+  call (
     method: string,
     path: string | Array<string> | String,
     params: Object = {},
@@ -114,12 +117,30 @@ export default class FacebookAdsApi {
     const domain = urlOverride || FacebookAdsApi.GRAPH;
     if (typeof path !== 'string' && !(path instanceof String)) {
       url = [domain, FacebookAdsApi.VERSION, ...path].join('/');
-      params['access_token'] = this.accessToken;
+      if (!params.access_token) {
+        params['access_token'] = this.accessToken;
+      }
       url += `?${FacebookAdsApi._encodeParams(params)}`;
+      if (this.appsecretProof && !url.includes('appsecret_proof')) {
+        let connector: string = '?';
+        if (url.indexOf('?') > -1) {
+          connector = '&';
+        }
+        url += connector + 'appsecret_proof=' + this.appsecretProof;
+      }
     } else {
       url = path;
     }
+
+    if (this.appsecretProof && !url.includes('appsecret_proof')) {
+      let connector: string = '?';
+      if (url.indexOf('?') > -1) {
+        connector = '&';
+      }
+      url += connector + 'appsecret_proof=' + this.appsecretProof;
+    }
     const strUrl: string = (url: any);
+
     return Http.request(method, strUrl, data, files, useMultipartFormData, this._showHeader)
       .then(response => {
         if (this._showHeader) {
@@ -146,7 +167,7 @@ export default class FacebookAdsApi {
       });
   }
 
-  static _encodeParams(params: Object) {
+  static _encodeParams (params: Object) {
     return Object.keys(params)
       .map(key => {
         var param = params[key];
@@ -156,5 +177,5 @@ export default class FacebookAdsApi {
         return `${encodeURIComponent(key)}=${encodeURIComponent(param)}`;
       })
       .join('&');
-    }
+  }
 }

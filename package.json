@@ -1,14 +1,14 @@
 {
-  "name": "facebook-nodejs-business-sdk",
+  "name": "@denimlabs/facebook-nodejs-business-sdk",
   "version": "6.0.4",
-  "description": "SDK for the Facebook Ads API in Javascript and Node.js",
+  "description": "Denimlabs Fork of SDK for the Facebook Ads API in Javascript and Node.js",
   "author": "Facebook",
   "maintainers": [
-    "Ellen Tao <ellentao@fb.com>, Yonghong Shi <yongshi@fb.com>, Moyang He <hemoyang@fb.com>, Zain Aziz <zaziz@fb.com>, Neil Chen <xiaotchen@fb.com>, Supasate Choochaisri <supasate@fb.com>, lucascosta <lucas@lucascosta.com>"
+    "Michael W. Clark <michaelwclark@gmail.com>"
   ],
-  "homepage": "https://github.com/facebook/facebook-nodejs-business-sdk",
+  "homepage": "https://github.com/denimlabs/facebook-nodejs-business-sdk",
   "bugs": {
-    "url": "https://github.com/facebook/facebook-nodejs-business-sdk/issues"
+    "url": "https://github.com/denimlabs/facebook-nodejs-business-sdk/issues"
   },
   "keywords": [
     "facebook",
@@ -27,7 +27,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/facebook/facebook-nodejs-business-sdk.git"
+    "url": "git://github.com/denimlabs/facebook-nodejs-business-sdk.git"
   },
   "dependencies": {
     "currency-codes": "^1.5.1",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-core": "^6.26.3",
+    "babel-core": "~6.17.0",
     "babel-eslint": "^7.2.3",
     "babel-plugin-async-to-promises": "^1.0.5",
     "babel-plugin-external-helpers": "~6.8.0",
@@ -49,18 +49,18 @@
     "babel-preset-stage-2": "^6.24.1",
     "babelrc-rollup": "^3.0.0",
     "chai": "~3.5.0",
-    "eslint": "^4.18.2",
-    "eslint-plugin-flowtype": "^2.50.3",
-    "flow-bin": "^0.101.0",
-    "gulp": "^4.0.2",
-    "gulp-cli": "^2.2.0",
+    "eslint": "^3.19.0",
+    "eslint-plugin-flowtype": "^2.34.0",
+    "gulp": "^3.9.1",
+    "gulp-cli": "^1.3.0",
     "gulp-filenames": "~4.0.0",
     "gulp-flowtype": "^1.0.0",
-    "gulp-load-plugins": "^1.6.0",
-    "gulp-open": "^3.0.1",
-    "gulp-rename": "^1.2.3",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-open": "~2.0.0",
+    "gulp-rename": "~1.2.2",
     "gulp-sourcemaps": "~2.1.1",
     "jshint-sourcemap-reporter": "0.0.1",
+    "mixwith": "~0.1.1",
     "rollup-plugin-babel": "~2.6.1",
     "rollup-plugin-commonjs": "~5.0.5",
     "rollup-plugin-json": "~2.0.2",
@@ -68,7 +68,7 @@
     "rollup-stream": "~1.14.0",
     "semistandard": "^11.0.0",
     "vinyl-buffer": "~1.0.0",
-    "vinyl-source-stream": "~2.0.0"
+    "vinyl-source-stream": "~1.1.0"
   },
   "scripts": {
     "prepublish": "gulp dist",

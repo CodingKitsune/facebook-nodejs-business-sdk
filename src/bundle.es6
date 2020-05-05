@@ -8,6 +8,7 @@
 
 export { default as FacebookAdsApi } from './../src/api';
 export { default as FacebookAdsApiBatch } from './../src/api-batch';
+export { default as AbstractCrudObject } from './abstract-crud-object';
 export { default as APIRequest } from './../src/api-request';
 export { default as APIResponse } from './../src/api-response';
 export { default as CrashReporter } from './../src/crash-reporter';
@@ -207,6 +208,7 @@ export { default as CustomAudienceStatus } from './../src/objects/custom-audienc
 export { default as CustomAudiencesTOS } from './../src/objects/custom-audiences-tos';
 export { default as CustomAudiencesharedAccountInfo } from './../src/objects/custom-audienceshared-account-info';
 export { default as CustomConversion } from './../src/objects/custom-conversion';
+export { default as Cursor } from './../src/cursor';
 export { default as CustomConversionStatsResult } from './../src/objects/custom-conversion-stats-result';
 export { default as CustomUserSettings } from './../src/objects/custom-user-settings';
 export { default as DACheck } from './../src/objects/da-check';

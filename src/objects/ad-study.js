@@ -67,7 +67,13 @@ export default class AdStudy extends AbstractCrudObject {
     );
   }
 
-  createObjective (fields: Array<string>, params: Object = {}): Promise<AdStudyObjective> {
+  delete(params): AbstractObject {
+    return super.delete(
+      params
+    );
+  }
+
+  createUserPermission (fields, params): AdStudy {
     return this.createEdge(
       '/objectives',
       fields,
