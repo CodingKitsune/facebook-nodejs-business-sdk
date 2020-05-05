@@ -70,18 +70,6 @@ export default class AdStudy extends AbstractCrudObject {
   delete(params): AbstractObject {
     return super.delete(
       params
-<<<<<<< HEAD
-    );
-  }
-
-  createUserPermission (fields, params): AdStudy {
-    return this.createEdge(
-      '/objectives',
-      fields,
-      params,
-      AdStudyObjective
-=======
->>>>>>> update/fb-versioning
     );
   }
 
