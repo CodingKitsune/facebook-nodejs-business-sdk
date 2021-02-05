@@ -14,7 +14,7 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdReportSpec extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       account_id: 'account_id',
       actions_group_by: 'actions_group_by',
@@ -27,7 +27,6 @@ export default class AdReportSpec extends AbstractCrudObject {
       id: 'id',
       insights_section: 'insights_section',
       name: 'name',
-      report_schedule: 'report_schedule',
       report_schedule_id: 'report_schedule_id',
       sort_by: 'sort_by',
       sort_dir: 'sort_dir',

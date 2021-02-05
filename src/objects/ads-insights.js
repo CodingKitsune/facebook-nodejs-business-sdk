@@ -14,7 +14,7 @@ import { AbstractCrudObject } from './../abstract-crud-object'
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdsInsights extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       account_currency: 'account_currency',
       account_id: 'account_id',
@@ -46,14 +46,11 @@ export default class AdsInsights extends AbstractCrudObject {
       campaign_name: 'campaign_name',
       canvas_avg_view_percent: 'canvas_avg_view_percent',
       canvas_avg_view_time: 'canvas_avg_view_time',
-      card_views: 'card_views',
       catalog_segment_actions: 'catalog_segment_actions',
-      catalog_segment_value_in_catalog_currency:
-        'catalog_segment_value_in_catalog_currency',
-      catalog_segment_value_mobile_purchase_roas:
-        'catalog_segment_value_mobile_purchase_roas',
-      catalog_segment_value_website_purchase_roas:
-        'catalog_segment_value_website_purchase_roas',
+      catalog_segment_value: 'catalog_segment_value',
+      catalog_segment_value_mobile_purchase_roas: 'catalog_segment_value_mobile_purchase_roas',
+      catalog_segment_value_omni_purchase_roas: 'catalog_segment_value_omni_purchase_roas',
+      catalog_segment_value_website_purchase_roas: 'catalog_segment_value_website_purchase_roas',
       clicks: 'clicks',
       conditional_time_spent_ms_over_10s_actions:
         'conditional_time_spent_ms_over_10s_actions',
@@ -70,6 +67,8 @@ export default class AdsInsights extends AbstractCrudObject {
       conversion_rate_ranking: 'conversion_rate_ranking',
       conversion_values: 'conversion_values',
       conversions: 'conversions',
+      converted_product_quantity: 'converted_product_quantity',
+      converted_product_value: 'converted_product_value',
       cost_per_15_sec_video_view: 'cost_per_15_sec_video_view',
       cost_per_2_sec_continuous_video_view:
         'cost_per_2_sec_continuous_video_view',
@@ -125,6 +124,7 @@ export default class AdsInsights extends AbstractCrudObject {
       instant_experience_clicks_to_open: 'instant_experience_clicks_to_open',
       instant_experience_clicks_to_start: 'instant_experience_clicks_to_start',
       instant_experience_outbound_clicks: 'instant_experience_outbound_clicks',
+      interactive_component_tap: 'interactive_component_tap',
       labels: 'labels',
       location: 'location',
       mobile_app_purchase_roas: 'mobile_app_purchase_roas',
@@ -133,6 +133,7 @@ export default class AdsInsights extends AbstractCrudObject {
       outbound_clicks_ctr: 'outbound_clicks_ctr',
       place_page_name: 'place_page_name',
       purchase_roas: 'purchase_roas',
+      qualifying_question_qualify_answer_rate: 'qualifying_question_qualify_answer_rate',
       quality_ranking: 'quality_ranking',
       quality_score_ectr: 'quality_score_ectr',
       quality_score_ecvr: 'quality_score_ecvr',
@@ -196,8 +197,9 @@ export default class AdsInsights extends AbstractCrudObject {
       value_28d_view: '28d_view',
       value_7d_click: '7d_click',
       value_7d_view: '7d_view',
-      default: 'default'
-    })
+      dda: 'dda',
+      default: 'default',
+    });
   }
   static get ActionBreakdowns (): Object {
     return Object.freeze({
@@ -216,8 +218,9 @@ export default class AdsInsights extends AbstractCrudObject {
   static get ActionReportTime (): Object {
     return Object.freeze({
       conversion: 'conversion',
-      impression: 'impression'
-    })
+      impression: 'impression',
+      mixed: 'mixed',
+    });
   }
   static get Breakdowns (): Object {
     return Object.freeze({

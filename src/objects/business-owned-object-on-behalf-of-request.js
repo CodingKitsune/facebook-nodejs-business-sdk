@@ -7,7 +7,6 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
 
 /**
  * BusinessOwnedObjectOnBehalfOfRequest
@@ -15,7 +14,7 @@ import AbstractObject from './../abstract-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class BusinessOwnedObjectOnBehalfOfRequest extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       business_owned_object: 'business_owned_object',
       id: 'id',
@@ -33,14 +32,6 @@ export default class BusinessOwnedObjectOnBehalfOfRequest extends AbstractCrudOb
       in_progress: 'IN_PROGRESS',
       pending: 'PENDING',
     });
-  }
-
-  // $FlowFixMe : Support Generic Types
-  delete (fields: Array<string>, params: Object = {}): AbstractObject {
-    // $FlowFixMe : Support Generic Types
-    return super.delete(
-      params
-    );
   }
 
   

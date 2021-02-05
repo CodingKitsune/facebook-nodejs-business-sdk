@@ -12,7 +12,6 @@ import AdAccount from './ad-account';
 import BusinessAssetGroup from './business-asset-group';
 import Page from './page';
 import ProductCatalog from './product-catalog';
-import User from './user';
 
 /**
  * SystemUser
@@ -20,7 +19,7 @@ import User from './user';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class SystemUser extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       created_by: 'created_by',
       created_time: 'created_time',
@@ -31,15 +30,6 @@ export default class SystemUser extends AbstractCrudObject {
     });
   }
 
-  static get Role (): Object {
-    return Object.freeze({
-      admin: 'ADMIN',
-      ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
-      employee: 'EMPLOYEE',
-      finance_analyst: 'FINANCE_ANALYST',
-      finance_editor: 'FINANCE_EDITOR',
-    });
-  }
 
   getAssignedAdAccounts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
@@ -78,16 +68,6 @@ export default class SystemUser extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/assigned_product_catalogs'
-    );
-  }
-
-  getUpdatedBy (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      User,
-      fields,
-      params,
-      fetchFirstPage,
-      '/updated_by'
     );
   }
 

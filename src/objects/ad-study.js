@@ -18,7 +18,7 @@ import AdStudyObjective from './ad-study-objective';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdStudy extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       business: 'business',
       canceled_time: 'canceled_time',
@@ -43,6 +43,7 @@ export default class AdStudy extends AbstractCrudObject {
       continuous_lift_config: 'CONTINUOUS_LIFT_CONFIG',
       geo_lift: 'GEO_LIFT',
       lift: 'LIFT',
+      private_lift: 'PRIVATE_LIFT',
       split_test: 'SPLIT_TEST',
     });
   }

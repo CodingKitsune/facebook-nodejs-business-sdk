@@ -17,7 +17,7 @@ import ProductItem from './product-item';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class ProductGroup extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       id: 'id',
       product_catalog: 'product_catalog',
@@ -26,6 +26,15 @@ export default class ProductGroup extends AbstractCrudObject {
     });
   }
 
+
+  createArDatum (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/ar_data',
+      fields,
+      params,
+      
+    );
+  }
 
   getProducts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(

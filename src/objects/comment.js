@@ -17,7 +17,7 @@ import Profile from './profile';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class Comment extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       admin_creator: 'admin_creator',
       application: 'application',
@@ -98,6 +98,16 @@ export default class Comment extends AbstractCrudObject {
     return super.deleteEdge(
       '/likes',
       params
+    );
+  }
+
+  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      Profile,
+      fields,
+      params,
+      fetchFirstPage,
+      '/likes'
     );
   }
 

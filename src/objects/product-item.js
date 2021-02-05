@@ -9,6 +9,7 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
+import CatalogItemChannelsToIntegrityStatus from './catalog-item-channels-to-integrity-status';
 import ProductSet from './product-set';
 
 /**
@@ -17,16 +18,18 @@ import ProductSet from './product-set';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class ProductItem extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       additional_image_cdn_urls: 'additional_image_cdn_urls',
       additional_image_urls: 'additional_image_urls',
       additional_variant_attributes: 'additional_variant_attributes',
       age_group: 'age_group',
+      applinks: 'applinks',
       availability: 'availability',
       brand: 'brand',
       capability_to_review_status: 'capability_to_review_status',
       category: 'category',
+      category_specific_fields: 'category_specific_fields',
       color: 'color',
       commerce_insights: 'commerce_insights',
       condition: 'condition',
@@ -39,17 +42,20 @@ export default class ProductItem extends AbstractCrudObject {
       custom_label_4: 'custom_label_4',
       description: 'description',
       expiration_date: 'expiration_date',
+      fb_product_category: 'fb_product_category',
       gender: 'gender',
       gtin: 'gtin',
       id: 'id',
       image_cdn_urls: 'image_cdn_urls',
       image_url: 'image_url',
+      images: 'images',
       inventory: 'inventory',
       manufacturer_part_number: 'manufacturer_part_number',
       material: 'material',
       mobile_link: 'mobile_link',
       name: 'name',
       ordering_index: 'ordering_index',
+      parent_product_id: 'parent_product_id',
       pattern: 'pattern',
       price: 'price',
       product_catalog: 'product_catalog',
@@ -340,6 +346,25 @@ export default class ProductItem extends AbstractCrudObject {
       fb_vehi: 'FB_VEHI',
       fb_vehi_part: 'FB_VEHI_PART',
     });
+  }
+
+  createArDatum (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/ar_data',
+      fields,
+      params,
+      
+    );
+  }
+
+  getChannelsToIntegrityStatus (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      CatalogItemChannelsToIntegrityStatus,
+      fields,
+      params,
+      fetchFirstPage,
+      '/channels_to_integrity_status'
+    );
   }
 
   getProductSets (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {

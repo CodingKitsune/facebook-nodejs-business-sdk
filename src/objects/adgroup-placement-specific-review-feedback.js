@@ -14,16 +14,21 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class AdgroupPlacementSpecificReviewFeedback extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       account_admin: 'account_admin',
       ad: 'ad',
+      ads_conversion_experiences: 'ads_conversion_experiences',
       b2c: 'b2c',
+      b2c_commerce_unified: 'b2c_commerce_unified',
       bsg: 'bsg',
       city_community: 'city_community',
+      commerce: 'commerce',
       daily_deals: 'daily_deals',
       daily_deals_legacy: 'daily_deals_legacy',
       dpa: 'dpa',
+      dri_copyright: 'dri_copyright',
+      dri_counterfeit: 'dri_counterfeit',
       facebook: 'facebook',
       facebook_pages_live_shopping: 'facebook_pages_live_shopping',
       instagram: 'instagram',

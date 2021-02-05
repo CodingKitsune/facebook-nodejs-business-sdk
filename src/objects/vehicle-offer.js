@@ -14,15 +14,17 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class VehicleOffer extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       amount_currency: 'amount_currency',
       amount_percentage: 'amount_percentage',
       amount_price: 'amount_price',
       amount_qualifier: 'amount_qualifier',
+      applinks: 'applinks',
       body_style: 'body_style',
       cashback_currency: 'cashback_currency',
       cashback_price: 'cashback_price',
+      category_specific_fields: 'category_specific_fields',
       currency: 'currency',
       dma_codes: 'dma_codes',
       downpayment_currency: 'downpayment_currency',

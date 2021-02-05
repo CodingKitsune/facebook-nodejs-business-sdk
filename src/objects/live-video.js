@@ -14,8 +14,8 @@ import Comment from './comment';
 import Page from './page';
 import LiveVideoError from './live-video-error';
 import LiveVideoInputStream from './live-video-input-stream';
-import Profile from './profile';
 import VideoPoll from './video-poll';
+import Profile from './profile';
 
 /**
  * LiveVideo
@@ -23,7 +23,7 @@ import VideoPoll from './video-poll';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class LiveVideo extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       ad_break_config: 'ad_break_config',
       ad_break_failure_reason: 'ad_break_failure_reason',
@@ -175,16 +175,6 @@ export default class LiveVideo extends AbstractCrudObject {
       fields,
       params,
       LiveVideoInputStream
-    );
-  }
-
-  getLikes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      Profile,
-      fields,
-      params,
-      fetchFirstPage,
-      '/likes'
     );
   }
 

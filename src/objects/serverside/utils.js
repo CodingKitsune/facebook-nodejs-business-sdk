@@ -7,6 +7,8 @@
  * @flow
  */
 
+import DeliveryCategory from './delivery-category.js';
+
 const sha256 = require('js-sha256');
 const currency_codes = require('currency-codes');
 const country_codes = require('iso-3166-1-alpha-2');
@@ -15,6 +17,8 @@ const PHONE_NUMBER_IGNORE_CHAR_SET = /[\-@#<>'",; ]|\(|\)|\+|[a-z]/g;
 const PHONE_NUMBER_DROP_PREFIX_ZEROS = /^\+?0{0,2}/;
 const US_PHONE_NUMBER_REGEX = /^1\(?\d{3}\)?\d{7}$/;
 const INTL_PHONE_NUMBER_REGEX = /^\d{1,4}\(?\d{2,3}\)?\d{4,}$/;
+const SHA256_REGEX = /^[a-f0-9]{64}$/;
+const MD5_REGEX = /^[a-f0-9]{32}$/;
 
 /**
  * ServerSideUtils contains the Utility modules used for sending Server Side Events
@@ -36,6 +40,10 @@ export default class ServerSideUtils {
 
     if (normalized_input.length === 0) {
       return null;
+    }
+
+    if (normalized_input.match(SHA256_REGEX) || normalized_input.match(MD5_REGEX)) {
+      return normalized_input;
     }
 
     switch (field) {
@@ -60,6 +68,22 @@ export default class ServerSideUtils {
       case 'zp':
         normalized_input = ServerSideUtils.normalizeZip(normalized_input);
         break;
+      case 'f5first':
+      case 'f5last':
+        normalized_input = ServerSideUtils.normalizeF5NameField(normalized_input);
+        break;
+      case 'fi':
+        normalized_input = normalized_input.charAt(0);
+        break;
+      case 'dobd':
+        normalized_input = ServerSideUtils.normalizeDobd(normalized_input);
+        break;
+      case 'dobm':
+        normalized_input = ServerSideUtils.normalizeDobm(normalized_input);
+        break;
+      case 'doby':
+        normalized_input = ServerSideUtils.normalizeDoby(normalized_input);
+        break;
     }
 
 	  // Hashing the normalized input with SHA 256
@@ -73,9 +97,7 @@ export default class ServerSideUtils {
    * @return {String} Normalized ISO country code.
    */
   static normalizeCountry (country: string) {
-    country = country.trim().toUpperCase();
-
-    if (country_codes.getCountry(country) == null) {
+    if (country_codes.getCountry(country.toUpperCase()) == null) {
       throw new Error("Invalid country code: '" + country + "'. Please follow ISO 3166-1 2-letter standard for representing country. eg: US");
     }
 
@@ -98,7 +120,8 @@ export default class ServerSideUtils {
    * @return {String} Normalized ISO currency code.
    */
   static normalizeCurrency (currency: string) {
-    
+    currency = currency.trim().toLowerCase();
+
     // Retain only alpha characters bounded for ISO code.
     currency = currency.replace(/[^a-zA-Z]/g, '');
 
@@ -107,6 +130,23 @@ export default class ServerSideUtils {
     }
 
     return currency;
+  }
+
+  /**
+   * Normalizes the given delivery category value and returns a valid string.
+   * @param  {String} [input] delivery_category input to be validated.
+   * @return {String} Valid delivery_category value.
+   */
+  static normalizeDeliveryCategory(input: string) {
+
+    let delivery_category = input.trim().toLowerCase();
+
+    if(!(Object.values(DeliveryCategory).includes(delivery_category))){
+				throw new Error("Invalid delivery_category passed: " + input +
+																". Allowed values are one of " + (Object.values(DeliveryCategory)).join(','));
+			}
+
+    return delivery_category;
   }
 
   /**
@@ -140,6 +180,16 @@ export default class ServerSideUtils {
     } else { return null; }
 
     return gender;
+  }
+
+   /**
+   * Normalizes the 5 character name field.
+   * @param  {String} [name] name value to be normalized.
+   * @return {String} Normalized 5 character {first,last}name field value.
+   */
+  static normalizeF5NameField (name: string) {
+
+    return name.length <= 5 ? name : name.substring(0,5);
   }
 
   /**
@@ -188,6 +238,55 @@ export default class ServerSideUtils {
     }
 
     return zip;
+  }
+
+  /**
+   * Normalizes the given date of birth day
+   * @param  {String} [dobd] value to be normalized.
+   * @return {String} Normalized value.
+   */
+  static normalizeDobd (dobd: string) {
+    if (dobd.length === 1) {
+      dobd = '0' + dobd;
+    }
+
+    const dobd_int = parseInt(dobd);
+    if (dobd_int < 1 || dobd_int > 31) {
+      throw new Error("Invalid format for dobd:'" + dobd + "'.Please use 'DD' format for dobd.")
+    }
+
+    return dobd;
+  }
+
+  /**
+   * Normalizes the given date of birth month
+   * @param  {String} [dobm] value to be normalized.
+   * @return {String} Normalized value.
+   */
+  static normalizeDobm (dobm: string) {
+    if (dobm.length === 1) {
+      dobm = '0' + dobm;
+    }
+
+    const dobm_int = parseInt(dobm);
+    if (dobm_int < 1 || dobm_int > 12) {
+      throw new Error("Invalid format for dobm:'" + dobm + "'.Please use 'MM' format for dobm.")
+    }
+
+    return dobm;
+  }
+
+  /**
+   * Normalizes the given date of birth year
+   * @param  {String} [doby] value to be normalized.
+   * @return {String} Normalized value.
+   */
+  static normalizeDoby (doby: string) {
+    if (!doby.match(/^[0-9]{4}$/)) {
+      throw new Error("Invalid format for doby:'" + doby + "'.Please use 'YYYY' format for doby.")
+    }
+
+    return doby;
   }
 
   /**

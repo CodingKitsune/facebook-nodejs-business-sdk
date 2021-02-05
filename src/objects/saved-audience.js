@@ -7,7 +7,6 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
-import AbstractObject from './../abstract-object';
 
 /**
  * SavedAudience
@@ -15,7 +14,7 @@ import AbstractObject from './../abstract-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class SavedAudience extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       account: 'account',
       approximate_count: 'approximate_count',
@@ -32,14 +31,6 @@ export default class SavedAudience extends AbstractCrudObject {
     });
   }
 
-
-  // $FlowFixMe : Support Generic Types
-  delete (fields: Array<string>, params: Object = {}): AbstractObject {
-    // $FlowFixMe : Support Generic Types
-    return super.delete(
-      params
-    );
-  }
 
   
   get (fields: Array<string>, params: Object = {}): SavedAudience {

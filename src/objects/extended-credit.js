@@ -7,6 +7,7 @@
  * @flow
  */
 import {AbstractCrudObject} from './../abstract-crud-object';
+import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
 import ExtendedCreditInvoiceGroup from './extended-credit-invoice-group';
 import ExtendedCreditAllocationConfig from './extended-credit-allocation-config';
@@ -17,7 +18,7 @@ import ExtendedCreditAllocationConfig from './extended-credit-allocation-config'
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class ExtendedCredit extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       allocated_amount: 'allocated_amount',
       balance: 'balance',
@@ -26,7 +27,6 @@ export default class ExtendedCredit extends AbstractCrudObject {
       id: 'id',
       is_access_revoked: 'is_access_revoked',
       is_automated_experience: 'is_automated_experience',
-      last_payment_time: 'last_payment_time',
       legal_entity_name: 'legal_entity_name',
       liable_biz_name: 'liable_biz_name',
       max_balance: 'max_balance',
@@ -75,6 +75,15 @@ export default class ExtendedCredit extends AbstractCrudObject {
       fields,
       params,
       ExtendedCreditAllocationConfig
+    );
+  }
+
+  createWhatsappCreditSharingAndAttach (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/whatsapp_credit_sharing_and_attach',
+      fields,
+      params,
+      
     );
   }
 

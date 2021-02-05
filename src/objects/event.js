@@ -18,7 +18,7 @@ import Profile from './profile';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class Event extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       attending_count: 'attending_count',
       can_guests_invite: 'can_guests_invite',
@@ -39,6 +39,8 @@ export default class Event extends AbstractCrudObject {
       maybe_count: 'maybe_count',
       name: 'name',
       noreply_count: 'noreply_count',
+      online_event_format: 'online_event_format',
+      online_event_third_party_url: 'online_event_third_party_url',
       owner: 'owner',
       parent_group: 'parent_group',
       place: 'place',
@@ -83,9 +85,19 @@ export default class Event extends AbstractCrudObject {
       workshop: 'WORKSHOP',
     });
   }
+  static get OnlineEventFormat (): Object {
+    return Object.freeze({
+      fb_live: 'fb_live',
+      messenger_room: 'messenger_room',
+      none: 'none',
+      other: 'other',
+      third_party: 'third_party',
+    });
+  }
   static get Type (): Object {
     return Object.freeze({
       community: 'community',
+      friends: 'friends',
       group: 'group',
       private: 'private',
       public: 'public',

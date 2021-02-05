@@ -23,7 +23,7 @@ import Event from './event';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class Application extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       aam_rules: 'aam_rules',
       an_ad_space_limit: 'an_ad_space_limit',
@@ -31,6 +31,7 @@ export default class Application extends AbstractCrudObject {
       android_key_hash: 'android_key_hash',
       android_sdk_error_categories: 'android_sdk_error_categories',
       app_domains: 'app_domains',
+      app_events_config: 'app_events_config',
       app_events_feature_bitmask: 'app_events_feature_bitmask',
       app_events_session_timeout: 'app_events_session_timeout',
       app_install_tracked: 'app_install_tracked',
@@ -138,6 +139,8 @@ export default class Application extends AbstractCrudObject {
       ipad: 'IPAD',
       iphone: 'IPHONE',
       mobile_web: 'MOBILE_WEB',
+      oculus: 'OCULUS',
+      samsung: 'SAMSUNG',
       supplementary_images: 'SUPPLEMENTARY_IMAGES',
       web: 'WEB',
       windows: 'WINDOWS',
@@ -276,6 +279,25 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/agencies'
+    );
+  }
+
+  createAggregateRevenue (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/aggregate_revenue',
+      fields,
+      params,
+      
+    );
+  }
+
+  getAndroidDialogConfigs (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AbstractObject,
+      fields,
+      params,
+      fetchFirstPage,
+      '/android_dialog_configs'
     );
   }
 
@@ -510,16 +532,6 @@ export default class Application extends AbstractCrudObject {
       fields,
       params,
       
-    );
-  }
-
-  getOzoneRelease (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/ozone_release'
     );
   }
 

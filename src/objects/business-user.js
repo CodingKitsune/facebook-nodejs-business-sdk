@@ -20,7 +20,7 @@ import ProductCatalog from './product-catalog';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class BusinessUser extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       business: 'business',
       email: 'email',
@@ -42,9 +42,19 @@ export default class BusinessUser extends AbstractCrudObject {
     return Object.freeze({
       admin: 'ADMIN',
       ads_rights_reviewer: 'ADS_RIGHTS_REVIEWER',
+      default: 'DEFAULT',
+      developer: 'DEVELOPER',
       employee: 'EMPLOYEE',
       finance_analyst: 'FINANCE_ANALYST',
+      finance_edit: 'FINANCE_EDIT',
       finance_editor: 'FINANCE_EDITOR',
+      finance_view: 'FINANCE_VIEW',
+      manage: 'MANAGE',
+      partner_center_admin: 'PARTNER_CENTER_ADMIN',
+      partner_center_analyst: 'PARTNER_CENTER_ANALYST',
+      partner_center_education: 'PARTNER_CENTER_EDUCATION',
+      partner_center_marketing: 'PARTNER_CENTER_MARKETING',
+      partner_center_operations: 'PARTNER_CENTER_OPERATIONS',
     });
   }
 

@@ -14,9 +14,11 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class Destination extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       address: 'address',
+      applinks: 'applinks',
+      category_specific_fields: 'category_specific_fields',
       currency: 'currency',
       description: 'description',
       destination_id: 'destination_id',

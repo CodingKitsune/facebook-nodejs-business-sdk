@@ -11,7 +11,6 @@ import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
 import AdAccount from './ad-account';
 import Ad from './ad';
-import CustomAudiencePrefillState from './custom-audience-prefill-state';
 import CustomAudienceSession from './custom-audience-session';
 import CustomAudiencesharedAccountInfo from './custom-audienceshared-account-info';
 
@@ -21,7 +20,7 @@ import CustomAudiencesharedAccountInfo from './custom-audienceshared-account-inf
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class CustomAudience extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       account_id: 'account_id',
       approximate_count: 'approximate_count',
@@ -80,6 +79,7 @@ export default class CustomAudience extends AbstractCrudObject {
       flight: 'FLIGHT',
       home_listing: 'HOME_LISTING',
       hotel: 'HOTEL',
+      local_service_business: 'LOCAL_SERVICE_BUSINESS',
       location_based_item: 'LOCATION_BASED_ITEM',
       media_title: 'MEDIA_TITLE',
       offline_product: 'OFFLINE_PRODUCT',
@@ -151,16 +151,6 @@ export default class CustomAudience extends AbstractCrudObject {
     );
   }
 
-  getPrefills (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      CustomAudiencePrefillState,
-      fields,
-      params,
-      fetchFirstPage,
-      '/prefills'
-    );
-  }
-
   getSessions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       CustomAudienceSession,
@@ -191,6 +181,15 @@ export default class CustomAudience extends AbstractCrudObject {
   createUser (fields: Array<string>, params: Object = {}): Promise<CustomAudience> {
     return this.createEdge(
       '/users',
+      fields,
+      params,
+      CustomAudience
+    );
+  }
+
+  createUsersReplace (fields: Array<string>, params: Object = {}): Promise<CustomAudience> {
+    return this.createEdge(
+      '/usersreplace',
       fields,
       params,
       CustomAudience

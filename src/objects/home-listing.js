@@ -15,7 +15,7 @@ import AbstractObject from './../abstract-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class HomeListing extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       ac_type: 'ac_type',
       additional_fees_description: 'additional_fees_description',
@@ -25,9 +25,11 @@ export default class HomeListing extends AbstractCrudObject {
       agent_fb_page_id: 'agent_fb_page_id',
       agent_name: 'agent_name',
       agent_phone: 'agent_phone',
+      applinks: 'applinks',
       area_size: 'area_size',
       area_unit: 'area_unit',
       availability: 'availability',
+      category_specific_fields: 'category_specific_fields',
       co_2_emission_rating_eu: 'co_2_emission_rating_eu',
       currency: 'currency',
       days_on_market: 'days_on_market',

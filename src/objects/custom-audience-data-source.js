@@ -14,7 +14,7 @@ import {AbstractCrudObject} from './../abstract-crud-object';
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
 export default class CustomAudienceDataSource extends AbstractCrudObject {
-  static get Fields () {
+  static get Fields (): Object {
     return Object.freeze({
       creation_params: 'creation_params',
       sub_type: 'sub_type',
@@ -66,6 +66,7 @@ export default class CustomAudienceDataSource extends AbstractCrudObject {
       platform: 'PLATFORM',
       platform_users: 'PLATFORM_USERS',
       seed_list: 'SEED_LIST',
+      signal_source: 'SIGNAL_SOURCE',
       smart_audience: 'SMART_AUDIENCE',
       store_visit_events: 'STORE_VISIT_EVENTS',
       s_expr: 'S_EXPR',
