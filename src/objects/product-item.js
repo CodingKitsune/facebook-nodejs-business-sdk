@@ -25,6 +25,7 @@ export default class ProductItem extends AbstractCrudObject {
       additional_variant_attributes: 'additional_variant_attributes',
       age_group: 'age_group',
       applinks: 'applinks',
+      ar_data: 'ar_data',
       availability: 'availability',
       brand: 'brand',
       capability_to_review_status: 'capability_to_review_status',
@@ -47,10 +48,12 @@ export default class ProductItem extends AbstractCrudObject {
       gtin: 'gtin',
       id: 'id',
       image_cdn_urls: 'image_cdn_urls',
+      image_fetch_status: 'image_fetch_status',
       image_url: 'image_url',
       images: 'images',
       inventory: 'inventory',
       manufacturer_part_number: 'manufacturer_part_number',
+      marked_for_product_launch: 'marked_for_product_launch',
       material: 'material',
       mobile_link: 'mobile_link',
       name: 'name',
@@ -62,6 +65,7 @@ export default class ProductItem extends AbstractCrudObject {
       product_feed: 'product_feed',
       product_group: 'product_group',
       product_type: 'product_type',
+      quantity_to_sell_on_facebook: 'quantity_to_sell_on_facebook',
       retailer_id: 'retailer_id',
       retailer_product_group_id: 'retailer_product_group_id',
       review_rejection_reasons: 'review_rejection_reasons',
@@ -119,6 +123,16 @@ export default class ProductItem extends AbstractCrudObject {
       unisex: 'unisex',
     });
   }
+  static get ImageFetchStatus (): Object {
+    return Object.freeze({
+      direct_upload: 'DIRECT_UPLOAD',
+      fetched: 'FETCHED',
+      fetch_failed: 'FETCH_FAILED',
+      no_status: 'NO_STATUS',
+      outdated: 'OUTDATED',
+      partial_fetch: 'PARTIAL_FETCH',
+    });
+  }
   static get ReviewStatus (): Object {
     return Object.freeze({
       approved: 'approved',
@@ -152,6 +166,7 @@ export default class ProductItem extends AbstractCrudObject {
       fb_aprl_clothing: 'FB_APRL_CLOTHING',
       fb_aprl_costume: 'FB_APRL_COSTUME',
       fb_aprl_cstm: 'FB_APRL_CSTM',
+      fb_aprl_formal: 'FB_APRL_FORMAL',
       fb_aprl_handbag: 'FB_APRL_HANDBAG',
       fb_aprl_jewelry: 'FB_APRL_JEWELRY',
       fb_aprl_shoe: 'FB_APRL_SHOE',
@@ -347,14 +362,12 @@ export default class ProductItem extends AbstractCrudObject {
       fb_vehi_part: 'FB_VEHI_PART',
     });
   }
-
-  createArDatum (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
-    return this.createEdge(
-      '/ar_data',
-      fields,
-      params,
-      
-    );
+  static get MarkedForProductLaunch (): Object {
+    return Object.freeze({
+      default: 'default',
+      marked: 'marked',
+      not_marked: 'not_marked',
+    });
   }
 
   getChannelsToIntegrityStatus (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {

@@ -153,6 +153,7 @@ export default class Application extends AbstractCrudObject {
       instant_articles: 'INSTANT_ARTICLES',
       ios: 'IOS',
       mobile_web: 'MOBILE_WEB',
+      oculus: 'OCULUS',
       unknown: 'UNKNOWN',
     });
   }
@@ -272,6 +273,25 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
+  getAemConversionConfigs (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      AbstractObject,
+      fields,
+      params,
+      fetchFirstPage,
+      '/aem_conversion_configs'
+    );
+  }
+
+  createAemConversion (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/aem_conversions',
+      fields,
+      params,
+      
+    );
+  }
+
   getAgencies (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       Business,
@@ -298,16 +318,6 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/android_dialog_configs'
-    );
-  }
-
-  getAppEventTypes (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
-    return this.getEdge(
-      AbstractObject,
-      fields,
-      params,
-      fetchFirstPage,
-      '/app_event_types'
     );
   }
 
@@ -590,6 +600,15 @@ export default class Application extends AbstractCrudObject {
     );
   }
 
+  createPushTokenRegister (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/push_token_register',
+      fields,
+      params,
+      
+    );
+  }
+
   getRoles (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(
       AbstractObject,
@@ -597,6 +616,15 @@ export default class Application extends AbstractCrudObject {
       params,
       fetchFirstPage,
       '/roles'
+    );
+  }
+
+  createSendNotification (fields: Array<string>, params: Object = {}): Promise<AbstractObject> {
+    return this.createEdge(
+      '/send_notification',
+      fields,
+      params,
+      
     );
   }
 

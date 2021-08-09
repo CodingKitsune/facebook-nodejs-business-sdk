@@ -19,7 +19,9 @@ import AssignedUser from './assigned-user';
 export default class WhatsAppBusinessAccount extends AbstractCrudObject {
   static get Fields (): Object {
     return Object.freeze({
+      account_review_status: 'account_review_status',
       analytics: 'analytics',
+      creation_time: 'creation_time',
       currency: 'currency',
       id: 'id',
       message_template_namespace: 'message_template_namespace',
@@ -39,6 +41,7 @@ export default class WhatsAppBusinessAccount extends AbstractCrudObject {
       manage: 'MANAGE',
       manage_phone: 'MANAGE_PHONE',
       manage_templates: 'MANAGE_TEMPLATES',
+      messaging: 'MESSAGING',
       view_cost: 'VIEW_COST',
     });
   }

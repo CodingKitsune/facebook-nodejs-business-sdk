@@ -98,10 +98,12 @@ export default class AdSet extends AbstractCrudObject {
       clicks: 'CLICKS',
       impressions: 'IMPRESSIONS',
       link_clicks: 'LINK_CLICKS',
+      listing_interaction: 'LISTING_INTERACTION',
       none: 'NONE',
       offer_claims: 'OFFER_CLAIMS',
       page_likes: 'PAGE_LIKES',
       post_engagement: 'POST_ENGAGEMENT',
+      purchase: 'PURCHASE',
       thruplay: 'THRUPLAY',
     });
   }
@@ -176,7 +178,7 @@ export default class AdSet extends AbstractCrudObject {
       last_week_mon_sun: 'last_week_mon_sun',
       last_week_sun_sat: 'last_week_sun_sat',
       last_year: 'last_year',
-      lifetime: 'lifetime',
+      maximum: 'maximum',
       this_month: 'this_month',
       this_quarter: 'this_quarter',
       this_week_mon_today: 'this_week_mon_today',

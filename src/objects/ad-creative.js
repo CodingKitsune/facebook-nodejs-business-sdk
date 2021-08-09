@@ -80,13 +80,6 @@ export default class AdCreative extends AbstractCrudObject {
     });
   }
 
-  static get ApplinkTreatment (): Object {
-    return Object.freeze({
-      deeplink_with_appstore_fallback: 'deeplink_with_appstore_fallback',
-      deeplink_with_web_fallback: 'deeplink_with_web_fallback',
-      web_only: 'web_only',
-    });
-  }
   static get CallToActionType (): Object {
     return Object.freeze({
       add_to_cart: 'ADD_TO_CART',
@@ -135,6 +128,7 @@ export default class AdCreative extends AbstractCrudObject {
       see_more: 'SEE_MORE',
       sell_now: 'SELL_NOW',
       send_a_gift: 'SEND_A_GIFT',
+      send_gift_money: 'SEND_GIFT_MONEY',
       share: 'SHARE',
       shop_now: 'SHOP_NOW',
       sign_up: 'SIGN_UP',
@@ -178,6 +172,13 @@ export default class AdCreative extends AbstractCrudObject {
       deleted: 'DELETED',
       in_process: 'IN_PROCESS',
       with_issues: 'WITH_ISSUES',
+    });
+  }
+  static get ApplinkTreatment (): Object {
+    return Object.freeze({
+      deeplink_with_appstore_fallback: 'deeplink_with_appstore_fallback',
+      deeplink_with_web_fallback: 'deeplink_with_web_fallback',
+      web_only: 'web_only',
     });
   }
   static get AuthorizationCategory (): Object {

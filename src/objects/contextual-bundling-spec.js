@@ -9,15 +9,14 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AdCreativePortraitCustomizations
+ * ContextualBundlingSpec
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AdCreativePortraitCustomizations extends AbstractCrudObject {
+export default class ContextualBundlingSpec extends AbstractCrudObject {
   static get Fields (): Object {
     return Object.freeze({
-      carousel_delivery_mode: 'carousel_delivery_mode',
-      specifications: 'specifications',
+      status: 'status',
     });
   }
 

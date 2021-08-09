@@ -9,25 +9,17 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * ReadOnlyAnalyticsUserPropertyConfig
+ * AdAccountIosFourteenCampaignLimits
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class ReadOnlyAnalyticsUserPropertyConfig extends AbstractCrudObject {
+export default class AdAccountIosFourteenCampaignLimits extends AbstractCrudObject {
   static get Fields (): Object {
     return Object.freeze({
-      active_properties: 'active_properties',
-      id: 'id',
+      campaign_group_limit: 'campaign_group_limit',
+      campaign_group_limits_details: 'campaign_group_limits_details',
+      campaign_limit: 'campaign_limit',
     });
   }
 
-
-  
-  get (fields: Array<string>, params: Object = {}): ReadOnlyAnalyticsUserPropertyConfig {
-    // $FlowFixMe : Support Generic Types
-    return this.read(
-      fields,
-      params
-    );
-  }
 }

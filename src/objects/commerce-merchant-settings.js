@@ -9,6 +9,9 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 import AbstractObject from './../abstract-object';
 import Cursor from './../cursor';
+import CommerceOrder from './commerce-order';
+import CommercePayout from './commerce-payout';
+import CommerceOrderTransactionDetail from './commerce-order-transaction-detail';
 import Application from './application';
 import ProductCatalog from './product-catalog';
 import CommerceMerchantSettingsSetupStatus from './commerce-merchant-settings-setup-status';
@@ -29,7 +32,9 @@ export default class CommerceMerchantSettings extends AbstractCrudObject {
       display_name: 'display_name',
       external_merchant_id: 'external_merchant_id',
       facebook_channel: 'facebook_channel',
+      feature_eligibility: 'feature_eligibility',
       has_discount_code: 'has_discount_code',
+      has_onsite_intent: 'has_onsite_intent',
       id: 'id',
       instagram_channel: 'instagram_channel',
       merchant_alert_email: 'merchant_alert_email',
@@ -48,6 +53,45 @@ export default class CommerceMerchantSettings extends AbstractCrudObject {
     });
   }
 
+
+  createAcknowledgeOrder (fields: Array<string>, params: Object = {}): Promise<CommerceMerchantSettings> {
+    return this.createEdge(
+      '/acknowledge_orders',
+      fields,
+      params,
+      CommerceMerchantSettings
+    );
+  }
+
+  getCommerceOrders (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      CommerceOrder,
+      fields,
+      params,
+      fetchFirstPage,
+      '/commerce_orders'
+    );
+  }
+
+  getCommercePayouts (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      CommercePayout,
+      fields,
+      params,
+      fetchFirstPage,
+      '/commerce_payouts'
+    );
+  }
+
+  getCommerceTransactions (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
+    return this.getEdge(
+      CommerceOrderTransactionDetail,
+      fields,
+      params,
+      fetchFirstPage,
+      '/commerce_transactions'
+    );
+  }
 
   getOrderManagementApps (fields: Array<string>, params: Object = {}, fetchFirstPage: boolean = true): Cursor | Promise<*> {
     return this.getEdge(

@@ -8,8 +8,8 @@
  */
 
 /**
- * Content is part of the Custom Data Parameters of a Server Side Event Request. Content can be used to set the item/product details added in the Custom Data.
- * @see {@link https://developers.facebook.com/docs/marketing-api/facebook-pixel/server-side-api/parameters#custom}
+ * Content is part of the Custom Data Parameters of a Conversions API Event Request. Content can be used to set the item/product details added in the Custom Data.
+ * @see {@link https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/custom-data#contents}
  */
 
 import ServerSideUtils from './utils';

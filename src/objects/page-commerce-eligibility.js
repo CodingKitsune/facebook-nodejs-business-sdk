@@ -9,15 +9,15 @@
 import {AbstractCrudObject} from './../abstract-crud-object';
 
 /**
- * AdCreativePortraitCustomizations
+ * PageCommerceEligibility
  * @extends AbstractCrudObject
  * @see {@link https://developers.facebook.com/docs/marketing-api/}
  */
-export default class AdCreativePortraitCustomizations extends AbstractCrudObject {
+export default class PageCommerceEligibility extends AbstractCrudObject {
   static get Fields (): Object {
     return Object.freeze({
-      carousel_delivery_mode: 'carousel_delivery_mode',
-      specifications: 'specifications',
+      offsite: 'offsite',
+      onsite: 'onsite',
     });
   }
 

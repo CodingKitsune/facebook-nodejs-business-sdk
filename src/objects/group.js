@@ -72,7 +72,6 @@ export default class Group extends AbstractCrudObject {
       deals: 'DEALS',
       ephemeral: 'EPHEMERAL',
       event_planning: 'EVENT_PLANNING',
-      faith: 'FAITH',
       family: 'FAMILY',
       fitness: 'FITNESS',
       for_sale: 'FOR_SALE',
@@ -130,7 +129,6 @@ export default class Group extends AbstractCrudObject {
       deals: 'DEALS',
       ephemeral: 'EPHEMERAL',
       event_planning: 'EVENT_PLANNING',
-      faith: 'FAITH',
       family: 'FAMILY',
       fitness: 'FITNESS',
       for_sale: 'FOR_SALE',
@@ -175,16 +173,6 @@ export default class Group extends AbstractCrudObject {
       work_team: 'WORK_TEAM',
       work_teamwork: 'WORK_TEAMWORK',
       work_vc_call: 'WORK_VC_CALL',
-    });
-  }
-  static get SuggestionCategory (): Object {
-    return Object.freeze({
-      event: 'EVENT',
-      messenger: 'MESSENGER',
-      work: 'WORK',
-      workplace: 'WORKPLACE',
-      workplace_1_1: 'WORKPLACE_1_1',
-      workplace_manager: 'WORKPLACE_MANAGER',
     });
   }
 
