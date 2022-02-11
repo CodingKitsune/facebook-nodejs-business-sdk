@@ -21,17 +21,17 @@ export default class FacebookAdsApi {
   appsecretProof: string;
   locale: string;
   static _defaultApi: FacebookAdsApi;
-  static get VERSION() {
-    return 'v11.0';
+  static get VERSION(): string {
+    return 'v13.0';
   }
-  static get SDK_VERSION() {
-    return '11.0.0';
+  static get SDK_VERSION(): string {
+    return '13.0.0';
   }
-  static get GRAPH () {
+  static get GRAPH(): string {
     return 'https://graph.facebook.com';
   }
 
-  static get GRAPH_VIDEO () {
+  static get GRAPH_VIDEO(): string {
     return 'https://graph-video.facebook.com';
   }
 
@@ -69,7 +69,7 @@ export default class FacebookAdsApi {
     this._defaultApi = api;
   }
 
-  static getDefaultApi () {
+  static getDefaultApi(): FacebookAdsApi {
     return this._defaultApi;
   }
 
@@ -170,7 +170,7 @@ export default class FacebookAdsApi {
       });
   }
 
-  static _encodeParams (params: Object) {
+  static _encodeParams(params: Object): string {
     return Object.keys(params)
       .map(key => {
         var param = params[key];
